@@ -1,11 +1,14 @@
 (TeX-add-style-hook
  "main"
  (lambda ()
+   (TeX-add-to-alist 'LaTeX-provided-package-options
+                     '(("geometry" "a4paper" "total={6in, 8in}")))
    (TeX-run-style-hooks
     "latex2e"
     "article"
     "art10"
-    "graphicx")
+    "graphicx"
+    "geometry")
    (LaTeX-add-labels
     "fig:forest1"
     "fig:evernote1"
