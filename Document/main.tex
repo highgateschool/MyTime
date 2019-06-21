@@ -76,6 +76,7 @@ way, so that I can focus on the underlying data structures, while Django mostly
 handles the interface. The data structures will also be implemented using Python
 in an object-oriented way, which I think is sensible and are tools I'm familiar
 with working with.
+
 \section{User group}
 My target users are students, in particular Sixth Form and University. As the
 program is targeted at individuals who struggle to manage their time and avoid
@@ -98,10 +99,9 @@ tasks in, and could not remind the user of their tasks - it would require the
 user to check and plan the time for themselves.
 
 \subsection{Abstraction}
-Tasks will be stored as fields in a database consisting of columns and rows, but
-I will be displaying this in the form of a list of items with tags and
-attributes. Data will also be stored in a database but displayed in the form of
-graphs.
+Data will be stored with an object-oriented approach. Tasks, subtasks, people,
+contexts and attachments will all be objects with appropriate relationships so
+that the data can be viewed from a number of perspectives.
 
 \subsection{Reusability}
 There are a number of functions which my program will need to perform where it
@@ -159,9 +159,9 @@ app. This encourages the user to avoid 'quickly' having a look at Facebook,
 sending a text or otherwise breaking their workflow. Forest shows you how much
 time you spent each day growing your forest, so you can see which days you were
 most productive on. The primary drawback of Forest is that it lacks any means of
-tracking tasks from within the app. In my view this is significantly
-problematic as the app which is going to help you focus the most is one which
-never needs you to leave while working. Integrated task management is an
+tracking tasks from within the app. In my view this is significantly problematic
+as the app which is going to help you focus the most is one which never needs
+you to leave while working. Integrated task management is an
 absolute must for my solution.\\
 
 \begin{figure}[h!]
@@ -174,7 +174,7 @@ Evernote is primarily focused on note-taking, organisation and task-management.
 The power of it's note-taking is remarkable, and can include voice memos,
 handwritten notes and embedded web pages. Most of these features are superfluous
 for a more simple task-management app, however I think it may be useful to add
-attachments such as links or images to tasks.\\ 
+attachments such as links or images to tasks.\\
 
 \begin{figure}[h!]
   \includegraphics[width=\linewidth]{Images/todoist.png}
@@ -200,8 +200,8 @@ want to have similar visualisations of how productive the user is being.\\
 Similar to Todoist, Remember the Milk has a lot of advanced tools for
 intelligently adding, sorting and searching through tasks. However I'm
 particularly interested in the ability to divide tasks into sub-tasks. I
-personally have used to-do apps with such a feature and have found it
-rather useful, so I'll be interested to get my stakeholder's opinion on this
+personally have used to-do apps with such a feature and have found it rather
+useful, so I'll be interested to get my stakeholder's opinion on this
 feature specifically when I talk to them.\\
 
 \begin{figure}[h!]
@@ -475,4 +475,4 @@ The program should:
 
 \end{document}
 
-% LocalWords:  MyTime Evernote Trello Todoist
+% LocalWords:  MyTime Evernote Trello Todoist subtasks
