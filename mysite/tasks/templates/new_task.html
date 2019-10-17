@@ -1,0 +1,9 @@
+<h1>Add a new task:</h1>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+
+<form action="{% url 'tasks:new_task' %}" method="post">
+    {% csrf_token %}
+    <p>Title: </p><input type="text" name="title" placeholder="Enter the title">
+    <p>Description: </p>
