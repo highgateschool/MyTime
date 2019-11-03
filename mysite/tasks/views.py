@@ -8,9 +8,10 @@ from .models import Task
 
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
+    template_name = 'tasks/index.html'
+    context_object_name = 'todo_task_list'
 
+    # TODO change this to get all tasks which aren't marked as done
     def get_queryset(self):
         # Return the last five published questions.
         return Task.objects.order_by('-due_date')
@@ -21,7 +22,11 @@ class DetailView(generic.DetailView):
     template_name = 'tasks/detail.html'
 
 
-def new_task(request):
+class FormView(generic.FormView):
+    template_name = "tasks/new_task.html"
+
+
+def create_task(request):
     task_data = {}
     for item in request.POST:
         try:
