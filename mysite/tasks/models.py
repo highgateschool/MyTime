@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class Task(models.Model):
     title = models.CharField(max_length=200)
-    descrition = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000)
     due_date = models.DateTimeField('due date')
     time_estimate = models.IntegerField('time estimate (hours)')
     done = models.BooleanField(default=False)

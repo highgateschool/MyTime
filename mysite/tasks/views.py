@@ -22,10 +22,12 @@ class DetailView(generic.DetailView):
     template_name = 'tasks/detail.html'
 
 
-class FormView(generic.FormView):
-    template_name = "tasks/new_task.html"
+class TaskCreate(generic.edit.CreateView):
+    model = Task
+    fields = ["title", "description", "due_date", "time_estimate"]
 
 
+"""
 def create_task(request):
     task_data = {}
     for item in request.POST:
@@ -40,3 +42,4 @@ def create_task(request):
         setattr(new_task, k, v)
     new_task.save()
     return HttpResponseRedirect(reverse("tasks:index"))
+"""
