@@ -6,7 +6,7 @@ class Task(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=1000)
     due_date = models.DateTimeField('due date')
-    time_estimate = models.TimeField('time estimate')
+    time_estimate = models.DurationField('time estimate')
     done = models.BooleanField(default=False)
 
     def __str__(self):
@@ -15,8 +15,11 @@ class Task(models.Model):
     def is_overdue(self):
         return self.due_date < timezone.now()
 
-    def mark_as_done(self):
+    def mark_done(self):
         self.done = True
+
+    def mark_todo(self):
+        self.done = False
 
     def get_absolute_url(self):
         return f"/tasks/{self.id}/"
