@@ -1,3 +1,4 @@
+import re
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render
@@ -10,7 +11,8 @@ class IndexView(ListView):
     context_object_name = 'todo_task_list'
 
     def get_queryset(self):
-        return Task.objects.filter(done=False).order_by('-due_date')
+        #return Task.objects.filter(done=False).order_by('-due_date')
+        return Task.objects.order_by('-due_date')
 
 
 class DetailView(DetailView):
@@ -29,28 +31,28 @@ class TaskCreate(CreateView):
     fields = ["title", "description", "due_date", "time_estimate"]
 
 
-# TODO make this change the task instead of creating a new one
 class TaskUpdate(UpdateView):
     model = Task
     fields = ["title", "description", "due_date", "time_estimate"]
     template_name = "tasks/task_update_form.html"
 
 
-# TODO write the HTML for this view, and possibly add relevant code to model
 class TaskDelete(DeleteView):
-    models = Task
-    success_url = reverse_lazy("tasks")
+    model = Task
+    success_url = reverse_lazy("tasks:index")
 
 
 def mark_task_done(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
+    link = request.META.get("HTTP_REFERER", "/")
     task.mark_done()
-    return HttpResponseRedirect(
-        reverse("tasks:detail", args=(task.id, )))
+    task.save()
+    return HttpResponseRedirect(link)
 
 
 def mark_task_todo(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
+    link = request.META.get("HTTP_REFERER", "/")
     task.mark_todo()
-    return HttpResponseRedirect(
-        reverse("tasks:detail", args=(task.id, )))
+    task.save()
+    return HttpResponseRedirect(link)
