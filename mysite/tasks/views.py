@@ -1,4 +1,4 @@
-import re
+from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render
@@ -8,11 +8,18 @@ from .models import Task
 
 class IndexView(ListView):
     template_name = 'tasks/index.html'
-    context_object_name = 'todo_task_list'
+    context_object_name = 'task_list'
 
     def get_queryset(self):
-        #return Task.objects.filter(done=False).order_by('-due_date')
         return Task.objects.order_by('-due_date')
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['todo_tasks'] = Task.objects.filter(
+            done=False).order_by("-due_date")
+        context['done_tasks'] = Task.objects.filter(
+            done=True).order_by("-due_date")
+        return context
 
 
 class DetailView(DetailView):
@@ -28,12 +35,40 @@ class DetailView(DetailView):
 
 class TaskCreate(CreateView):
     model = Task
-    fields = ["title", "description", "due_date", "time_estimate"]
+    fields = ["title", "description", "due_date", "due_time", "time_estimate"]
+    due_date = forms.DateField(
+        widget=forms.SelectDateWidget(
+            attrs={
+                'type': 'date',
+            }
+        )
+    )
+    due_time = forms.TimeField(
+        widget=forms.TimeInput(
+            attrs={
+                'type': 'time',
+            }
+        )
+    )
 
 
 class TaskUpdate(UpdateView):
     model = Task
-    fields = ["title", "description", "due_date", "time_estimate"]
+    fields = ["title", "description", "due_date", "due_time", "time_estimate"]
+    due_date = forms.DateField(
+        widget=forms.SelectDateWidget(
+            attrs={
+                'type': 'date',
+            }
+        )
+    )
+    due_time = forms.TimeField(
+        widget=forms.TimeInput(
+            attrs={
+                'type': 'time',
+            }
+        )
+    )
     template_name = "tasks/task_update_form.html"
 
 
