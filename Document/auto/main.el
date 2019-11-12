@@ -24,7 +24,8 @@
     "operating-systems"
     "recommended-hardware_1"
     "gnulinux"
-    "software-requirements")
+    "software-requirements"
+    "fig:TDD1")
    (LaTeX-add-index-entries
     "\\item"))
  :latex)

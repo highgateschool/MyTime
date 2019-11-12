@@ -2,7 +2,7 @@
 \usepackage{graphicx}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
-\title{ComSci Project - MyTime\\Analysis Draft}
+\title{ComSci Project - MyTime}
 \author{Max Stupple}
 \date{}
 
@@ -472,6 +472,26 @@ The program should:
 \item Sync tasks between devices
 \item Remind the user of upcoming tasks
 \end{itemize}
+
+
+\part{Design}
+\section{Breaking down the problem}
+The first step to solving the problem is to decompose it into modules,
+which will comprise the overall solution.
+I have identified the key functions that my solution will need to perform as:
+\begin{itemize}
+\item Basic calendaring
+
+  My solution needs to keep track of the user's regular commitments,
+  and particular events,
+  so that tasks can be scheduled around them.
+\end{itemize}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Images/TDD.png}
+  \caption{Combination of top-down design analysis and class diagrams}
+  \label{fig:TDD1}
+\end{figure}
 
 \end{document}
 
