@@ -23,3 +23,12 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         return f"/tasks/{self.id}/"
+
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    date = models.DateField("date")
+    start_time = models.TimeField("start time")
+    end_time = models.TimeField("end time")
+    
+    def __str__(self):
+        return self.title
