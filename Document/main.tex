@@ -478,13 +478,34 @@ The program should:
 \section{Breaking down the problem}
 The first step to solving the problem is to decompose it into modules,
 which will comprise the overall solution.
+This is a higher-level description than the product specification,
+but low enough that each component is a manageable individual problem.
 I have identified the key functions that my solution will need to perform as:
 \begin{itemize}
-\item Basic calendaring
-
+\item Basic calendaring:\\
   My solution needs to keep track of the user's regular commitments,
   and particular events,
   so that tasks can be scheduled around them.
+\item Task management:\\
+  The user should be able to add tasks,
+  mark them as done,
+  and delete them.
+  These tasks should be able to hold a reasonable amount of information,
+  but in particular a due date and time estimate will be essential to the scheduler.
+\item Track time spent on tasks:\\
+  The user should be able to log they are working on a task,
+  and for how long,
+  so that they can see overall statistics,
+  on the accuracy of their time estimates,
+  and on how good they are at sticking to their schedule.
+\item Calculate and display statistics:\\
+  The aforementioned statistics should be presented to the user in a helpful way.
+\item Scheduling the user's tasks:\\
+  The program will need to allocate time for each of the user's tasks,
+  according to their priority,
+  due date,
+  and time estimate.
+  It will also need to take into account the user's other commitments.
 \end{itemize}
 
 \begin{figure}[h]

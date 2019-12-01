@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1554144319 "main.tex" "main.pdf" "main" 1554144320
+["pdflatex"] 1574077685 "main.tex" "main.pdf" "main" 1574077694
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1520645099 2704162 7a0bfe1b6869e6081137f3dece8a4231 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1480098701 1328 c834bbb027764024c09d3d2bf908b5f0 ""
@@ -23,9 +23,11 @@
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1480098733 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1480098733 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
+  "/usr/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1480098815 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1480098815 7612 729a8cc22a1ee0029997c7f74717ae05 ""
   "/usr/share/texmf-dist/tex/generic/oberdiek/ifluatex.sty" 1480098815 7324 2310d1247db0114eb4726807c8837a0e ""
   "/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty" 1490564930 1251 d170e11a3246c3392bc7f59595af42cb ""
+  "/usr/share/texmf-dist/tex/generic/oberdiek/ifvtex.sty" 1480098815 6797 90b7f83b0ad46826bc16058b1e3d48df ""
   "/usr/share/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1480098815 8253 473e0e41f9adadb1977e8631b8f72ea6 ""
   "/usr/share/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty" 1480098815 5152 b67a3a964ad9851e095110c854a1d461 ""
   "/usr/share/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty" 1480098815 14040 ac8866aac45982ac84021584b0abb252 ""
@@ -34,6 +36,7 @@
   "/usr/share/texmf-dist/tex/latex/base/article.cls" 1523050425 19823 fcbc01552b07b608574cbf8e1977e0c0 ""
   "/usr/share/texmf-dist/tex/latex/base/omscmr.fd" 1523050425 2472 aa08940f0a4dc6c24ae9f943b04ae0b9 ""
   "/usr/share/texmf-dist/tex/latex/base/size10.clo" 1523050425 8294 b0f177401f895563eb19304d2389582d ""
+  "/usr/share/texmf-dist/tex/latex/geometry/geometry.sty" 1522012985 41366 3ed245b911039f45436c2cb62a4d1e62 ""
   "/usr/share/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1480098830 1224 978390e9c2234eab29404bc21b268d1e ""
   "/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def" 1515537368 17334 520b9b85ad8a2a48eda3f643e27a5179 ""
   "/usr/share/texmf-dist/tex/latex/graphics/graphics.sty" 1523134385 15272 5a97061616e0c8b2aa79c6615ff769f4 ""
@@ -46,6 +49,7 @@
   "/usr/share/texmf-dist/tex/latex/oberdiek/kvoptions.sty" 1480098836 22417 1d9df1eb66848aa31b18a593099cf45c ""
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1540236256 33365 b118b048154c25395e1bced26df2b0e5 ""
   "/usr/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1540236288 4231648 be5d721c768f2d3dbbee2c14a9c277ca ""
+  "Images/TDD.png" 1573578101 65698 265932997e6d010fb9dcb6e28c7b23c5 ""
   "Images/evernote.jpg" 1553081332 50384 44ade4509f68668a7887511f3da6d394 ""
   "Images/forest.jpg" 1553081224 202825 b9a788ee517e89de83a1fb07a9876739 ""
   "Images/ike.png" 1553082840 841386 63e9b4200fdd85a70f7f19c63078e628 ""
@@ -53,9 +57,9 @@
   "Images/remember-the-milk.png" 1553081461 28110 b83296c0f1aa06e66f055151a4165ca1 ""
   "Images/todoist.png" 1553081438 143232 aed74facb94c7fe8da9555d8a2654e49 ""
   "Images/trello.jpg" 1553081753 374932 6c13c50703bfde93702f97aa0f0d7301 ""
-  "main.aux" 1554144320 2463 059bb912c145e62e6664e146b6f64ff5 ""
-  "main.tex" 1554144318 17366 2b7bfc0bde7912b214f88d9dc40a6206 ""
+  "main.aux" 1574077686 2779 e802d9a1d150a42f4685d1586cb0341c ""
+  "main.tex" 1574077685 23553 f0c4f2eaa66f39b6c0e4d4b3c0ac8b5e ""
   (generated)
   "main.log"
-  "main.pdf"
   "main.aux"
+  "main.pdf"

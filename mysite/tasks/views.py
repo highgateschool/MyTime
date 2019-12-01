@@ -35,40 +35,27 @@ class DetailView(DetailView):
 
 class TaskCreate(CreateView):
     model = Task
-    fields = ["title", "description", "due_date", "due_time", "time_estimate"]
-    due_date = forms.DateField(
-        widget=forms.SelectDateWidget(
-            attrs={
-                'type': 'date',
-            }
-        )
-    )
-    due_time = forms.TimeField(
-        widget=forms.TimeInput(
-            attrs={
-                'type': 'time',
-            }
-        )
-    )
+    fields = [
+        "title", "description", "due_date", "due_time", "time_estimate",
+        "priority"
+    ]
+    due_date = forms.DateField(widget=forms.SelectDateWidget(attrs={
+        'type': 'date',
+    }))
+    due_time = forms.TimeField(widget=forms.TimeInput(attrs={
+        'type': 'time',
+    }))
 
 
 class TaskUpdate(UpdateView):
     model = Task
     fields = ["title", "description", "due_date", "due_time", "time_estimate"]
-    due_date = forms.DateField(
-        widget=forms.SelectDateWidget(
-            attrs={
-                'type': 'date',
-            }
-        )
-    )
-    due_time = forms.TimeField(
-        widget=forms.TimeInput(
-            attrs={
-                'type': 'time',
-            }
-        )
-    )
+    due_date = forms.DateField(widget=forms.SelectDateWidget(attrs={
+        'type': 'date',
+    }))
+    due_time = forms.TimeField(widget=forms.TimeInput(attrs={
+        'type': 'time',
+    }))
     template_name = "tasks/task_update_form.html"
 
 

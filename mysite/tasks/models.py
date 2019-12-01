@@ -10,6 +10,7 @@ class Task(models.Model):
     due_time = models.TimeField('due time', default=timezone.now)
     time_estimate = models.DurationField('time estimate',
                                          default=datetime.timedelta(minutes=0))
+    priority = models.IntegerField("priority", default=1)
     done = models.BooleanField(default=False)
 
     def __str__(self):
@@ -26,3 +27,9 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         return f"/tasks/{self.id}/"
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    start_time = models.DateField("start time")
+    finish_time = models.DateField("finish time")
