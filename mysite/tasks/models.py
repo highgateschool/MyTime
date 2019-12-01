@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.db import models
 from django.utils import timezone
 
@@ -24,6 +25,7 @@ class Task(models.Model):
     def get_absolute_url(self):
         return f"/tasks/{self.id}/"
 
+
 class Event(models.Model):
     title = models.CharField(max_length=200)
     date = models.DateField("date")
@@ -33,8 +35,29 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
+    def get_day(self):
+        return self.date
+
+    def get_start(self):
+        return self.start_time
+
+    def get_end(self):
+        return self.end_time
+
 
 class Routine(models.Model):
-    day = models.CharField(max_length=200)
+    day = models.IntegerField()
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")
+
+    def get_day(self):
+        today = datetime.today()
+        delta = (self.day - today.weekday()) % 7
+        date = datetime.today() + timedelta(days=delta)
+        return date
+
+    def get_start(self):
+        return self.start_time
+
+    def get_end(self):
+        return self.end_time
