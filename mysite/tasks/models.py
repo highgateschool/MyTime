@@ -86,3 +86,20 @@ class Routine(models.Model):
 
     def get_end(self):
         return self.end_time
+
+
+class TimeSlot(models.Model):
+    date = models.DateField("date")
+    start_time = models.TimeField("start time")
+    end_time = models.TimeField("end time")
+    associated_object = models.ForeignKey(models.Model,
+                                          on_delete=models.CASCADE)
+
+    def get_date(self):
+        return self.date
+
+    def get_start(self):
+        return self.start_time
+
+    def get_end(self):
+        return self.end_time
