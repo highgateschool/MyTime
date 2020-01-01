@@ -28,10 +28,8 @@ class Task(models.Model):
 
 
 class Event(models.Model):
-    purpose = models.CharField(max_length=200, default="event")
     title = models.CharField(max_length=200)
     date = models.DateField("date")
-    day = None
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")
     override_routine = models.BooleanField(default=False)
@@ -58,23 +56,26 @@ class Event(models.Model):
             return False
 
 
-#class Routine(Event):
-#    purpose = models.CharField(max_length=200, default="routine")
-#    date = None
-#    day = models.IntegerField("day")
-#
-#    def get_date(self):
-#        today = datetime.today()
-#        delta = (self.day - today.weekday()) % 7
-#        date = datetime.today() + timedelta(days=delta)
-#        return date
-#
-#    def get_day(self):
-#        return self.day
-
-
 class Routine(models.Model):
-    day = models.IntegerField("day")
+    MON = 0
+    TUE = 1
+    WED = 2
+    THU = 3
+    FRI = 4
+    SAT = 5
+    SUN = 6
+    DAY_CHOICES = [
+        (MON, "Monday"),
+        (TUE, "Tuesday"),
+        (WED, "Wednesday"),
+        (THU, "Thursday"),
+        (FRI, "Friday"),
+        (SAT, "Saturday"),
+        (SUN, "Sunday"),
+    ]
+
+    title = models.CharField(max_length=200)
+    day = models.IntegerField("day", choices=DAY_CHOICES)
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")
 

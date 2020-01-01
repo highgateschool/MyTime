@@ -35,33 +35,72 @@ class DetailView(DetailView):
 
 class TaskCreate(CreateView):
     model = Task
-    fields = [
-        "title", "description", "due_date", "due_time", "time_estimate",
-        "priority"
-    ]
-    due_date = forms.DateField(widget=forms.SelectDateWidget(attrs={
-        'type': 'date',
-    }))
-    due_time = forms.TimeField(widget=forms.TimeInput(attrs={
-        'type': 'time',
-    }))
+    fields = ["title", "description", "due_date", "due_time", "time_estimate"]
+    due_date = forms.DateField(widget=forms.SelectDateWidget(
+        attrs={'type': 'date'}))
+    due_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
 
 
 class TaskUpdate(UpdateView):
     model = Task
     fields = ["title", "description", "due_date", "due_time", "time_estimate"]
-    due_date = forms.DateField(widget=forms.SelectDateWidget(attrs={
-        'type': 'date',
-    }))
-    due_time = forms.TimeField(widget=forms.TimeInput(attrs={
-        'type': 'time',
-    }))
+    due_date = forms.DateField(widget=forms.SelectDateWidget(
+        attrs={'type': 'date'}))
+    due_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
     template_name = "tasks/task_update_form.html"
 
 
 class TaskDelete(DeleteView):
     model = Task
     success_url = reverse_lazy("tasks:index")
+
+
+class EventCreate(CreateView):
+    model = Event
+    fields = ["title", "date", "start_time", "end_time"]
+    date = forms.DateField(widget=forms.SelectDateWidget(
+        attrs={"type": "date"}))
+    start_time = forms.TimeField(widget=forms.TimeInput(
+        attrs={'type': 'time'}))
+    end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+
+
+class EventUpdate(UpdateView):
+    model = Event
+    fields = ["title", "date", "start_time", "end_time"]
+    date = forms.DateField(widget=forms.SelectDateWidget(
+        attrs={'type': 'date'}))
+    start_time = forms.TimeField(widget=forms.TimeInput(
+        attrs={'type': 'time'}))
+    end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+    template_name = "tasks/event_update_form.html"
+
+
+class EventDelete(DeleteView):
+    model = Event
+    #success_url = reverse_lazy("tasks:index")
+
+
+class RoutineCreate(CreateView):
+    model = Routine
+    fields = ["day", "start_time", "end_time"]
+    start_time = forms.TimeField(widget=forms.TimeInput(
+        attrs={'type': 'time'}))
+    end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+
+
+class RoutineUpdate(UpdateView):
+    model = Routine
+    fields = ["day", "start_time", "end_time"]
+    start_time = forms.TimeField(widget=forms.TimeInput(
+        attrs={'type': 'time'}))
+    end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+    template_name = "tasks/routine_update_form.html"
+
+
+class RoutineDelete(DeleteView):
+    model = Routine
+    #success_url = reverse_lazy("tasks:index")
 
 
 def mark_task_done(request, task_id):
