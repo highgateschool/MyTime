@@ -7,7 +7,7 @@ from .models import Task
 
 
 class IndexView(ListView):
-    template_name = 'tasks/index.html'
+    template_name = 'tasks/task_index.html'
     context_object_name = 'task_list'
 
     def get_queryset(self):
@@ -24,7 +24,7 @@ class IndexView(ListView):
 
 class DetailView(DetailView):
     model = Task
-    template_name = 'tasks/detail.html'
+    template_name = 'tasks/task_detail.html'
 
     def task_done(self):
         Task.mark_done()
@@ -52,7 +52,7 @@ class TaskUpdate(UpdateView):
 
 class TaskDelete(DeleteView):
     model = Task
-    success_url = reverse_lazy("tasks:index")
+    success_url = reverse_lazy("tasks:task_index")
 
 
 class EventCreate(CreateView):

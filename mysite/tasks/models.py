@@ -93,8 +93,15 @@ class TimeSlot(models.Model):
     date = models.DateField("date")
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")
-    associated_object = models.ForeignKey(models.Model,
-                                          on_delete=models.CASCADE)
+    associated_task = models.ForeignKey(Task,
+                                        on_delete=models.CASCADE,
+                                        null=True)
+    associated_event = models.ForeignKey(Event,
+                                         on_delete=models.CASCADE,
+                                         null=True)
+    associated_routine = models.ForeignKey(Routine,
+                                           on_delete=models.CASCADE,
+                                           null=True)
 
     def get_date(self):
         return self.date
