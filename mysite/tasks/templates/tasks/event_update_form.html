@@ -1,0 +1,14 @@
+<h1>Edit event:</h1>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'tasks:edit_event' event.id %}" method="post">
+    {% csrf_token %}
+    Title:<br><input type="text" name="title" placeholder="Enter a title", value={{ event.title }}><br><br>
+    Date:<br><input type="date" name="date" placeholder="Enter the date", value={{ event.date }}><br><br>
+    Start time:<br><input type="time" name="start_time" placeholder="Enter the start time", value={{ event.start_time }}><br><br>
+    End time:<br><input type="time" name="end_time" placeholder="Enter the end time", value={{ event.end_time }}><br><br>
+    <input type="submit" value="Update">
+</form>

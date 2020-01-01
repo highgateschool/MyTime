@@ -4,10 +4,22 @@ from django.utils import timezone
 
 
 class Task(models.Model):
+    LOW = 1
+    MED = 2
+    HIGH = 3
+    PRIORITY_LIST = [
+        (LOW, "Low"),
+        (MED, "Normal"),
+        (HIGH, "High"),
+    ]
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=1000)
-    due_date = models.DateTimeField('due date')
+    due_date = models.DateField('due date')
+    due_time = models.TimeField("due time", default="00:00")
     time_estimate = models.DurationField('time estimate')
+    priority = models.IntegerField("priority",
+                                   choices=PRIORITY_LIST,
+                                   default=2)
     done = models.BooleanField(default=False)
     override_routine = models.BooleanField(default=False)
 
@@ -74,7 +86,7 @@ class Routine(models.Model):
         (SUN, "Sunday"),
     ]
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, null=True)
     day = models.IntegerField("day", choices=DAY_CHOICES)
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")

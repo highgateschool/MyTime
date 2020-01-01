@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Task
+from .models import Task, Event, Routine
 
 
 class IndexView(ListView):
@@ -35,7 +35,10 @@ class DetailView(DetailView):
 
 class TaskCreate(CreateView):
     model = Task
-    fields = ["title", "description", "due_date", "due_time", "time_estimate"]
+    fields = [
+        "title", "description", "due_date", "due_time", "time_estimate",
+        "priority"
+    ]
     due_date = forms.DateField(widget=forms.SelectDateWidget(
         attrs={'type': 'date'}))
     due_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
@@ -43,7 +46,10 @@ class TaskCreate(CreateView):
 
 class TaskUpdate(UpdateView):
     model = Task
-    fields = ["title", "description", "due_date", "due_time", "time_estimate"]
+    fields = [
+        "title", "description", "due_date", "due_time", "time_estimate",
+        "priority"
+    ]
     due_date = forms.DateField(widget=forms.SelectDateWidget(
         attrs={'type': 'date'}))
     due_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
@@ -83,7 +89,7 @@ class EventDelete(DeleteView):
 
 class RoutineCreate(CreateView):
     model = Routine
-    fields = ["day", "start_time", "end_time"]
+    fields = ["title", "day", "start_time", "end_time"]
     start_time = forms.TimeField(widget=forms.TimeInput(
         attrs={'type': 'time'}))
     end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
@@ -91,7 +97,7 @@ class RoutineCreate(CreateView):
 
 class RoutineUpdate(UpdateView):
     model = Routine
-    fields = ["day", "start_time", "end_time"]
+    fields = ["title", "day", "start_time", "end_time"]
     start_time = forms.TimeField(widget=forms.TimeInput(
         attrs={'type': 'time'}))
     end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
