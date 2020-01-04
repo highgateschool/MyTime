@@ -4,7 +4,7 @@
 {% if todo_tasks %}
 <ul>
     {% for task in todo_tasks %}
-    <li><a href="/tasks/{{ task.id }}/">{{ task.title }}</a>
+    <li><a href="/task/{{ task.id }}/">{{ task.title }}</a>
         {% if task.done %}
         <form action="{% url 'tasks:mark_as_todo' task.id %}" method="post">
             {% csrf_token %}
@@ -29,7 +29,7 @@
 {% if done_tasks %}
 <ul>
     {% for task in done_tasks %}
-    <li><a href="/tasks/{{ task.id }}/">{{ task.title }}</a>
+    <li><a href="/task/{{ task.id }}/">{{ task.title }}</a>
         {% if task.done %}
         <form action="{% url 'tasks:mark_as_todo' task.id %}" method="post">
             {% csrf_token %}
@@ -54,7 +54,9 @@
 <p>You don't have any tasks. Make some?</p>
 {% endif %}
 
-<form action="{% url 'tasks:create_task' %}" method="get">
+<_by(
+"-day")
+form action="{% url 'tasks:create_task' %}" method="get">
     {% csrf_token %}
     <input type="submit", value="Add a new task">
 </form>

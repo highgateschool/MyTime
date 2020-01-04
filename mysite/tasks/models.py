@@ -36,7 +36,7 @@ class Task(models.Model):
         self.done = False
 
     def get_absolute_url(self):
-        return f"/tasks/{self.id}/"
+        return f"/task/{self.id}/"
 
 
 class Event(models.Model):
@@ -66,6 +66,9 @@ class Event(models.Model):
             return True
         else:
             return False
+
+    def get_absolute_url(self):
+        return f"/event/{self.id}/"
 
 
 class Routine(models.Model):
@@ -99,6 +102,9 @@ class Routine(models.Model):
 
     def get_end(self):
         return self.end_time
+
+    def get_absolute_url(self):
+        return f"/routine/{self.id}/"
 
 
 class TimeSlot(models.Model):

@@ -1,3 +1,4 @@
+from datetime import datetime
 from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -7,7 +8,7 @@ from .models import Task, Event, Routine
 
 
 class IndexView(ListView):
-    template_name = 'tasks/task_index.html'
+    template_name = 'tasks/index.html'
     context_object_name = 'task_list'
 
     def get_queryset(self):
@@ -22,7 +23,25 @@ class IndexView(ListView):
         return context
 
 
-class DetailView(DetailView):
+class ScheduleView(ListView):
+    template_name = "tasks/schedule.html"
+    context_object_name = "event_list"
+
+    def get_queryset(self):
+        return Event.objects.order_by('-date')
+
+    def get_context_data(self, **kwargs):
+        context = super(ScheduleView, self).get_context_data(**kwargs)
+        context['events_today'] = Event.objects.filter(
+            date=datetime.today()).order_by("-start_time")
+        context['routine_today'] = Routine.objects.filter(
+            day=datetime.today().weekday()).order_by("-start_time")
+        context['events'] = Event.objects.order_by("-date", "start_time")
+        context['routine'] = Routine.objects.order_by("-day", "-start_time")
+        return context
+
+
+class TaskDetail(DetailView):
     model = Task
     template_name = 'tasks/task_detail.html'
 
@@ -31,6 +50,16 @@ class DetailView(DetailView):
 
     def task_todo(self):
         Task.mark_todo()
+
+
+class EventDetail(DetailView):
+    model = Event
+    template_name = "tasks/event_detail.html"
+
+
+class RoutineDetail(DetailView):
+    model = Routine
+    template_name = "tasks/routine_detail.html"
 
 
 class TaskCreate(CreateView):
@@ -42,6 +71,24 @@ class TaskCreate(CreateView):
     due_date = forms.DateField(widget=forms.SelectDateWidget(
         attrs={'type': 'date'}))
     due_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+
+
+class EventCreate(CreateView):
+    model = Event
+    fields = ["title", "date", "start_time", "end_time"]
+    date = forms.DateField(widget=forms.SelectDateWidget(
+        attrs={"type": "date"}))
+    start_time = forms.TimeField(widget=forms.TimeInput(
+        attrs={'type': 'time'}))
+    end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+
+
+class RoutineCreate(CreateView):
+    model = Routine
+    fields = ["title", "day", "start_time", "end_time"]
+    start_time = forms.TimeField(widget=forms.TimeInput(
+        attrs={'type': 'time'}))
+    end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
 
 
 class TaskUpdate(UpdateView):
@@ -56,21 +103,6 @@ class TaskUpdate(UpdateView):
     template_name = "tasks/task_update_form.html"
 
 
-class TaskDelete(DeleteView):
-    model = Task
-    success_url = reverse_lazy("tasks:task_index")
-
-
-class EventCreate(CreateView):
-    model = Event
-    fields = ["title", "date", "start_time", "end_time"]
-    date = forms.DateField(widget=forms.SelectDateWidget(
-        attrs={"type": "date"}))
-    start_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'type': 'time'}))
-    end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
-
-
 class EventUpdate(UpdateView):
     model = Event
     fields = ["title", "date", "start_time", "end_time"]
@@ -82,19 +114,6 @@ class EventUpdate(UpdateView):
     template_name = "tasks/event_update_form.html"
 
 
-class EventDelete(DeleteView):
-    model = Event
-    #success_url = reverse_lazy("tasks:index")
-
-
-class RoutineCreate(CreateView):
-    model = Routine
-    fields = ["title", "day", "start_time", "end_time"]
-    start_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'type': 'time'}))
-    end_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
-
-
 class RoutineUpdate(UpdateView):
     model = Routine
     fields = ["title", "day", "start_time", "end_time"]
@@ -104,9 +123,19 @@ class RoutineUpdate(UpdateView):
     template_name = "tasks/routine_update_form.html"
 
 
+class TaskDelete(DeleteView):
+    model = Task
+    success_url = reverse_lazy("tasks:index")
+
+
+class EventDelete(DeleteView):
+    model = Event
+    success_url = reverse_lazy("tasks:schedule")
+
+
 class RoutineDelete(DeleteView):
     model = Routine
-    #success_url = reverse_lazy("tasks:index")
+    success_url = reverse_lazy("tasks:schedule")
 
 
 def mark_task_done(request, task_id):
