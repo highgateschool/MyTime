@@ -3,7 +3,8 @@ from . import views
 
 app_name = "tasks"
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
+    path('tasks/', views.IndexView.as_view(), name='index'),
+    path("events/", views.EventView.as_view(), name="event_index"),
     path('schedule/', views.ScheduleView.as_view(), name='schedule'),
     path('task/<int:pk>/', views.TaskDetail.as_view(), name='task_detail'),
     path("new_task/", views.TaskCreate.as_view(), name="create_task"),

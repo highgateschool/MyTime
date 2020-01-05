@@ -54,9 +54,8 @@
 <p>You don't have any tasks. Make some?</p>
 {% endif %}
 
-<_by(
-"-day")
-form action="{% url 'tasks:create_task' %}" method="get">
+<br>
+<form action="{% url 'tasks:create_task' %}" method="get">
     {% csrf_token %}
     <input type="submit", value="Add a new task">
 </form>

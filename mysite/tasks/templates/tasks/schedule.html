@@ -1,25 +1,28 @@
-<h1>Schedule</h1>
-{% if event_list %}
-<h2>Today:</h2>
-{% if events_today %}
+<h1>Today's schedule</h1>
+{% if time_slots %}
 <ul>
-    {% for event in events_today %}
-    <li><a href="/event/{{ event.id }}/">{{ event.title }}</a>
-        From {{ event.start_time }} to {{ event.end_time }}
+    {% for slot in time_slots %}
+    {% if slot.associated_type == "T" %}
+    <li>Task:
+        <a href="/task/{{ slot.associated_task.id }}/">{{ slot.associated_task.title }}</a>
+        from {{ slot.start_time }} to {{ slot.end_time }}
     </li>
+
+    {% elif slot.associated_type == "E" %}
+    <li>Event:
+        <a href="/event/{{ slot.associated_event.id }}/">{{ slot.associated_event.title }}</a>
+        from {{ slot.start_time }} to {{ slot.end_time }}
+    </li>
+
+    {% elif slot.associated_type == "R" %}
+    <li>Routine:
+        <a href="/routine/{{ slot.associated_routine.id }}/">{{ slot.associated_routine.title }}</a>
+        from {{ slot.start_time }} to {{ slot.end_time }}
+    </li>
+    {% endif %}
     {% endfor %}
 </ul>
 
 {% else %}
-<p>Nothing on today.</p>
+<p>You don't have anything in the schedule for today.</p>
 {% endif %}
-
-{% else %}
-<p>You don't have any upcoming events. Add some?</p>
-{% endif %}
-
-<form action="{% url 'tasks:create_event' %}" method="get">
-    {% csrf_token %}
-    <input type="submit", value="Add a new event">
-</form>
-

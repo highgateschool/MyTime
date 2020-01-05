@@ -108,9 +108,18 @@ class Routine(models.Model):
 
 
 class TimeSlot(models.Model):
+    TYPE_CHOICES = [
+        ("T", "task"),
+        ("E", "event"),
+        ("R", "routine"),
+    ]
+
     date = models.DateField("date")
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")
+    associated_type = models.CharField("type",
+                                       max_length=200,
+                                       choices=TYPE_CHOICES)
     associated_task = models.ForeignKey(Task,
                                         on_delete=models.CASCADE,
                                         null=True)
@@ -129,3 +138,9 @@ class TimeSlot(models.Model):
 
     def get_end(self):
         return self.end_time
+
+    def __str__(self):
+        return f"TimeSlot type {self.associated_type}"
+
+    def __repr__(self):
+        return f"TimeSlot type {self.associated_type}"

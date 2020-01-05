@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Task, Event, Routine
+from .models import Task, Event, Routine, TimeSlot
+from .scheduler import update_schedule
 
 
 class IndexView(ListView):
@@ -12,33 +13,42 @@ class IndexView(ListView):
     context_object_name = 'task_list'
 
     def get_queryset(self):
-        return Task.objects.order_by('-due_date')
+        return Task.objects.order_by('due_date')
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['todo_tasks'] = Task.objects.filter(
-            done=False).order_by("-due_date")
+            done=False).order_by("due_date")
         context['done_tasks'] = Task.objects.filter(
-            done=True).order_by("-due_date")
+            done=True).order_by("due_date")
+        return context
+
+
+class EventView(ListView):
+    template_name = "tasks/event_index.html"
+    context_object_name = "event_list"
+
+    def get_queryset(self):
+        return Event.objects.order_by('date')
+
+    def get_context_data(self, **kwargs):
+        context = super(EventView, self).get_context_data(**kwargs)
+        context['events_today'] = Event.objects.filter(
+            date=datetime.today()).order_by("start_time")
+        context['routine_today'] = Routine.objects.filter(
+            day=datetime.today().weekday()).order_by("start_time")
+        context['events'] = Event.objects.order_by("date", "start_time")
+        context['routine'] = Routine.objects.order_by("day", "start_time")
         return context
 
 
 class ScheduleView(ListView):
     template_name = "tasks/schedule.html"
-    context_object_name = "event_list"
+    context_object_name = "time_slots"
 
     def get_queryset(self):
-        return Event.objects.order_by('-date')
-
-    def get_context_data(self, **kwargs):
-        context = super(ScheduleView, self).get_context_data(**kwargs)
-        context['events_today'] = Event.objects.filter(
-            date=datetime.today()).order_by("-start_time")
-        context['routine_today'] = Routine.objects.filter(
-            day=datetime.today().weekday()).order_by("-start_time")
-        context['events'] = Event.objects.order_by("-date", "start_time")
-        context['routine'] = Routine.objects.order_by("-day", "-start_time")
-        return context
+        update_schedule(datetime.today().weekday())
+        return TimeSlot.objects.order_by("start_time")
 
 
 class TaskDetail(DetailView):
@@ -130,12 +140,12 @@ class TaskDelete(DeleteView):
 
 class EventDelete(DeleteView):
     model = Event
-    success_url = reverse_lazy("tasks:schedule")
+    success_url = reverse_lazy("tasks:event_index")
 
 
 class RoutineDelete(DeleteView):
     model = Routine
-    success_url = reverse_lazy("tasks:schedule")
+    success_url = reverse_lazy("tasks:event_index")
 
 
 def mark_task_done(request, task_id):
