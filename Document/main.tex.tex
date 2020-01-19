@@ -1,6 +1,36 @@
+% Created 2020-01-19 Sun 14:20
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Max Stupple}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Max Stupple},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
 \documentclass{article}
 \usepackage{graphicx}
-\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[a4paper, total=\{6in, 8in\}]\{geometry\}
 
 \title{ComSci Project - MyTime}
 \author{Max Stupple}
@@ -49,7 +79,7 @@ attractive colour scheme.
 \section{Initial ideas}
 This initial feature list will help me research existing software which may
 partially solve the problem. It will also give an idea of how complex the final
-solution will be.
+solution will be.\\
 
 To satisfy the needs of SH, I anticipate a solution will need to fulfil the
 following functions:
@@ -83,7 +113,7 @@ program is targeted at individuals who struggle to manage their time and avoid
 procrastination, the program will need to be engaging and provide incentives for
 the user to complete tasks early rather than delaying them. Thus the user will
 avoid situations in which they find themselves with insufficient time to
-complete all their tasks before they are due.
+complete all their tasks before they are due.\\
 
 The UI must also be simple and intuitive to use: there's no point in using an
 app to organise your time if you waste more time trying to get the app to work
@@ -162,7 +192,7 @@ most productive on. The primary drawback of Forest is that it lacks any means of
 tracking tasks from within the app. In my view this is significantly problematic
 as the app which is going to help you focus the most is one which never needs
 you to leave while working. Integrated task management is an
-absolute must for my solution.
+absolute must for my solution.\\
 
 \begin{figure}[h!]
   \includegraphics[width=\linewidth]{Images/evernote.jpg}
@@ -188,7 +218,7 @@ the scope of my product, however I am interested in the tools they have for
 tracking your productivity. Todoist can display graphs of total number of tasks
 done per day/week, the distribution between different types of tasks e.g.
 whether you did more tasks tagged with ``Study'' or ``Chores''. I definitely
-want to have similar visualisations of how productive the user is being.
+want to have similar visualisations of how productive the user is being.\\
 
 \begin{figure}[h!]
   \includegraphics[width=\linewidth]{Images/remember-the-milk.png}
@@ -201,7 +231,7 @@ intelligently adding, sorting and searching through tasks. However I'm
 particularly interested in the ability to divide tasks into sub-tasks. I
 personally have used to-do apps with such a feature and have found it rather
 useful, so I'll be interested to get my stakeholder's opinion on this
-feature specifically when I talk to them.
+feature specifically when I talk to them.\\
 
 \begin{figure}[h!]
   \includegraphics[width=\linewidth]{Images/ike.png}
@@ -217,7 +247,7 @@ and could perhaps be preset in my product, but I find it limiting that Ike
 forces you to organise by those categories. I definitely want my product to
 allow the user to organise their tasks into whatever folders and sub-folders
 they please. I think any limitation on how the tasks are organised will always
-be counterproductive in some degree to some users.
+be counterproductive in some degree to some users.\\
 
 \begin{figure}[h!]
   \includegraphics[width=\linewidth]{Images/keep.png}
@@ -231,7 +261,7 @@ something that my project is too concerned with. I'm also not a fan of Keep's
 visual metaphor of tasks being ``cards'' on the screen - a common visual
 metaphor in Google's design language. I think this creates confusion as there is
 not simply a vertical list. I also dislike that you need to create different
-types of tasks for simple text, lists, voice memos etc.
+types of tasks for simple text, lists, voice memos etc.\\
 
 \begin{figure}[h!]
   \includegraphics[width=\linewidth]{Images/trello.jpg}
@@ -245,7 +275,7 @@ creating tasks, marking them complete, adding comments and so on. However I
 think this sort of feature is beyond the scope of my solution. However I do like
 that each ``card'' can - unlike Keep - have text, checklists, and attachments. I
 think it will be useful for my users to be able to attach a reasonable amount of
-information to their tasks.
+information to their tasks.\\
 
 I think these programs all offer partial solutions to the problem, but none of
 them offer a solution to the exact problem SH has described. Forest is excellent
@@ -265,7 +295,7 @@ scope of the problem I'm trying to solve. Evernote is in my opinion the least
 effective of these programs, as it is mainly focused on note taking, with
 reminders as a side-feature. Trello offers the most features oriented towards
 time management and prioritising tasks, but is more focused around team
-collaboration on big projects than individual to-do management.
+collaboration on big projects than individual to-do management.\\
 
 I showed the candidates to SH to get his opinion and he gave me the following
 comments:
@@ -299,7 +329,7 @@ comments:
 
 He also commented in general that he liked the ability to sync tasks between
 devices, and a feature which he wanted but none of the programs offered was the
-ability to have ``subtasks'' nestled inside other tasks.
+ability to have ``subtasks'' nestled inside other tasks.\\
 
 From this I have assembled the following list of features which my program will
 need:
@@ -478,25 +508,25 @@ This is a higher-level description than the product specification,
 but low enough that each component is a manageable individual problem.
 I have identified the key functions that my solution will need to perform as:
 \begin{itemize}
-\item Basic calendaring:
+\item Basic calendaring:\\
   My solution needs to keep track of the user's regular commitments,
   and particular events,
   so that tasks can be scheduled around them.
-\item Task management:
+\item Task management:\\
   The user should be able to add tasks,
   mark them as done,
   and delete them.
   These tasks should be able to hold a reasonable amount of information,
   but in particular a due date and time estimate will be essential to the scheduler.
-\item Track time spent on tasks:
+\item Track time spent on tasks:\\
   The user should be able to log they are working on a task,
   and for how long,
   so that they can see overall statistics,
   on the accuracy of their time estimates,
   and on how good they are at sticking to their schedule.
-\item Calculate and display statistics:
+\item Calculate and display statistics:\\
   The aforementioned statistics should be presented to the user in a helpful way.
-\item Scheduling the user's tasks:
+\item Scheduling the user's tasks:\\
   The program will need to allocate time for each of the user's tasks,
   according to their priority,
   due date,
@@ -519,7 +549,7 @@ and a statistics viewer.
 The relevant data that each component will need to use is also quite obvious:
 the task manager, time tracker and statistics tracker will only be concerned with tasks,
 whereas the calendar will additionally need the user's routine, daily commitments,
-and any particular events that tasks will need to be scheduled around.
+and any particular events that tasks will need to be scheduled around.\\
 
 The data, then, will consist of four types.
 Tasks will have a title and description,
@@ -544,11 +574,9 @@ which represent a concrete allocation of time to be used for a specific purpose.
 Of course events and routines are already concrete,
 as the program will never override them since this would not be helpful for the user,
 but it is a nice logical separation to make in the database,
-which wouldn't be possible if I instead used the approach of converting everything into events for scheduling.
-Furthermore it would bloat event records with fields that would often go unused,
-depending on whether it was a regular event or a wrapper around a task or routine,
-so it seems more elegant to have a separate class for time slots.
+which wouldn't be possible if I instead used the approach of converting everything into events for scheduling.\\
 
 \end{document}
 
-% LocalWords:  MyTime Evernote Trello Todoist subtasks TimeSlot
+\% LocalWords:  MyTime Evernote Trello Todoist subtasks
+\end{document}
