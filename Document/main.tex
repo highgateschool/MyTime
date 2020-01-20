@@ -478,25 +478,25 @@ This is a higher-level description than the product specification,
 but low enough that each component is a manageable individual problem.
 I have identified the key functions that my solution will need to perform as:
 \begin{itemize}
-\item Basic calendaring:
+\item Basic calendaring:\\
   My solution needs to keep track of the user's regular commitments,
   and particular events,
   so that tasks can be scheduled around them.
-\item Task management:
+\item Task management:\\
   The user should be able to add tasks,
   mark them as done,
   and delete them.
   These tasks should be able to hold a reasonable amount of information,
   but in particular a due date and time estimate will be essential to the scheduler.
-\item Track time spent on tasks:
+\item Track time spent on tasks:\\
   The user should be able to log they are working on a task,
   and for how long,
   so that they can see overall statistics,
   on the accuracy of their time estimates,
   and on how good they are at sticking to their schedule.
-\item Calculate and display statistics:
+\item Calculate and display statistics:\\
   The aforementioned statistics should be presented to the user in a helpful way.
-\item Scheduling the user's tasks:
+\item Scheduling the user's tasks:\\
   The program will need to allocate time for each of the user's tasks,
   according to their priority,
   due date,
@@ -510,7 +510,7 @@ I have identified the key functions that my solution will need to perform as:
   \label{fig:TDD1}
 \end{figure}
 
-\subsection{Explanation of design}
+\subsubsection{Explanation of design}
 The solution naturally breaks down into four parts:
 a task manager,
 a basic calendar,
@@ -548,6 +548,40 @@ which wouldn't be possible if I instead used the approach of converting everythi
 Furthermore it would bloat event records with fields that would often go unused,
 depending on whether it was a regular event or a wrapper around a task or routine,
 so it seems more elegant to have a separate class for time slots.
+
+\subsection{UI Design}
+It seems sensible for this sort of product that I would want a navigation bar,
+shared by every screen,
+with the content below.
+
+I will have the following views:
+\begin{itemize}
+\item Task list:\\
+  A screen where the user can create, view and manage their tasks
+\item Calendar:\\
+  A screen where the user can create, view and manage upcoming events
+\item Schedule:\\
+  A screen showing the users tasks scheduled in around their events for today
+\item Task/event/routine detail:\\
+  A screen where the user can look at and individual task, event or routine,
+  and perform relevant actions such as marking as done/todo,
+  editing or deleting them
+\item Task/event/routine creator:\\
+  A form to create new tasks, events or routines
+\item Task/event/routine editor:\\
+  A form to edit existing tasks, events or routines
+\item Work time:\\
+  A screen where the user can enter a ``work session'' which records the time they spend working
+\item Work review:\\
+  A screen displaying statistics about the time the user has spent working
+\end{itemize}
+
+I think it will be simplest and most intuitive to have a navigation bar,
+at the top of the screen,
+allowing the user to quickly jump between the five main views -
+task list, calendar, schedule, work time and work review -
+and have individual tasks and events accessible from those views.
+It might also be helpful to have a quick button to add a new task/event/routine.
 
 \end{document}
 
