@@ -1,0 +1,65 @@
+#+TITLE: All the pseudocode for my project
+* Models
+Django allows me to view the database more abstractly in terms of classes and objects,
+with classes corresponding to tables and attributes to their fields,
+and instances being particular records.
+These are called models and may also have methods associated with them,
+although these are not part of the database.
+** Task
+Each task will have a
+title,
+description,
+due date,
+due time,
+priority level,
+and marker for if it's done
+#+BEGIN_SRC ruby
+class Task
+  str title
+  str description
+  date due_date
+  time due_time
+  timedelta time_estimate
+  int priority
+  bool done
+
+  def is_overdue()
+    return true if self.due_date > today else false
+  end
+
+  def mark_done()
+    self.done = true
+  end
+
+  def mark_todo()
+    self.done = false
+  end
+end
+#+END_SRC
+** Event
+#+BEGIN_SRC ruby
+class Event
+  str title
+  date date
+  time start_time
+  time end_time
+end
+#+END_SRC
+** Routine Event
+#+BEGIN_SRC ruby
+class Routine
+  str title
+  int day
+  time start_time
+  time end_time
+end
+#+END_SRC
+** Time Slot
+#+BEGIN_SRC ruby
+class TimeSlot
+  date date
+  time start_time
+  time end_time
+  foreignkey associated_object
+end
+#+END_SRC

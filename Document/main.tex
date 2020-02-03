@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{graphicx}
+\usepackage{listings}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \title{ComSci Project - MyTime}
@@ -582,6 +583,106 @@ allowing the user to quickly jump between the five main views -
 task list, calendar, schedule, work time and work review -
 and have individual tasks and events accessible from those views.
 It might also be helpful to have a quick button to add a new task/event/routine.
+
+\part{Development}
+\section{Stage 0: Learning Django}
+I haven't used Django before,
+so before I really get started on building my project I need to learn the basics.
+Fortunately, Django have a very helpful and comprehensive tutorial,
+as well as detailed and easy to navigate documentation.
+
+I decided first of all to run through the standard tutorial,
+which involves building a website for hosting various polls.
+In fact, this turned out to be incredibly useful because the structure of this website bears a number of similarities to my project:
+the main screen is a list of various polls,
+which you can then click on to view more information about and interact with.
+I will similarly need to have screens with lists of tasks and events,
+which you can then view in more detail and edit or mark as done etc.
+
+\subsection{Models and Views}
+I understand that Django is oriented around two primary data structures:
+models and views.
+Models are classes in Python,
+but they are also the tables in the database,
+with the attributes of the class corresponding to the fields,
+and instances to specific records.
+Being objects, they can also have methods.
+These don't correspond to anything in the database,
+but are useful for manipulating data.
+I imagine, for example, that I will want my Task model to have a mark as done method when I come to implement it.
+
+Views, on the other hand, correspond to the frontend.
+They outline what data will be viewed on each page,
+and also vaguely specify the appearance of the page,
+although this is controlled more precisely in HTML ``templates''.
+
+Here is an example model from the polls tutorial:
+\begin{lstlisting}[language=Python]
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+    def __str__(self):
+        return self.question_text
+
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+\end{lstlisting}
+
+In the database,
+this corresponds to a table called ``Question'',
+with fields ``question\_text'' and ``pub\_date'',
+holding text and datetimes respectively.
+
+Here's a screenshot of the that table:
+
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{Images/question_table.png}
+  \caption{Database table ``Question''}
+  \label{fig:database1}
+\end{figure}
+
+As you can see,
+Django also automatically includes a primary key ``id'' field with each table.
+
+The model also has the methods ``\_\_str\_\_'' and ``was\_published\_recently'',
+which are not seen in the database,
+but rather make it quicker and easier to use the data within Python.
+
+Here is an example view from the polls tutorial:
+\begin{lstlisting}[language=Python]
+class IndexView(generic.ListView):
+    template_name = 'polls/index.html'
+    context_object_name = 'latest_question_list'
+
+    def get_queryset(self):
+        # Return the last five published questions.
+        return Question.objects.order_by('-pub_date')[:5]
+\end{lstlisting}
+
+The queryset for this view is the five most recently published objects in the Question table.
+It then uses the template located at ``templates/polls/index.html'' -
+the root folder ``templates'' is implicit.
+Here is that template:
+\begin{lstlisting}[language=HTML]
+{% if latest_question_list %}
+   <ul>
+       {% for question in latest_question_list %}
+       <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+       {% endfor %}
+   </ul>
+{% else \%}
+   <p>No polls are available.</p>
+{% endif %}
+\end{lstlisting}
+
+Unless ``latest\_question\_list'' is empty,
+this will output a list of the five most recent questions,
+showing their names and linking to that question's page.
+The URLs are defined in the aptly names urls.py.
+
+\section{Stage 1: Tasks}
+
 
 \end{document}
 

@@ -14,12 +14,10 @@ class Task(models.Model):
     ]
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=1000)
-    due_date = models.DateField('due date')
+    due_date = models.DateField("due date")
     due_time = models.TimeField("due time", default="00:00")
-    time_estimate = models.DurationField('time estimate')
-    priority = models.IntegerField("priority",
-                                   choices=PRIORITY_LIST,
-                                   default=2)
+    time_estimate = models.DurationField("time estimate")
+    priority = models.IntegerField("priority", choices=PRIORITY_LIST, default=2)
     done = models.BooleanField(default=False)
     override_routine = models.BooleanField(default=False)
 
@@ -27,7 +25,7 @@ class Task(models.Model):
         return self.title
 
     def is_overdue(self):
-        return self.due_date < timezone.now()
+        return self.due_date <= timezone.now()
 
     def mark_done(self):
         self.done = True
@@ -117,18 +115,10 @@ class TimeSlot(models.Model):
     date = models.DateField("date")
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")
-    associated_type = models.CharField("type",
-                                       max_length=200,
-                                       choices=TYPE_CHOICES)
-    associated_task = models.ForeignKey(Task,
-                                        on_delete=models.CASCADE,
-                                        null=True)
-    associated_event = models.ForeignKey(Event,
-                                         on_delete=models.CASCADE,
-                                         null=True)
-    associated_routine = models.ForeignKey(Routine,
-                                           on_delete=models.CASCADE,
-                                           null=True)
+    associated_type = models.CharField("type", max_length=200, choices=TYPE_CHOICES)
+    associated_task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
+    associated_event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
+    associated_routine = models.ForeignKey(Routine, on_delete=models.CASCADE, null=True)
 
     def get_date(self):
         return self.date
