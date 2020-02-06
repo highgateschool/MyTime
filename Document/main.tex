@@ -1,11 +1,25 @@
 \documentclass{article}
+\setlength{\parskip}{0.67\baselineskip}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
-\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
 
 \title{ComSci Project - MyTime}
 \author{Max Stupple}
 \date{}
+
+\lstset{
+    frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
+    numbers=left, % display line numbers on the left
+    basicstyle=\ttfamily,
+    commentstyle=\color{gray}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red} % string color
+}
 
 \begin{document}
     
@@ -617,7 +631,7 @@ and also vaguely specify the appearance of the page,
 although this is controlled more precisely in HTML ``templates''.
 
 Here is an example model from the polls tutorial:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, breaklines]
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
@@ -650,7 +664,7 @@ which are not seen in the database,
 but rather make it quicker and easier to use the data within Python.
 
 Here is an example view from the polls tutorial:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, breaklines]
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -664,7 +678,7 @@ The queryset for this view is the five most recently published objects in the Qu
 It then uses the template located at ``templates/polls/index.html'' -
 the root folder ``templates'' is implicit.
 Here is that template:
-\begin{lstlisting}[language=HTML]
+\begin{lstlisting}[language=HTML, breaklines]
 {% if latest_question_list %}
    <ul>
        {% for question in latest_question_list %}
@@ -682,6 +696,63 @@ showing their names and linking to that question's page.
 The URLs are defined in the aptly names urls.py.
 
 \section{Stage 1: Tasks}
+Given the foundations laid by my work on the tutorial,
+I think the best place to start development will be with task management,
+especially given that this is the primary important function of my product.
+
+I need to make:
+\begin{itemize}
+\item A task model,
+  to store that data about each task
+\item A task index,
+  listing todo and done tasks separately,
+  and linking through to view each task in more detail
+\item A task detail view,
+  showing all the information about a given task and allowing editing/deletion
+\item A form for adding and editing tasks
+\item A task deletion view
+\end{itemize}
+
+\subsection{Task Model}
+Logically, it makes sense to create the model first,
+as we can't even begin to think about how we will display a task until we know their attributes.
+Since I've already outlines the attributes and methods for it in my design,
+creating the model will be quite simple.
+
+\begin{lstlisting}[language=Python, breaklines]
+class Task(models.Model):
+    LOW = 1
+    MED = 2
+    HIGH = 3
+    PRIORITY_LIST = [
+        (LOW, "Low"),
+        (MED, "Normal"),
+        (HIGH, "High"),
+    ]
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=1000)
+    due_date = models.DateField("due date")
+    due_time = models.TimeField("due time", default="00:00")
+    time_estimate = models.DurationField("time estimate")
+    priority = models.IntegerField("priority", choices=PRIORITY_LIST, default=2)
+    done = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+    def is_overdue(self):
+        return self.due_date <= timezone.now()
+
+    def mark_done(self):
+        self.done = True
+
+    def mark_todo(self):
+        self.done = False
+
+    def get_absolute_url(self):
+        return f"/task/{self.id}/"
+\end{lstlisting}
+
 
 
 \end{document}

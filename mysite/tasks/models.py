@@ -19,7 +19,6 @@ class Task(models.Model):
     time_estimate = models.DurationField("time estimate")
     priority = models.IntegerField("priority", choices=PRIORITY_LIST, default=2)
     done = models.BooleanField(default=False)
-    override_routine = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
