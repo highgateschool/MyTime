@@ -12,13 +12,30 @@ class UserData(models.Model):
     tasks_done_recent = models.IntegerField("tasks done recent")
 
     def find_tasks_todo(self):
-        pass
+        return len(list(Task.objects.filter_by(associated_user=self, done=False)))
+
+    def find_tasks_overdue(self):
+        return len(
+            list(Task.objects.filter_by(associated_user=self, done=False, overdue=True))
+        )
+
+    def find_tasks_done(self):
+        return len(
+            list(
+                Task.objects.filter_by(associated_user=self, done=True).order_by(
+                    completion_time
+                )[:5]
+            )
+        )
+
+    def find_tasks_done_recent(self):
+        return len(list(Task.objects.filter_by(associated_user=self, done=True)))
 
     def __str__(self):
-        return f"User data for {user}"
+        return f"User data for {self.user}"
 
     def __repr__(self):
-        return f"User data for {user}"
+        return f"User data for {self.user}"
 
 
 class Task(models.Model):
@@ -37,11 +54,13 @@ class Task(models.Model):
     time_estimate = models.DurationField("time estimate")
     priority = models.IntegerField("priority", choices=PRIORITY_LIST, default=2)
     done = models.BooleanField(default=False)
+    completion_time = models.DateTimeField("completion time", null=True)
     completed_on_time = models.BooleanField(default=False)
     time_spent = models.DurationField(
         "time spent", default=timedelta(hours=0, minutes=0)
     )
     associated_user = models.ForeignKey(UserData, on_delete=models.CASCADE)
+    overdue = self.is_overdue()
 
     def __str__(self):
         return self.title
@@ -56,9 +75,12 @@ class Task(models.Model):
             self.completed_on_time = False
         else:
             self.completed_on_time = True
+        self.completion_time = timezone.now()
 
     def mark_todo(self):
         self.done = False
+        self.completed_on_time = False
+        self.completion_time = None
 
     def get_absolute_url(self):
         return f"/task/{self.id}/"
