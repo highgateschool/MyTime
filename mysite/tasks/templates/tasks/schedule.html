@@ -1,0 +1,28 @@
+<h1>Today's schedule</h1>
+{% if time_slots %}
+<ul>
+    {% for slot in time_slots %}
+    {% if slot.associated_type == "T" %}
+    <li>Task:
+        <a href="/task/{{ slot.associated_task.id }}/">{{ slot.associated_task.title }}</a>
+        from {{ slot.start_time }} to {{ slot.end_time }}
+    </li>
+
+    {% elif slot.associated_type == "E" %}
+    <li>Event:
+        <a href="/event/{{ slot.associated_event.id }}/">{{ slot.associated_event.title }}</a>
+        from {{ slot.start_time }} to {{ slot.end_time }}
+    </li>
+
+    {% elif slot.associated_type == "R" %}
+    <li>Routine:
+        <a href="/routine/{{ slot.associated_routine.id }}/">{{ slot.associated_routine.title }}</a>
+        from {{ slot.start_time }} to {{ slot.end_time }}
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% else %}
+<p>You don't have anything in the schedule for today.</p>
+{% endif %}

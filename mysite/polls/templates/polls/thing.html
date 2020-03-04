@@ -1,0 +1,15 @@
+<h1>Let's square a number</h1>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% else %}
+{% if output %}
+<p><strong>{{ output }}</strong></p>
+{% endif %}
+{% endif %}
+
+<form action="{% url 'polls:square' %}" method="post">
+    {% csrf_token %}
+    <input type="number" name="input" placeholder="Enter a number">
+    <input type="submit" value="Go">
+</form>

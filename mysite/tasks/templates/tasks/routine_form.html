@@ -1,0 +1,15 @@
+<h1>Add a new routine event:</h1>
+<p>NB: please ensure you have a routine event for the night time.</p>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'tasks:create_event' %}" method="post">
+    {% csrf_token %}
+    Title:<br><input type="text" name="title" placeholder="Enter a title"><br><br>
+    Day:<br><input type="choice" name="day" placeholder="Select the day"><br><br>
+    Start time:<br><input type="time" name="start_time" placeholder="Enter the start time"><br><br>
+    End time:<br><input type="time" name="end_time" placeholder="Enter the end time"><br><br>
+    <input type="submit" value="Save">
+</form>

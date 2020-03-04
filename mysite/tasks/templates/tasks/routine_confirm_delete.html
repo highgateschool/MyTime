@@ -1,0 +1,6 @@
+<h1>Confirm deletion</h1>
+
+<form action="{% url 'tasks:delete_routine' routine.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit", value="Delete routine event">
+</form>

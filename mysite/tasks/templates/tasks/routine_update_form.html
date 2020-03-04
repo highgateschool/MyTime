@@ -1,0 +1,14 @@
+<h1>Edit routine event:</h1>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'tasks:create_event' routine.id %}" method="post">
+    {% csrf_token %}
+    Title:<br><input type="text" name="title" placeholder="Enter a title", value={{ routine.title }}><br><br>
+    Day:<br><input type="choice" name="day" placeholder="Select the day", value={{ routine.day }}><br><br>
+    Start time:<br><input type="time" name="start_time" placeholder="Enter the start time", value={{ routine.start_time }}><br><br>
+    End time:<br><input type="time" name="end_time" placeholder="Enter the end time", value={{ routine.end_time }}><br><br>
+    <input type="submit" value="Update">
+</form>
