@@ -54,13 +54,12 @@ class Task(models.Model):
     time_estimate = models.DurationField("time estimate")
     priority = models.IntegerField("priority", choices=PRIORITY_LIST, default=2)
     done = models.BooleanField(default=False)
-    completion_time = models.DateTimeField("completion time", null=True)
+    completion_time = models.DateTimeField("completion time", null=True, blank=True)
     completed_on_time = models.BooleanField(default=False)
     time_spent = models.DurationField(
         "time spent", default=timedelta(hours=0, minutes=0)
     )
-    associated_user = models.ForeignKey(UserData, on_delete=models.CASCADE)
-    overdue = self.is_overdue()
+    # associated_user = models.ForeignKey(UserData, on_delete=models.CASCADE, default=0)
 
     def __str__(self):
         return self.title
@@ -81,6 +80,10 @@ class Task(models.Model):
         self.done = False
         self.completed_on_time = False
         self.completion_time = None
+
+    def alter_time_spent(self, delta):
+        if self.time_spent + delta >= 0:
+            self.time_spent += delta
 
     def get_absolute_url(self):
         return f"/task/{self.id}/"
