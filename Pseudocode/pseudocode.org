@@ -1,0 +1,121 @@
+#+TITLE: All the pseudocode for my project
+* Models
+Django allows me to view the database more abstractly in terms of classes and objects,
+with classes corresponding to tables and attributes to their fields,
+and instances being particular records.
+These are called models and may also have methods associated with them,
+although these are not part of the database.
+** Task
+Each task will have a
+title,
+description,
+due date,
+due time,
+priority level,
+and marker for if it's done
+#+BEGIN_SRC ruby
+class Task inherits Model
+  str title
+  str description
+  date due_date
+  time due_time
+  timedelta time_estimate
+  int priority
+  bool done
+
+  def is_overdue()
+    return true if self.due_date > today else false
+  end
+
+  def mark_done()
+    self.done = true
+  end
+
+  def mark_todo()
+    self.done = false
+  end
+end
+#+END_SRC
+** Event
+#+BEGIN_SRC ruby
+class Event inherits Model
+  str title
+  date date
+  time start_time
+  time end_time
+end
+#+END_SRC
+** Routine Event
+#+BEGIN_SRC ruby
+class Routine inherits Model
+  str title
+  int day
+  time start_time
+  time end_time
+end
+#+END_SRC
+** Time Slot
+#+BEGIN_SRC ruby
+class TimeSlot inherits Model
+  date date
+  time start_time
+  time end_time
+  foreignkey associated_object
+end
+#+END_SRC
+* Views
+Django utilises "views" to create dynamic web pages based on user input and the database.
+It is possible to supply various model instances to be displayed and code to be run,
+when a particular URL is visited.
+** TaskIndex
+The task index view will be based on the generic list view,
+accessing both the complete and incomplete tasks from the database.
+#+BEGIN_SRC ruby
+class TaskIndex inherits ListView
+  str template_name = "task_index.html" # where to find the HTML template for the page
+  str context_object_name = "task_list" # this is the name by which the data can be accessed in the HTML template
+
+  def get_queryset() # this is a required method so Django knows what data the view will use
+    return Task objects ordered by due_date # Django will automatically handle ordering/filtering
+  end
+
+  def get_context_data() # this provides additional specification for the database query
+    dict context
+    # Here we are segregating the objects into todo and done
+    context["todo_tasks"] = Task objects filtered by done=False ordered by due_date
+    context["done_tasks"] = Task objects filtered by done=True ordered by due_data
+    return context
+  end
+end
+#+END_SRC
+** EventIndex
+The event index would be exceedingly similar to the task index,
+so I will not write pseudocode for it.
+The differences would be it's use of the Event and Routine models instead of the Task model,
+and it would section them into events today,
+routine events today,
+events on other days and routines on other days.
+** TaskDetail
+This is a simple view to display all the information about a task,
+however it does have methods for marking the task as todo or done.
+#+BEGIN_SRC ruby
+class TaskDetail inherits DetailView
+  obj model = Task
+  str template_name = "task_detail.html"
+
+  def task_done()
+    Task.mark_done()
+  end
+
+  def task_todo()
+    Task.mark_todo()
+  end
+end
+#+END_SRC
+* Scheduler
+This is the main interesting algorithm used in my project.
+It needs take all the events, tasks and routine events,
+convert them to time slots,
+and create an overall schedule for them.
+This is pretty straightforward for events and routines,
+but somewhat less so for tasks.
