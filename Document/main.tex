@@ -592,12 +592,67 @@ I will have the following views:
   A screen displaying statistics about the time the user has spent working
 \end{itemize}
 
-I think it will be simplest and most intuitive to have a navigation bar,
+I think it will also be helpful to have a navigation bar,
 at the top of the screen,
 allowing the user to quickly jump between the five main views -
 task list, calendar, schedule, work time and work review -
 and have individual tasks and events accessible from those views.
 It might also be helpful to have a quick button to add a new task/event/routine.
+
+\subsubsection{Task Index}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{Mockups/task_index.png}
+\label{fig:task_index_mockup}
+\caption{Mockup of the task index page}
+\end{figure}
+\end{minipage} \hfill
+\begin{minipage}{0.45\textwidth}
+\paragraph{Features:}
+\begin{itemize}
+\item View all tasks
+\item List split by todo/done status
+\item Click on a task to see a more detailed view
+\item Quickly toggle whether a task is done
+\item Add new tasks
+\end{itemize}
+\end{minipage}
+
+\subsubsection{Calendar}
+\begin{minipage}{0.35\textwidth}
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{Mockups/event_index.png}
+\label{fig:event_index_mockup}
+\caption{Mockup of the calendar page}
+\end{figure}
+\end{minipage} \hfill
+\begin{minipage}{0.6\textwidth}
+\paragraph{Features:}
+\begin{itemize}
+\item View all upcoming events
+\item List split by one-off events and routine events,
+  and further by those which are today and which are later
+\item Click on and event to see a more detailed view
+\item Add new events
+\end{itemize}
+\end{minipage}
+
+\subsubsection{Schedule}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{Mockups/schedule.png}
+\label{fig:schedule_mockup}
+\caption{Mockup of the schedule page}
+\end{figure}
+\end{minipage} \hfill
+\begin{minipage}{0.45\textwidth}
+\paragraph{Features:}
+\begin{itemize}
+\item View routine, events and tasks scheduled for today
+\item Tasks are scheduled automatically according to due date, priority and time estimate
+\item Click on an item to see a more detailed view
+\end{itemize}
+\end{minipage}
 
 \part{Development}
 \section{Stage 0: Learning Django}
@@ -1078,6 +1133,74 @@ and all routines,
 into separate entries in the \texttt{context} dictionary,
 each ordered by date/day and start time,
 so each can be displayed separately in chronological order.
+It makes sense to separate out the tasks and routines that are on today,
+so that they can be displayed more prominently.
+
+\section{Stage 3: The Scheduler}
+The scheduler consists of two parts:
+a view where the events and scheduled tasks can be seen together,
+and a function responsible for scheduling the tasks relative to the events.
+It won't make much of a difference,
+but I will put the scheduler in it's own file,
+\texttt{scheduler.py},
+as although it will exclusively be called by the view,
+it doesn't really make sense to put it in the \texttt{views.py} file.
+
+Something which I considered,
+while implementing the scheduler,
+is how exactly it should manage tasks, events and routines relative to each other.
+Clearly, it would be easiest to convert them all into a singular data type,
+so they can be operated on in the same way.
+One possible approach I considered was casting routines and tasks into events,
+since events have a fixed date, start and end time,
+which is all the information needed for scheduling purposes.
+However, this would require adding additional clutter into the event table,
+as fields would be needed to flag whether it was an ordinary event,
+an event converted from a routine or an event converted from task,
+and a foreign key field to link to the actual task or event it was converted from.
+
+Instead,
+I decided to create a new model for the specific purpose of representing chunks of time.
+\texttt{TimeSlot} is a model with a date, start and end time,
+and an associated object being a task, event or routine.
+It doesn't need a name/title as this can simply be retrieved from the associated object.
+
+\begin{lstlisting}[language=Python, breaklines]
+class TimeSlot(models.Model):
+
+    date = models.DateField("date")
+    start_time = models.TimeField("start time")
+    end_time = models.TimeField("end time")
+    associated_object = models.ForeignKey(on_delete=models.CASCADE, null=True)
+
+    def get_date(self):
+        return self.date
+
+    def get_start(self):
+        return self.start_time
+
+    def get_end(self):
+        return self.end_time
+\end{lstlisting}
+
+Note that for the foreign key it has the argument \texttt{on\_delete=models.CASCADE}.
+This ensures referential integrity as if the associated object is deleted,
+the time slot will be deleted as well.
+
+The scheduler itself, then:
+\begin{itemize}
+\item Gets all the events, routines and tasks from the database
+\item Creates time slots for all the events and routines
+\item Puts them into a list in order
+\item Iterates over all the tasks according to their due date, time estimate and priority level,
+  for each one finding an available space between sequential timeslots
+  where the gap it at least as large as the time estimate for the task
+\item When a space is found, creates a time slot for the task at that time
+\end{itemize}
+
+There is also some additional fluff,
+such as deleting unused time slots,
+and converting between dates and days for the routines.
 
 \end{document}
 

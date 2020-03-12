@@ -112,7 +112,7 @@ class Event(models.Model):
         return self.title
 
     def does_clash(self, other):
-        if self.start_time < other.end_time and self.end_time > other.start:
+        if self.start_time < other.end_time and self.end_time > other.start_time:
             return True
         else:
             return False

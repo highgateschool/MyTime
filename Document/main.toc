@@ -1,29 +1,39 @@
 \contentsline {part}{I\hspace {1em}Analysis}{2}% 
-\contentsline {section}{\numberline {1}Overview of the problem}{2}% 
+\contentsline {section}{\numberline {1}Overview of the problem}{3}% 
 \contentsline {section}{\numberline {2}Limitations of current system}{3}% 
 \contentsline {section}{\numberline {3}Initial ideas}{3}% 
 \contentsline {section}{\numberline {4}User group}{4}% 
 \contentsline {section}{\numberline {5}Computational methods}{4}% 
 \contentsline {subsection}{\numberline {5.1}Abstraction}{4}% 
-\contentsline {subsection}{\numberline {5.2}Reusability}{4}% 
-\contentsline {subsection}{\numberline {5.3}Visualisation}{4}% 
+\contentsline {subsection}{\numberline {5.2}Reusability}{5}% 
+\contentsline {subsection}{\numberline {5.3}Visualisation}{5}% 
 \contentsline {subsection}{\numberline {5.4}Concurrency}{5}% 
 \contentsline {subsection}{\numberline {5.5}Data Mining}{5}% 
 \contentsline {subsection}{\numberline {5.6}Logic}{5}% 
 \contentsline {section}{\numberline {6}Research}{5}% 
-\contentsline {section}{\numberline {7}System requirements}{12}% 
+\contentsline {section}{\numberline {7}System requirements}{13}% 
 \contentsline {section}{\numberline {8}Success Criteria}{14}% 
 \contentsline {subsection}{\numberline {8.1}General objectives}{14}% 
 \contentsline {subsection}{\numberline {8.2}Specific objectives}{14}% 
 \contentsline {part}{II\hspace {1em}Design}{15}% 
 \contentsline {section}{\numberline {9}Breaking down the problem}{15}% 
-\contentsline {subsubsection}{\numberline {9.0.1}Explanation of design}{15}% 
-\contentsline {subsection}{\numberline {9.1}UI Design}{16}% 
-\contentsline {part}{III\hspace {1em}Development}{17}% 
-\contentsline {section}{\numberline {10}Stage 0: Learning Django}{17}% 
-\contentsline {subsection}{\numberline {10.1}Models and Views}{18}% 
-\contentsline {section}{\numberline {11}Stage 1: Tasks}{19}% 
-\contentsline {subsection}{\numberline {11.1}Task Model}{20}% 
-\contentsline {subsection}{\numberline {11.2}Task Index}{21}% 
-\contentsline {subsection}{\numberline {11.3}Task Detail}{23}% 
-\contentsline {subsection}{\numberline {11.4}Task creation/editing/deletion}{24}% 
+\contentsline {subsubsection}{\numberline {9.0.1}Explanation of design}{16}% 
+\contentsline {subsection}{\numberline {9.1}UI Design}{17}% 
+\contentsline {subsubsection}{\numberline {9.1.1}Task Index}{18}% 
+\contentsline {paragraph}{Features:}{18}% 
+\contentsline {subsubsection}{\numberline {9.1.2}Calendar}{18}% 
+\contentsline {paragraph}{Features:}{18}% 
+\contentsline {subsubsection}{\numberline {9.1.3}Schedule}{19}% 
+\contentsline {paragraph}{Features:}{19}% 
+\contentsline {part}{III\hspace {1em}Development}{19}% 
+\contentsline {section}{\numberline {10}Stage 0: Learning Django}{19}% 
+\contentsline {subsection}{\numberline {10.1}Models and Views}{19}% 
+\contentsline {section}{\numberline {11}Stage 1: Tasks}{21}% 
+\contentsline {subsection}{\numberline {11.1}Task Model}{21}% 
+\contentsline {subsection}{\numberline {11.2}Task Index}{23}% 
+\contentsline {subsection}{\numberline {11.3}Task Detail}{25}% 
+\contentsline {subsection}{\numberline {11.4}Task creation/editing/deletion}{26}% 
+\contentsline {section}{\numberline {12}Stage 2: Events and Routines}{28}% 
+\contentsline {subsection}{\numberline {12.1}Models}{28}% 
+\contentsline {subsection}{\numberline {12.2}Views}{29}% 
+\contentsline {section}{\numberline {13}Stage 3: The Scheduler}{29}% 
