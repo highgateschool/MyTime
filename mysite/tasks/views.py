@@ -172,3 +172,13 @@ def mark_task_todo(request, task_id):
     task.mark_todo()
     task.save()
     return HttpResponseRedirect(link)
+
+
+def change_time_spent(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    link = request.META.get("HTTP_REFERER", "/")
+    time = int(request.POST["input"])
+    tdelta = timedelta(minutes=time)
+    task.alter_time_spent(tdelta)
+    task.save()
+    return HttpResponseRedirect(link)

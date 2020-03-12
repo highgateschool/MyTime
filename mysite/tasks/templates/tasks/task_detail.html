@@ -6,10 +6,18 @@
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
+<p>{{ task.description }}</p>
 <li>Due on {{ task.due_date }} at {{ task.due_time }}</li>
 <li>Time estimate: {{ task.time_estimate }}</li>
 <li>Priority level: {{ task.priority }}</li>
-<p>{{ task.description }}</p>
+<li>Time spent: {{ task.time_spent }}</li>
+
+<form action="{% url 'tasks:change_time_spent' task.id %}" method="post">
+    {% csrf_token %}
+    Log time spent working on the task:
+    <input type="number" name="input" placeholder="Time spent (minutes)">
+    <input type="submit" value="Log">
+</form>
 
 {% if task.done %}
 <p>Done!</p>
@@ -34,3 +42,4 @@
     {% csrf_token %}
     <input type="submit", value="Delete">
 </form>
+

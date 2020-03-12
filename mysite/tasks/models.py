@@ -82,7 +82,7 @@ class Task(models.Model):
         self.completion_time = None
 
     def alter_time_spent(self, delta):
-        if self.time_spent + delta >= 0:
+        if (self.time_spent + delta).total_seconds() >= 0:
             self.time_spent += delta
 
     def get_absolute_url(self):
