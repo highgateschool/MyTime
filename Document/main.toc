@@ -1,47 +1,65 @@
-\contentsline {part}{I\hspace {1em}Analysis}{2}% 
+\contentsline {part}{I\hspace {1em}Analysis}{3}% 
 \contentsline {section}{\numberline {1}Overview of the problem}{3}% 
-\contentsline {section}{\numberline {2}Limitations of current system}{3}% 
-\contentsline {section}{\numberline {3}Initial ideas}{3}% 
-\contentsline {section}{\numberline {4}User group}{4}% 
-\contentsline {section}{\numberline {5}Computational methods}{4}% 
-\contentsline {subsection}{\numberline {5.1}Abstraction}{4}% 
+\contentsline {section}{\numberline {2}Limitations of current system}{4}% 
+\contentsline {section}{\numberline {3}Initial ideas}{4}% 
+\contentsline {section}{\numberline {4}User group}{5}% 
+\contentsline {section}{\numberline {5}Computational methods}{5}% 
+\contentsline {subsection}{\numberline {5.1}Abstraction}{5}% 
 \contentsline {subsection}{\numberline {5.2}Reusability}{5}% 
 \contentsline {subsection}{\numberline {5.3}Visualisation}{5}% 
-\contentsline {subsection}{\numberline {5.4}Concurrency}{5}% 
-\contentsline {subsection}{\numberline {5.5}Data Mining}{5}% 
-\contentsline {subsection}{\numberline {5.6}Logic}{5}% 
-\contentsline {section}{\numberline {6}Research}{5}% 
+\contentsline {subsection}{\numberline {5.4}Concurrency}{6}% 
+\contentsline {subsection}{\numberline {5.5}Data Mining}{6}% 
+\contentsline {subsection}{\numberline {5.6}Logic}{6}% 
+\contentsline {section}{\numberline {6}Research}{6}% 
 \contentsline {section}{\numberline {7}System requirements}{13}% 
-\contentsline {section}{\numberline {8}Success Criteria}{14}% 
-\contentsline {subsection}{\numberline {8.1}General objectives}{14}% 
-\contentsline {subsection}{\numberline {8.2}Specific objectives}{14}% 
-\contentsline {part}{II\hspace {1em}Design}{15}% 
-\contentsline {section}{\numberline {9}Breaking down the problem}{15}% 
+\contentsline {section}{\numberline {8}Success Criteria}{15}% 
+\contentsline {subsection}{\numberline {8.1}General objectives}{15}% 
+\contentsline {subsection}{\numberline {8.2}Specific objectives}{15}% 
+\contentsline {part}{II\hspace {1em}Design}{16}% 
+\contentsline {section}{\numberline {9}Breaking down the problem}{16}% 
 \contentsline {subsection}{\numberline {9.1}Explanation of design}{16}% 
-\contentsline {section}{\numberline {10}UI Design}{17}% 
-\contentsline {subsection}{\numberline {10.1}View Mockups}{18}% 
-\contentsline {paragraph}{Features:}{18}% 
-\contentsline {paragraph}{Features:}{18}% 
+\contentsline {section}{\numberline {10}UI Design}{18}% 
+\contentsline {subsection}{\numberline {10.1}View Mockups}{19}% 
 \contentsline {paragraph}{Features:}{19}% 
 \contentsline {paragraph}{Features:}{19}% 
 \contentsline {paragraph}{Features:}{20}% 
 \contentsline {paragraph}{Features:}{20}% 
 \contentsline {paragraph}{Features:}{21}% 
-\contentsline {section}{\numberline {11}Algorithms}{21}% 
-\contentsline {subsection}{\numberline {11.1}Create task}{21}% 
-\contentsline {subsection}{\numberline {11.2}Update task}{22}% 
-\contentsline {part}{III\hspace {1em}Development}{22}% 
-\contentsline {section}{\numberline {12}Stage 0: Learning Django}{22}% 
-\contentsline {subsection}{\numberline {12.1}Models and Views}{22}% 
-\contentsline {section}{\numberline {13}Stage 1: Tasks}{24}% 
-\contentsline {subsection}{\numberline {13.1}Task Model}{24}% 
-\contentsline {subsection}{\numberline {13.2}Task Index}{25}% 
-\contentsline {subsection}{\numberline {13.3}Task Detail}{27}% 
-\contentsline {subsection}{\numberline {13.4}Task creation/editing/deletion}{28}% 
-\contentsline {section}{\numberline {14}Stage 2: Events and Routines}{30}% 
-\contentsline {subsection}{\numberline {14.1}Models}{30}% 
-\contentsline {subsection}{\numberline {14.2}Views}{31}% 
-\contentsline {section}{\numberline {15}Stage 3: The Scheduler}{32}% 
-\contentsline {subsection}{\numberline {15.1}The Scheduling Function}{32}% 
-\contentsline {subsection}{\numberline {15.2}The Schedule View}{33}% 
-\contentsline {part}{IV\hspace {1em}Evaluation}{33}% 
+\contentsline {paragraph}{Features:}{21}% 
+\contentsline {paragraph}{Features:}{22}% 
+\contentsline {section}{\numberline {11}Algorithms}{22}% 
+\contentsline {subsection}{\numberline {11.1}Create task}{22}% 
+\contentsline {subsection}{\numberline {11.2}Update task}{23}% 
+\contentsline {subsection}{\numberline {11.3}Make schedule}{24}% 
+\contentsline {subsection}{\numberline {11.4}Generate statistics}{25}% 
+\contentsline {subsection}{\numberline {11.5}Other parts of the solution}{26}% 
+\contentsline {section}{\numberline {12}Relations of the modules}{27}% 
+\contentsline {part}{III\hspace {1em}Development}{28}% 
+\contentsline {section}{\numberline {13}Stage 0: Learning Django}{28}% 
+\contentsline {subsection}{\numberline {13.1}Models and Views}{28}% 
+\contentsline {section}{\numberline {14}Validation and Testing}{30}% 
+\contentsline {section}{\numberline {15}Stage 1: Tasks}{30}% 
+\contentsline {subsection}{\numberline {15.1}Task Model}{30}% 
+\contentsline {subsection}{\numberline {15.2}Task Index}{34}% 
+\contentsline {subsection}{\numberline {15.3}Task Detail}{36}% 
+\contentsline {subsection}{\numberline {15.4}Task creation/editing/deletion}{38}% 
+\contentsline {subsection}{\numberline {15.5}Stage 1 Testing}{40}% 
+\contentsline {subsection}{\numberline {15.6}Stage 1 Review}{42}% 
+\contentsline {section}{\numberline {16}Stage 2: Events and Routines}{43}% 
+\contentsline {subsection}{\numberline {16.1}Models}{43}% 
+\contentsline {subsection}{\numberline {16.2}Views}{43}% 
+\contentsline {section}{\numberline {17}Stage 3: The Scheduler}{44}% 
+\contentsline {subsection}{\numberline {17.1}The Scheduling Function}{44}% 
+\contentsline {subsection}{\numberline {17.2}The Schedule View}{45}% 
+\contentsline {section}{\numberline {18}Time Tracking and User Statistics}{46}% 
+\contentsline {subsection}{\numberline {18.1}Tracking time spent on a task}{46}% 
+\contentsline {paragraph}{Max}{46}% 
+\contentsline {paragraph}{SH}{46}% 
+\contentsline {paragraph}{Max}{46}% 
+\contentsline {paragraph}{SH}{47}% 
+\contentsline {paragraph}{Max}{47}% 
+\contentsline {paragraph}{SH}{47}% 
+\contentsline {subsection}{\numberline {18.2}User Statistics}{48}% 
+\contentsline {part}{IV\hspace {1em}Evaluation}{50}% 
+\contentsline {section}{\numberline {19}Evaluation of solution}{50}% 
+\contentsline {subsection}{\numberline {19.1}Measurement against success criteria}{50}% 

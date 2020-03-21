@@ -27,4 +27,5 @@ urlpatterns = [
     path(
         "routine/<int:pk>/delete/", views.RoutineDelete.as_view(), name="delete_routine"
     ),
+    path("stats/", views.StatisticsView.as_view(), name="user_statistics"),
 ]

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.8)  15 MAR 2020 15:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.8)  21 MAR 2020 18:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -130,18 +130,18 @@ Package: inputenc 2018/08/11 v1.3c Input encoding file
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -239,11 +239,11 @@ e
 ))
 \c@lstlisting=\count106
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 27.
+(Font)              <12> on input line 28.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 27.
+(Font)              <8> on input line 28.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 27.
+(Font)              <6> on input line 28.
 
 (./main.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -252,17 +252,16 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 7.
  [1
 
-{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}])
+{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}] [2])
 \tf@toc=\write3
 \openout3 = `main.toc'.
 
- [2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 41.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 42.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 41.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 42.
  [3] [4]
 [5]
 <Images/forest.jpg, id=24, 973.6375pt x 662.475pt>
@@ -270,126 +269,150 @@ File: Images/forest.jpg Graphic file (type jpg)
 <use Images/forest.jpg>
 Package pdftex.def Info: Images/forest.jpg  used on input line 166.
 (pdftex.def)             Requested size: 433.62pt x 295.038pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 <Images/evernote.jpg, id=25, 642.4pt x 401.5pt>
 File: Images/evernote.jpg Graphic file (type jpg)
 <use Images/evernote.jpg>
 Package pdftex.def Info: Images/evernote.jpg  used on input line 184.
 (pdftex.def)             Requested size: 433.62pt x 271.01918pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/todoist.png, id=26, 1676.2625pt x 877.2775pt>
+[6]
+<Images/todoist.png, id=29, 1676.2625pt x 877.2775pt>
 File: Images/todoist.png Graphic file (type png)
 <use Images/todoist.png>
 Package pdftex.def Info: Images/todoist.png  used on input line 195.
 (pdftex.def)             Requested size: 433.62pt x 226.93556pt.
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6 <./Images/forest.jpg>]
-
-LaTeX Warning: Text page 7 contains only floats.
-
-
-Overfull \vbox (3.68364pt too high) has occurred while \output is active []
-
-
-[7 <./Images/evernote.jpg> <./Images/todoist.png>]
-<Images/remember-the-milk.png, id=36, 642.4pt x 401.5pt>
+<Images/remember-the-milk.png, id=31, 642.4pt x 401.5pt>
 File: Images/remember-the-milk.png Graphic file (type png)
 <use Images/remember-the-milk.png>
 Package pdftex.def Info: Images/remember-the-milk.png  used on input line 210.
 (pdftex.def)             Requested size: 433.62pt x 271.01918pt.
-<Images/ike.png, id=37, 2168.1pt x 1284.8pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<Images/ike.png, id=32, 2168.1pt x 1284.8pt>
 File: Images/ike.png Graphic file (type png)
 <use Images/ike.png>
 Package pdftex.def Info: Images/ike.png  used on input line 223.
 (pdftex.def)             Requested size: 433.62pt x 256.95544pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/keep.png, id=38, 1519.6775pt x 832.10875pt>
+[7 <./Images/forest.jpg>]
+
+LaTeX Warning: Text page 8 contains only floats.
+
+
+Overfull \vbox (3.68364pt too high) has occurred while \output is active []
+
+
+[8 <./Images/evernote.jpg> <./Images/todoist.png>]
+<Images/keep.png, id=41, 1519.6775pt x 832.10875pt>
 File: Images/keep.png Graphic file (type png)
 <use Images/keep.png>
 Package pdftex.def Info: Images/keep.png  used on input line 239.
 (pdftex.def)             Requested size: 433.62pt x 237.43279pt.
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8 <./Images/remember-the-milk.png>]
+<Images/trello.jpg, id=42, 908.39375pt x 510.90875pt>
+File: Images/trello.jpg Graphic file (type jpg)
+<use Images/trello.jpg>
+Package pdftex.def Info: Images/trello.jpg  used on input line 253.
+(pdftex.def)             Requested size: 433.62pt x 243.88474pt.
 
-LaTeX Warning: Text page 9 contains only floats.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9 <./Images/remember-the-milk.png>]
+
+LaTeX Warning: Text page 10 contains only floats.
 
 
 Overfull \vbox (0.11713pt too high) has occurred while \output is active []
 
 
-[9 <./Images/ike.png (PNG copy)> <./Images/keep.png (PNG copy)>]
-<Images/trello.jpg, id=46, 908.39375pt x 510.90875pt>
-File: Images/trello.jpg Graphic file (type jpg)
-<use Images/trello.jpg>
-Package pdftex.def Info: Images/trello.jpg  used on input line 253.
-(pdftex.def)             Requested size: 433.62pt x 243.88474pt.
- [10 <./Images/trello.jpg>] [11] [12] [13] [14] [15]
+[10 <./Images/ike.png (PNG copy)> <./Images/keep.png (PNG copy)>] [11 <./Images
+/trello.jpg>] [12] [13] [14] [15]
 <Images/TDD.png, id=67, 1340.00626pt x 949.5475pt>
 File: Images/TDD.png Graphic file (type png)
 <use Images/TDD.png>
-Package pdftex.def Info: Images/TDD.png  used on input line 524.
+Package pdftex.def Info: Images/TDD.png  used on input line 528.
 (pdftex.def)             Requested size: 433.62pt x 307.2663pt.
- [16 <./Images/TDD.png>]
-<Mockups/task_index.png, id=72, 1127.21124pt x 891.33pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[16] [17 <./Images/TDD.png>]
+<Mockups/task_index.png, id=75, 1127.21124pt x 891.33pt>
 File: Mockups/task_index.png Graphic file (type png)
 <use Mockups/task_index.png>
-Package pdftex.def Info: Mockups/task_index.png  used on input line 603.
+Package pdftex.def Info: Mockups/task_index.png  used on input line 607.
 (pdftex.def)             Requested size: 216.81pt x 171.43535pt.
- [17]
-<Mockups/event_index.png, id=76, 796.9775pt x 1005.7575pt>
+ [18]
+<Mockups/event_index.png, id=79, 796.9775pt x 1005.7575pt>
 File: Mockups/event_index.png Graphic file (type png)
 <use Mockups/event_index.png>
-Package pdftex.def Info: Mockups/event_index.png  used on input line 621.
-(pdftex.def)             Requested size: 173.44534pt x 218.87326pt.
-<Mockups/schedule.png, id=77, 1127.21124pt x 796.9775pt>
-File: Mockups/schedule.png Graphic file (type png)
-<use Mockups/schedule.png>
-Package pdftex.def Info: Mockups/schedule.png  used on input line 639.
-(pdftex.def)             Requested size: 216.81pt x 153.2879pt.
- [18 <./Mockups/task_index.png> <./Mockups/event_index.png>]
-<Mockups/task_detail.png, id=83, 743.77875pt x 796.9775pt>
-File: Mockups/task_detail.png Graphic file (type png)
-<use Mockups/task_detail.png>
-Package pdftex.def Info: Mockups/task_detail.png  used on input line 655.
-(pdftex.def)             Requested size: 216.81pt x 232.30931pt.
-<Mockups/event_detail.png, id=84, 743.77875pt x 716.6775pt>
-File: Mockups/event_detail.png Graphic file (type png)
-<use Mockups/event_detail.png>
-Package pdftex.def Info: Mockups/event_detail.png  used on input line 673.
-(pdftex.def)             Requested size: 216.81pt x 208.90285pt.
- [19 <./Mockups/schedule.png> <./Mockups/task_detail.png>]
-<Mockups/study_space.png, id=91, 796.9775pt x 629.35126pt>
-File: Mockups/study_space.png Graphic file (type png)
-<use Mockups/study_space.png>
-Package pdftex.def Info: Mockups/study_space.png  used on input line 689.
-(pdftex.def)             Requested size: 216.81pt x 171.20432pt.
-<Mockups/statistics.png, id=92, 796.9775pt x 716.6775pt>
-File: Mockups/statistics.png Graphic file (type png)
-<use Mockups/statistics.png>
-Package pdftex.def Info: Mockups/statistics.png  used on input line 707.
-(pdftex.def)             Requested size: 216.81pt x 194.95995pt.
- [20 <./Mockups/event_detail.png> <./Mockups/study_space.png>]
-Overfull \hbox (13.67914pt too wide) in paragraph at lines 741--742
-[][][][][][][][][][][][][][][][][][][][][] 
+Package pdftex.def Info: Mockups/event_index.png  used on input line 625.
+(pdftex.def)             Requested size: 195.12767pt x 246.23625pt.
+
+Underfull \hbox (badness 1067) in paragraph at lines 634--636
+[]\OT1/cmr/m/n/10 List split by one-off events and rou-tine
  []
 
-[21 <./Mockups/statistics.png>]
+<Mockups/schedule.png, id=80, 1127.21124pt x 796.9775pt>
+File: Mockups/schedule.png Graphic file (type png)
+<use Mockups/schedule.png>
+Package pdftex.def Info: Mockups/schedule.png  used on input line 643.
+(pdftex.def)             Requested size: 216.81pt x 153.2879pt.
+[19 <./Mockups/task_index.png> <./Mockups/event_index.png>]
+<Mockups/task_detail.png, id=87, 743.77875pt x 796.9775pt>
+File: Mockups/task_detail.png Graphic file (type png)
+<use Mockups/task_detail.png>
+Package pdftex.def Info: Mockups/task_detail.png  used on input line 659.
+(pdftex.def)             Requested size: 216.81pt x 232.30931pt.
+<Mockups/event_detail.png, id=88, 743.77875pt x 716.6775pt>
+File: Mockups/event_detail.png Graphic file (type png)
+<use Mockups/event_detail.png>
+Package pdftex.def Info: Mockups/event_detail.png  used on input line 677.
+(pdftex.def)             Requested size: 216.81pt x 208.90285pt.
+ [20 <./Mockups/schedule.png> <./Mockups/task_detail.png>]
+<Mockups/study_space.png, id=94, 796.9775pt x 629.35126pt>
+File: Mockups/study_space.png Graphic file (type png)
+<use Mockups/study_space.png>
+Package pdftex.def Info: Mockups/study_space.png  used on input line 693.
+(pdftex.def)             Requested size: 216.81pt x 171.20432pt.
+<Mockups/statistics.png, id=95, 796.9775pt x 716.6775pt>
+File: Mockups/statistics.png Graphic file (type png)
+<use Mockups/statistics.png>
+Package pdftex.def Info: Mockups/statistics.png  used on input line 711.
+(pdftex.def)             Requested size: 216.81pt x 194.95995pt.
+ [21 <./Mockups/event_detail.png> <./Mockups/study_space.png>] [22 <./Mockups/s
+tatistics.png>] [23] [24] [25]
+<Screenshots/mytime_modular_design.png, id=116, 1165.35374pt x 721.69624pt>
+File: Screenshots/mytime_modular_design.png Graphic file (type png)
+<use Screenshots/mytime_modular_design.png>
+Package pdftex.def Info: Screenshots/mytime_modular_design.png  used on input l
+ine 933.
+(pdftex.def)             Requested size: 433.62pt x 268.5321pt.
+ [26]
+[27 <./Screenshots/mytime_modular_design.png>]
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
-) [22]
-<Images/question_table.png, id=106, 467.7475pt x 121.45375pt>
+) [28]
+<Images/question_table.png, id=127, 467.7475pt x 121.45375pt>
 File: Images/question_table.png Graphic file (type png)
 <use Images/question_table.png>
-Package pdftex.def Info: Images/question_table.png  used on input line 809.
+Package pdftex.def Info: Images/question_table.png  used on input line 1015.
 (pdftex.def)             Requested size: 433.62pt x 112.59868pt.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -397,50 +420,53 @@ File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
-) [23 <./Images/question_table.png>] [24] [25] [26]
-<Screenshots/task_index.png, id=121, 309.155pt x 427.5975pt>
+) [29 <./Images/question_table.png>] [30] [31] [32] [33] [34]
+<Screenshots/task_index.png, id=148, 309.155pt x 427.5975pt>
 File: Screenshots/task_index.png Graphic file (type png)
 <use Screenshots/task_index.png>
-Package pdftex.def Info: Screenshots/task_index.png  used on input line 1035.
+Package pdftex.def Info: Screenshots/task_index.png  used on input line 1381.
 (pdftex.def)             Requested size: 260.17464pt x 359.88411pt.
- [27 <./Screenshots/task_index.png>]
-<Screenshots/task_detail.png, id=126, 465.74pt x 388.45125pt>
+ [35] [36 <./Screenshots/task_index.png>]
+<Screenshots/task_detail.png, id=156, 465.74pt x 388.45125pt>
 File: Screenshots/task_detail.png Graphic file (type png)
 <use Screenshots/task_detail.png>
-Package pdftex.def Info: Screenshots/task_detail.png  used on input line 1076.
+Package pdftex.def Info: Screenshots/task_detail.png  used on input line 1423.
 (pdftex.def)             Requested size: 260.17464pt x 217.00368pt.
- [28 <./Screenshots/task_detail.png>]
-<Screenshots/task_form.png, id=131, 330.23375pt x 507.8975pt>
+ [37 <./Screenshots/task_detail.png>]
+<Screenshots/task_form.png, id=162, 330.23375pt x 507.8975pt>
 File: Screenshots/task_form.png Graphic file (type png)
 <use Screenshots/task_form.png>
-Package pdftex.def Info: Screenshots/task_form.png  used on input line 1116.
+Package pdftex.def Info: Screenshots/task_form.png  used on input line 1495.
 (pdftex.def)             Requested size: 216.81pt x 333.46191pt.
- [29 <./Screenshots/task_form.png>] [30] [31]
-[32] [33] (./main.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+ [38] [39 <./Screenshots/task_form.png>] [40] [41] [42] [43] [44] [45] [46]
+<Screenshots/task_detail_with_time.png, id=192, 578.16pt x 428.60126pt>
+File: Screenshots/task_detail_with_time.png Graphic file (type png)
+<use Screenshots/task_detail_with_time.png>
+Package pdftex.def Info: Screenshots/task_detail_with_time.png  used on input l
+ine 1927.
+(pdftex.def)             Requested size: 433.62pt x 321.45015pt.
+ [47 <./Screenshots/task_detail_with_time.png>] [48] [49] [50] [51] (./main.aux
+) ) 
 Here is how much of TeX's memory you used:
- 4674 strings out of 494553
- 63513 string characters out of 6177319
- 377618 words of memory out of 5000000
- 8280 multiletter control sequences out of 15000+600000
+ 4769 strings out of 494553
+ 65195 string characters out of 6177319
+ 443676 words of memory out of 5000000
+ 8373 multiletter control sequences out of 15000+600000
  8716 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,8n,51p,271b,1661s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (33 pages, 2332605 bytes).
+ 41i,8n,51p,271b,1657s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (51 pages, 2462711 bytes).
 PDF statistics:
- 176 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
+ 240 PDF objects out of 1000 (max. 8388607)
+ 140 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -40,10 +40,12 @@
     "fig:event_detail_mockup"
     "fig:work_space_mockup"
     "fig:statistics_mockup"
+    "fig:modular_design"
     "fig:database1"
     "fig:task_index1"
     "fig:task_detail1"
-    "fig:task_form1")
+    "fig:task_form1"
+    "fig:task_detail2")
    (LaTeX-add-index-entries
     "\\item"))
  :latex)

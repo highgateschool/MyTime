@@ -1,0 +1,30 @@
+<h1>Usage Statistics</h1>
+{% if recent_tasks %}
+<ol>
+  {% for task in recent_task %}
+  <li><a href="/task/{{ task.id }}/">{{ task.title }}</a>
+    <ul>
+      <li>Was due on {{ task.due_date }} at {{ task.due_time }},
+        {% if task.was_completed_on_time %}
+        completed {{ task.completion_delta }} early at {{ task.completion_time }}
+        {% else %}
+        completed {{ task.completion_delta }} late at {{ task.completion_time }}
+        {% endif %}
+      </li>
+      <li>Estimated {{ task.time_estimate }} needed,
+        took {{ task.time_spent }},
+        {% if task.estimate_accuracy == 0 %}
+        - perfect estimate!
+        {% elif task.was_completed_in_time %}
+        so time was overestimated by {{ task.estimate_accuracy }}%
+        {% else %}
+        so time was overestimated by {{ task.estimate_accuracy }}%
+        {% endif %}
+    </ul>
+  </li>
+  {% endfor %}
+</ol>
+{% else %}
+<p>No data to show for recent tasks.</p>
+{% endif %}
+

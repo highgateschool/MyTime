@@ -19,7 +19,8 @@
 	basicstyle=\ttfamily,
 	commentstyle=\color{gray}, % comment color
 	keywordstyle=\color{blue}, % keyword color
-	stringstyle=\color{red} % string color
+	stringstyle=\color{red}, % string color
+  breaklines=true, % allow line wrapping
 }
 
 \begin{document}
@@ -47,8 +48,7 @@ time, but this has two drawbacks:
 My stakeholder (henceforth referred to as SH) is a Sixth Form student
 studying Maths, Further Maths, Physics and Chemistry. He struggles to fit in all
 his work around his various extra-curricular activities, so he needs an app that
-will not only help him keep track of what he needs to do, but timetable when to
-do each task and prioritise those which are most urgent. SH represents the needs
+will not only help him keep track of what he needs to do, but timetable when to do each task and prioritise those which are most urgent. SH represents the needs
 of my target user group.
 
 \section{Limitations of current system}
@@ -456,10 +456,13 @@ Any system which meets these requirements will be able to run the program.
 \section{Success Criteria}
 
 \subsection{General objectives}
-To create a program which stores tasks and arranges them around the user's
-schedule. The program should engage the user through the use of a game-like
-progression system and help the user complete their tasks in a timely manner
-through the use of reminders.
+To create a program which stores tasks and arranges them around the user's schedule.
+To do this the program should hold a list of the user's tasks they need to do,
+and hold their schedule,
+in order that tasks may be arranged around them.
+The user should be able to easily manage their tasks and upcoming events for this purpose.
+The program should also help the user with feedback on their ability to meet due dates,
+and complete tasks within the allotted time.
 
 \subsection{Specific objectives}
 The program should:
@@ -468,21 +471,22 @@ The program should:
 	\item Store a list of the user's tasks
 	\item Store the due date, priority, expected time needed, and other information
 	      about each task
-	\item Add and remove tasks from the list
-	\item Allow the user to group tasks into categories of their choosing, and
-	      colour code categories
+	\item Allow the user to add, edit and remove tasks from the list
 	\item Record the successful completion of each task, time taken, and number of
 	      breaks taken and display this information to the user in a useful manner
+	\item Store information about the user's schedule,
+	      including both regular and particular commitments
 	\item Schedule time for the user to complete their tasks, according to the
-	      user's schedule, task due date, task priority, and the user's preferences
-	\item Display the tasks in their allocated time slots in a calendar view, and
-	      allow the user to manually alter time allocations
+	      user's schedule, task due date and task priority
+	\item Display the tasks in their allocated time slots in a calendar view
 	\item Have a focus mode, which helps the user concentrate on the task at hand,
-	      and incentivise the user to complete the task in a timely manner without
+	      and incentivises the user to complete the task in a timely manner without
 	      procrastination using game-like aspects
+	\item Provide feedback to the user about their completed tasks,
+	      such as whether a task was completed on time and within the scheduled time slot,
+	      and equivalent overall and average task statistics
 	\item Be available on multiple platforms and devices
 	\item Sync tasks between devices
-	\item Remind the user of upcoming tasks
 \end{itemize}
 
 
@@ -616,14 +620,14 @@ It might also be helpful to have a quick button to add a new task/event/routine.
 	\end{itemize}
 \end{minipage}
 
-\begin{minipage}{0.4\textwidth}
+\begin{minipage}{0.45\textwidth}
 	\begin{figure}[H]
 		\includegraphics[width=\linewidth]{Mockups/event_index.png}
 		\label{fig:event_index_mockup}
 		\caption{Mockup of the calendar page}
 	\end{figure}
 \end{minipage} \hfill
-\begin{minipage}{0.55\textwidth}
+\begin{minipage}{0.5\textwidth}
 	\paragraph{Features:}
 	\begin{itemize}
 		\item View all upcoming events
@@ -758,6 +762,8 @@ task.set_priority(priority)
 task.save()
 \end{lstlisting}
 
+The process for creating events and routines is largely identical.
+
 \subsection{Update task}
 \begin{lstlisting}[breaklines]
 // Get input for what data needs updating
@@ -802,6 +808,10 @@ else
     print("That wasn't a valid input, please try again.")
 end
 \end{lstlisting}
+
+The process for updating events and routines is similar,
+however it is only possible to update the information,
+as there is no status or time spent attribute.
 
 \subsection{Make schedule}
 \begin{lstlisting}[breaklines]
@@ -907,6 +917,48 @@ else
 end
 \end{lstlisting}
 
+\subsection{Other parts of the solution}
+This covers the dynamic aspects of the project.
+Although, as discussed, there are other parts,
+these aren't really possible to describe algorithmically,
+since pages such as the detail views and calendar and task views are primarily static.
+
+\section{Relations of the modules}
+The top-down design breaks down the project to some extent,
+however I will now outline the structure more explicitly,
+and in the context of the terminology used by Django.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Screenshots/mytime_modular_design.png}
+	\caption{Diagram of the modules showing the flow of data}
+	\label{fig:modular_design}
+\end{figure}
+
+The modules have been colour coded into:
+\begin{itemize}
+  \item Red: distinct functions
+  \item Blue: database models
+  \item Green: page views
+  \item Yellow: page templates
+\end{itemize}
+
+This diagram shows the solution broken down into almost as small components as possible.
+Note that creation, editing and deletion views for each model have been grouped together,
+even though they could be distinguished,
+because in terms of the flow of data,
+and in the operation of the project they are obviously interdependent.
+The arrows show the ``flow'' of the data,
+I'll explain this with some illustrations:
+new tasks are created by filling in forms in the HTML template for task creation,
+which returns this data to the task view,
+which creates a corresponding task model in the database;
+the schedule view call the schedule function,
+which takes task, event and routine models,
+and creates corresponding time slot models,
+which the schedule view provides the schedule template,
+to render in HTML.
+
 \part{Development}
 \section{Stage 0: Learning Django}
 I haven't used Django before,
@@ -940,7 +992,7 @@ and also vaguely specify the appearance of the page,
 although this is controlled more precisely in HTML ``templates''.
 
 Here is an example model from the polls tutorial:
-\begin{lstlisting}[language=Python, breaklines]
+\begin{lstlisting}[language=Python]
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
@@ -973,7 +1025,7 @@ which are not seen in the database,
 but rather make it quicker and easier to use the data within Python.
 
 Here is an example view from the polls tutorial:
-\begin{lstlisting}[language=Python, breaklines]
+\begin{lstlisting}[language=Python]
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -987,7 +1039,7 @@ The queryset for this view is the five most recently published objects in the Qu
 It then uses the template located at ``templates/polls/index.html'' -
 the root folder ``templates'' is implicit.
 Here is that template:
-\begin{lstlisting}[language=HTML, breaklines]
+\begin{lstlisting}[language=HTML]
 {% if latest_question_list %}
    <ul>
        {% for question in latest_question_list %}
@@ -1002,7 +1054,28 @@ Here is that template:
 Unless ``latest\_question\_list'' is empty,
 this will output a list of the five most recent questions,
 showing their names and linking to that question's page.
-The URLs are defined in the aptly names urls.py.
+The URLs are defined in \texttt{urls.py}.
+
+\section{Validation and Testing}
+Django also provides some help with validation and testing.
+Due to the connection typically present between views and models,
+as long as you tell Django which forms and fields are corresponding to which models and attributes,
+it will automatically validate input at both the front and backend.
+For example, if a model attribute is supposed to be number between 0-5,
+then Django will validate the HTML input field to require a number,
+and will also make sure before submitting the data into the database that the input is between 0 and 5.
+This means for the most part I won't need to manually validate input;
+if I do use my own validation, I'll point that out,
+otherwise it should be assumed that Django's automatic validation is being used.
+
+With regards to testing,
+Django recommends that various test be written in the \texttt{tests.py} file.
+These tests can then all be run in one go,
+and Django will flag any tests which failed.
+The way these tests work is that a test database is created,
+and one can instantiate models with various attributes,
+run various methods on them,
+and check that the resulting state is as expected.
 
 \section{Stage 1: Tasks}
 Given the foundations laid by my work on the tutorial,
@@ -1028,7 +1101,8 @@ as we can't even begin to think about how we will display a task until we know t
 Since I've already outlined the attributes and methods for it in my design,
 creating the model will be quite simple.
 
-\begin{lstlisting}[language=Python, breaklines]
+Prototype task model:
+\begin{lstlisting}[language=Python]
 class Task(models.Model):
     LOW = 1
     MED = 2
@@ -1086,25 +1160,143 @@ here I'm using an ``f-string'',
 or formatted string,
 so \texttt{{self.id}} will be evaluated to the id of the task.
 
+Later in development,
+I realised that the task would need some additional attributes for statistics tracking -
+I could have created a separate data type for this,
+but I think,
+purely in terms of the code and database,
+that would have been less elegant.
+Additional methods and changes to the existing ones were also required to facilitate this.
+
+\begin{lstlisting}[language=Python]
+class Task(models.Model):
+    # Define the choices to be used in the priority field
+    LOW = 1
+    MED = 2
+    HIGH = 3
+    PRIORITY_LIST = [
+        (LOW, "Low"),
+        (MED, "Normal"),
+        (HIGH, "High"),
+    ]
+    # Define the attributes that tasks will have
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=1000)
+    due_date = models.DateField("due date", default=timezone.now().date())
+    due_time = models.TimeField("due time", default=timezone.now().time())
+    time_estimate = models.DurationField("time estimate", default=timedelta(minutes=0))
+    priority = models.IntegerField("priority", choices=PRIORITY_LIST, default=2)
+    done = models.BooleanField(default=False)
+
+    # I realised later that task would additionally need these fields,
+    # for the purpose of statistics tracking
+    completion_time = models.DateTimeField("completion time", null=True, blank=True)
+    completed_on_time = models.BooleanField(default=False)
+    completed_in_time = models.BooleanField(default=False)
+    time_spent = models.DurationField(
+        "time spent", default=timedelta(hours=0, minutes=0)
+    )
+    completion_delta = models.DurationField("completion delta", null=True, blank=True)
+    estimate_accuracy = models.DecimalField(
+        "estimate accuracy", max_digits=4, decimal_places=1, null=True, blank=True
+    )
+
+    def __str__(self):
+        return self.title
+
+    # Check whether the task is overdue
+    def is_overdue(self):
+        due_datetime = datetime.combine(self.due_date, self.due_time)
+        return due_datetime <= datetime.now()
+
+    # Mark the task as done
+    def mark_done(self):
+        self.done = True
+
+        # At this point we can mark whether the task was completed before it's due date,
+        # and within the user's time estimate
+        if self.is_overdue():
+            self.completed_on_time = False
+        else:
+            self.completed_on_time = True
+        self.completion_time = timezone.now()
+
+        if self.time_spent <= self.time_estimate:
+            self.completed_in_time = True
+        else:
+            self.completed_in_time = False
+
+    # Unmark the task as done
+    def mark_todo(self):
+        self.done = False
+        # These values need to be reset
+        self.completed_on_time = False
+        self.completed_in_time = False
+        self.completion_time = None
+
+    # Alter the time spent on the task
+    def alter_time_spent(self, delta):
+        # Time spent can't be negative, so need to check
+        if (self.time_spent + delta).total_seconds() >= 0:
+            self.time_spent += delta
+        # If the value would be negative, just set it to 0 minutes
+        else:
+            self.time_spent = timedelta(minutes=0)
+
+    def get_absolute_url(self):
+        return f"/task/{self.id}/"
+\end{lstlisting}
+
+The additional attributes:
+\begin{itemize}
+  \item \texttt{completion\_time},
+    a datetime for when the task was marked as completed
+  \item \texttt{completed\_on\_time},
+    a boolean for whether was or wasn't overdue at time of completion
+  \item \texttt{completed\_in\_time},
+    a boolean for whether the time spent was greater or less than the time estimate at time of completion
+  \item \texttt{time\_spent},
+    a timedelta for time spent working on the task
+  \item \texttt{completion\_delta},
+    a time delta from completion time to due time
+  \item \texttt{estimate\_accuracy},
+    the percentage (to 1 d.p.) error from the estimate to actual time taken
+\end{itemize}
+
+These attributes are elaborated on in the Statistics and Time Tracking section of the development.
+
+The changes to the methods,
+and new method \texttt{alter\_time\_spent},
+are clearly to facilitate these new attributes,
+and ensure their values are always reasonable.
+\texttt{mark\_done} now sets them when the task is marked as done,
+and \texttt{mark\_todo} resets them.
+\texttt{alter\_time\_spent} is needed for validation purposes,
+to ensure that \texttt{time\_spent} does not take a negative value:
+in the event the user tries to alter the time spent in a way that would make it negative,
+it is simply set to 0 instead.
+
 \subsection{Task Index}
 This will consist of two parts:
 a view defining the data to be displayed,
 and an HTML template defining the layout.
 
-\begin{lstlisting}[language=Python, breaklines]
+\begin{lstlisting}[language=Python]
 class IndexView(ListView):
-    template_name = 'tasks/index.html'
-    context_object_name = 'task_list'
+    # Locate the HTML template
+    template_name = "tasks/index.html"
+    # Name the data for use in the template
+    context_object_name = "task_list"
 
     def get_queryset(self):
-        return Task.objects.order_by('due_date')
+        # Get all the tasks
+        return Task.objects.order_by("due_date")
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['todo_tasks'] = Task.objects.filter(
-            done=False).order_by("due_date")
-        context['done_tasks'] = Task.objects.filter(
-            done=True).order_by("due_date")
+        # Get the done and todo tasks separately
+        context["todo_tasks"] = Task.objects.filter(done=False).order_by("due_date")
+        context["done_tasks"] = Task.objects.filter(done=True).order_by("due_date")
         return context
 \end{lstlisting}
 
@@ -1139,7 +1331,7 @@ doubling as a link to the detail view of the task.
 It will also have a button to quickly toggle the tasks todo/done status.
 
 Here is a snippet of that part of the code:
-\begin{lstlisting}[language=HTML, breaklines]
+\begin{lstlisting}[language=HTML]
 <li><a href="/task/{{ task.id }}/">{{ task.title }}</a>
     {% if task.done %}
     <form action="{% url 'tasks:mark_as_todo' task.id %}" method="post">
@@ -1198,7 +1390,8 @@ because I haven't actually created the detail view for the tasks yet.
 It's fairly simple,
 it just needs to show the user all the information about a specific task.
 
-\begin{lstlisting}[language=Python, breaklines]
+Prototype task detail view:
+\begin{lstlisting}[language=Python]
 class TaskDetail(DetailView):
     model = Task
     template_name = "tasks/task_detail.html"
@@ -1232,6 +1425,34 @@ of course.
 	\label{fig:task_detail1}
 \end{figure}
 
+Later in development,
+I made the decision to have time tracking done from the task detail page;
+this is explained in detail in the Statistics and Time Tracking section.
+
+\begin{lstlisting}
+class TaskDetail(DetailView):
+    model = Task
+    template_name = "tasks/task_detail.html"
+
+    # Provide a method to mark the task as done
+    def task_done(self):
+        Task.mark_done()
+
+    # Provide a method to mark the task as todo
+    def task_todo(self):
+        Task.mark_todo()
+
+    # Provide a method to alter the time
+    def task_time_alter(self, mins):
+        # Convert the inputted integer to a timedelta of that many minutes
+        time_delta = timedelta(minute=mins)
+        # Run the task time-alteration method
+        Task.alter_time_spent(time_delta)
+\end{lstlisting}
+
+This simply involved the addition of the \texttt{task\_time\_alter} method,
+and a corresponding form in the HTML template.
+
 \subsection{Task creation/editing/deletion}
 Django can automagically create basic forms for creating and updating model objects.
 One just needs to specify what model a form is operating on,
@@ -1240,9 +1461,11 @@ and any specific widgets to be used for entering data for each field.
 Then it will retrieve the values from the fields in the form with the matching name,
 and create a new object or change an existing one to match the input.
 
-\begin{lstlisting}[language=Python, breaklines]
+\begin{lstlisting}[language=Python]
 class TaskCreate(CreateView):
     model = Task
+
+    # The fields the user is allowed to set when creating a task
     fields = [
         "title",
         "description",
@@ -1251,6 +1474,8 @@ class TaskCreate(CreateView):
         "time_estimate",
         "priority",
     ]
+
+    # Provide specialised input for the due date and time
     due_date = forms.DateField(widget=forms.SelectDateWidget(attrs={"type": "date"}))
     due_time = forms.TimeField(widget=forms.TimeInput(attrs={"type": "time"}))
 \end{lstlisting}
@@ -1277,9 +1502,10 @@ the only notable feature is how it redirects the user back to the index,
 as going back the previous page wouldn't workm
 since that would be the detail view of a task that was just deleted.
 
-\begin{lstlisting}[language=Python, breaklines]
+\begin{lstlisting}[language=Python]
 class TaskDelete(DeleteView):
     model = Task
+    # Return to the index on a successful completion
     success_url = reverse_lazy("tasks:index")
 \end{lstlisting}
 
@@ -1304,6 +1530,180 @@ but no date or time specified in which they should actually be completed.
 Once I've added what is essentially calendaring functionality with events and routines,
 I'll write scheduler,
 which will be responsible for giving tasks that anchoring in time.
+
+\subsection{Stage 1 Testing}
+The main subject for testing here is the task model.
+The main way to perform tests is Django is through the use of the \texttt{TestCase} class,
+which allows one to create a test database,
+and use various assertion statements to check information about the database.
+Here's one of the tests:
+\begin{lstlisting}[language=Python]
+class TaskModelTests(TestCase):
+    # Test that marking a task as done works as expected
+    def test_mark_done_on_todo_task(self):
+        # Create a task that is todo
+        todo_task = Task(done=False)
+        # Get the time before
+        before = timezone.now()
+        # Mark task as done
+        todo_task.mark_done()
+        # Get the time after
+        after = timezone.now()
+
+        # Check that the task is indeed marked as done
+        self.assertIs(todo_task.done, True)
+
+        # Check that the task was completed between the two timestamps
+        not_too_early = bool(todo_task.completion_time >= before)
+        not_too_late = bool(todo_task.completion_time <= after)
+
+        self.assertIs(not_too_early, True)
+        self.assertIs(not_too_late, True)
+\end{lstlisting}
+
+Let me walk this through in detail.
+Tests are written as methods of a class which inherits from \texttt{TestCase}.
+Here I've called the class \texttt{TaskModelTests}.
+The first test is one for checking the functionality of the \texttt{mark\_done} method,
+on a task which is still todo.
+I want to test
+\begin{enumerate}
+  \item that the task is indeed marked as done after the method is run
+  \item that the completion time is assigned correctly
+\end{enumerate}
+so I take time snapshots before and after marking the task as done.
+Then I check that the task's \texttt{done} attribute is true,
+using the assertion method provided by the \texttt{TestCase} class.
+Next, I assign two variables,
+\texttt{not\_too\_early} and \texttt{not\_too\_late},
+respectively to whether the completion time of the task is after the \texttt{before} datetime,
+and before the \texttt{after} datetime -
+i.e. both these variables will be true if the completion time is between the two timestamps,
+as it should be.
+Finally, I assert that both these variables are true.
+
+Here are the rest of the tests for the task model:
+\begin{lstlisting}[language=Python]
+    # Test that marking a task as todo works as expected
+    def test_mark_todo_on_done_task(self):
+        # Create a task that is done
+        done_task = Task(done=True)
+        # Mark it as todo
+        done_task.mark_todo()
+
+        # Check the task is not marked as done
+        self.assertIs(done_task.done, False)
+
+        # Check that the completion time has been reset
+        self.assertEquals(done_task.completion_time, None)
+
+    # Test that the overdue method works correctly
+    def test_is_overdue_on_not_overdue_task(self):
+        # Create a task that is not overdue
+        non_overdue_task = Task(
+            due_date=dt.date.today() + dt.timedelta(days=1),
+            due_time=dt.time(hour=0, minute=0),
+        )
+
+        # Check that the method finds it to not be overdue
+        self.assertIs(non_overdue_task.is_overdue(), False)
+
+    def test_is_overdue_on_overdue_task(self):
+        # Create a task that is overdue
+        overdue_task = Task(
+            due_date=dt.date.today() - dt.timedelta(days=1),
+            due_time=dt.time(hour=0, minute=0),
+        )
+
+        # Check that it is found to be overdue
+        self.assertIs(overdue_task.is_overdue(), True)
+
+    # Basic test for time spent alteration
+    def test_alter_time_spent(self):
+        # Create a taskwith no time spent
+        no_time_task = Task()
+
+        # Increase time spent by 10 minutes
+        no_time_task.alter_time_spent(dt.timedelta(minutes=10))
+
+        # Check that the time spent is correct
+        self.assertEquals(no_time_task.time_spent, dt.timedelta(minutes=10))
+
+    # Test that when altering a task to have negative time spent,
+    # it instead is set to 0
+    def test_alter_time_spent_negative(self):
+        # Create a task with 10 minutes time spent
+        ten_minute_task = Task(time_spent=dt.timedelta(minutes=10))
+
+        # Reduce time spent by 20 minutes
+        ten_minute_task.alter_time_spent(timedelta(minutes=-20))
+
+        # Time spent should now be 0 minutes, rather then -10
+        self.assertEquals(ten_minute_task.time_spent, timedelta(minutes=0))
+\end{lstlisting}
+
+The comments here should be sufficient to make it clear what each task does.
+One thing worth explaining is the use of \texttt{assertEquals},
+rather than \texttt{assertIs} in some places:
+this is because \texttt{assertIs} is only for boolean comparisons.
+
+When I ran these tests I encountered one error.
+In fact this wasn't a problem with any of my assert statements,
+rather an error was encountered in the line \lstinline{no_time_task.alter_time_spent(dt.timedelta(minutes=10))}.
+When this line was run,
+the value for \texttt{time\_spent} was actually null,
+so when the time alteration method tried to add the input timedelta to the existing time spent,
+it encountered an error,
+since you can't add \texttt{timedelta} to \texttt{None}.
+I rectified this by adding a default value of a 0 minute timedelta to that attribute.
+This was a good error to catch,
+as it would have completely broken all time-logging functionality,
+since, without the default value,
+all tasks would start with a null time spent.
+
+With regard to testing views,
+Django also provides a framework for testing these,
+however this is quite complicated would require,
+I think,
+an unreasonable amount of time to learn.
+So I went ahead with testing manually.
+In particular, I looked at:
+\begin{itemize}
+  \item the mark todo/done buttons on the task index and task detail pages
+  \item whether the views for creating, updating and deleting tasks worked correctly
+\end{itemize}
+
+I verified that use of the mark todo/done buttons produced corresponding change in the database,
+and that the values input to the forms on the task creation and updating pages created the correct attributes in the corresponding task.
+If any field contains an invalid input when the form is submitted,
+the database will not be affected and the user must correct the problem.
+Finally,
+the task deletion view does correctly delete the corresponding task from the database.
+
+\subsection{Stage 1 Review}
+This stage was overall quite a success,
+especially given that one might expect more problems to come up at the start of the project.
+I think I largely attribute this taking the time to walk through Django's tutorial,
+familiarising myself with the tools available,
+prior to diving into development of the project proper.
+Clearly the most notable issue with this stage were the omissions,
+which I needed to come back and fix when I realised that they were missing.
+More care in the design stage could have helped to avoid this.
+However, thankfully, this turned out not to be a very big issue,
+and was easily corrected.
+
+So at the end of stage 1 it is now possible to:
+\begin{itemize}
+  \item Create tasks
+  \item View the list of tasks which are still todo and which are done
+  \item View a page with detailed information about each task
+  \item Edit a task or delete it
+  \item Toggle whether a task is todo or done,
+    from either the index or the detail pages
+\end{itemize}
+
+In other words,
+the task management component is fully functional.
 
 \section{Stage 2: Events and Routines}
 Events and routines will be like tasks in many ways.
@@ -1332,15 +1732,17 @@ and a flag for if it should override a routine if it clashes.
 It has several getters,
 and additionally a method to check if it clashes with another event/routine.
 
-\begin{lstlisting}[language=Python, breaklines]
+\begin{lstlisting}[language=Python]
 def does_clash(self, other):
+    # For events A and B to clash,
+    # A must start before B ends and end after B starts
     if self.start_time < other.end_time and self.end_time > other.start_time:
         return True
     else:
         return False
 \end{lstlisting}
 
-It took me a few tries to figure out how exactly to formulate that if codition.
+It took me a few tries to figure out how exactly to formulate that if condition.
 The logic is this:
 if event A starts before B ends,
 and A hasn't finished by the time B starts,
@@ -1348,7 +1750,7 @@ then they must overlap.
 
 The routine model is very similar,
 however it has a day instead of a date,
-which is a selection from Monday, Tuesday and so on.
+which is a selection from Monday through Sunday.
 
 \subsection{Views}
 Events and routines each have detail, creation, updating and deletion views similar to tasks.
@@ -1356,22 +1758,26 @@ There is also an event and routine index similar to the task index.
 Apart from the index these views aren't worthy of much discussion,
 due to their similarity with the corresponding task views.
 
-\begin{lstlisting}[language=Python, breaklines]
+\begin{lstlisting}[language=Python]
 class EventView(ListView):
     template_name = "tasks/event_index.html"
     context_object_name = "event_list"
 
     def get_queryset(self):
+        # Get the events in order of their date
         return Event.objects.order_by("date")
 
     def get_context_data(self, **kwargs):
         context = super(EventView, self).get_context_data(**kwargs)
+        # Get today's events in time order
         context["events_today"] = Event.objects.filter(date=datetime.today()).order_by(
             "start_time"
         )
+        # Likewise for today's routine events
         context["routine_today"] = Routine.objects.filter(
             day=datetime.today().weekday()
         ).order_by("start_time")
+        # Likeise for all events and routine events
         context["events"] = Event.objects.order_by("date", "start_time")
         context["routine"] = Routine.objects.order_by("day", "start_time")
         return context
@@ -1388,6 +1794,143 @@ each ordered by date/day and start time,
 so each can be displayed separately in chronological order.
 It makes sense to separate out the tasks and routines that are on today,
 so that they can be displayed more prominently.
+
+\subsection{Stage 2 Testing}
+The models here are relatively simpler,
+compared to the task model.
+The only thing to test here is the \texttt{does\_clash} method of the event model.
+
+\begin{lstlisting}[language=Python]
+class EventModelTests(TestCase):
+    # Test non-overlapping events
+    #
+    # Test events that are on the same day and nearly overlap, but don't
+    def same_day_no_time_overlap(self):
+        # Define two events which are consecutive but don't overlap
+        event_1 = Event(
+            date=timezone.now().date(),
+            start_time=timezone.now().time() - dt.timedelta(minutes=10),
+            end_time=timezeon.now().time(),
+        )
+        event_2 = Event(
+            date=timezone.now().date(),
+            start_time=timezone.now().time(),
+            end_time=timezeon.now().time() + dt.timedelta(minutes=10),
+        )
+
+        # Neither should clash with the other
+        self.assertIs(event_1.does_clash(event_2), False)
+        self.assertIs(event_2.does_clash(event_1), False)
+
+    # Test events where the time overlaps but are on different days
+    def different_day_overlapping_time(self):
+        # Define two events which would clash if they were on the same day,
+        # but are on different days
+        event_1 = Event(
+            date=timezone.now().date(),
+            start_time=timezone.now().time(),
+            end_time=timezeon.now().time() + dt.timedelta(minutes=10),
+        )
+        event_2 = Event(
+            date=timezone.now().date() + 1,
+            start_time=timezone.now().time() - dt.timedelta(minutes=5),
+            end_time=timezeon.now().time() + dt.timedelta(minutes=5),
+        )
+
+        # Neither should clash with the other
+        self.assertIs(event_1.does_clash(event_2), False)
+        self.assertIs(event_2.does_clash(event_1), False)
+
+    # Test overlapping events
+    #
+    # Test events overlapping only at one end
+    def overlap_one_end(self):
+        # Define two events which overlap only on one end
+        event_1 = Event(
+            date=timezone.now().date(),
+            start_time=timezone.now().time(),
+            end_time=timezeon.now().time() + dt.timedelta(minutes=10),
+        )
+        event_2 = Event(
+            date=timezone.now().date(),
+            start_time=timezone.now().time() - dt.timedelta(minutes=5),
+            end_time=timezeon.now().time() + dt.timedelta(minutes=5),
+        )
+
+        # Both should clash with the other
+        self.assertIs(event_1.does_clash(event_2), False)
+        self.assertIs(event_2.does_clash(event_1), False)
+
+    # Test events overlapping at both ends
+    def overlap_both_ends(self):
+        # Define two events which overlap at both ends
+        event_1 = Event(
+            date=timezone.now().date(),
+            start_time=timezone.now().time(),
+            end_time=timezeon.now().time() + dt.timedelta(minutes=10),
+        )
+        event_2 = Event(
+            date=timezone.now().date(),
+            start_time=timezone.now().time() - dt.timedelta(minutes=5),
+            end_time=timezeon.now().time() + dt.timedelta(minutes=15),
+        )
+
+        # Both should clash with the other
+        self.assertIs(event_1.does_clash(event_2), False)
+        self.assertIs(event_2.does_clash(event_1), False)
+\end{lstlisting}
+
+As I was writing these tests I actually realised that one of them would definitely fail:
+the test for events on the same time but different days.
+In fact this might seem quite an odd thing to test,
+but I realised that the \texttt{does\_clash} function didn't check at all whether the two events were on the same day.
+As expected, that test did fail,
+so I fixed the function.
+
+Here's the corrected version:
+\begin{lstlisting}[language=Python]
+def does_clash(self, other):
+    # For events A and B to clash,
+    # A must start before B ends and end after B starts
+    if (
+        self.date == other.date
+        and self.start_time < other.end_time
+        and self.end_time > other.start_time
+    ):
+        return True
+    else:
+        return False
+\end{lstlisting}
+
+With this fix all the tests now pass.
+
+Then I went on to test the views in a similar manner to the task related views,
+however there was less to do due the less dynamic nature of events an routines.
+As one might expect,
+given that the task views already worked and the similarity with the event and routine views,
+there were no problems here.
+
+\subsection{Stage 2 Review}
+This stage was a bit easier than stage 1,
+due to the overall similarities the event- and routine-related models and views,
+had with the already existing task model and related views.
+This meant the ideas and principles behind that stage of development could mostly be recycled,
+with changes to the code itself mostly being small changes and simplifications.
+The only hitch was that error in the \texttt{does\_clash} method for events,
+which was fixed easily.
+
+So at the end of stage 2 it is now possible to:
+\begin{itemize}
+  \item Create events
+  \item View them in a list,
+    separated by whether they are on today or some other day in the future
+  \item View a detailed information page about them
+  \item Edit or delete existing events
+  \item And do all the same things for routine events
+\end{itemize}
+
+In other words,
+full calendaring functionality.
 
 \section{Stage 3: The Scheduler}
 The scheduler consists of two parts:
@@ -1419,7 +1962,7 @@ I decided to create a new model for the specific purpose of representing chunks 
 and an associated object being a task, event or routine.
 It doesn't need a name/title as this can simply be retrieved from the associated object.
 
-\begin{lstlisting}[language=Python, breaklines]
+\begin{lstlisting}[language=Python]
 class TimeSlot(models.Model):
 
     date = models.DateField("date")
@@ -1461,7 +2004,7 @@ When the page is accessed,
 the schedule will be updated in the background.
 
 The code for the view is quite simple:
-\begin{lstlisting}[language=Python,breaklines]
+\begin{lstlisting}[language=Python]
 class ScheduleView(ListView):
     template_name = "tasks/schedule.html"
     context_object_name = "time_slots"
@@ -1471,7 +2014,7 @@ class ScheduleView(ListView):
         return TimeSlot.objects.order_by("start_time")
 \end{lstlisting}
 
-The view simply calls the scheduler to run with the day being today,
+The view simply calls the scheduler to run passing today as the argument for the day,
 and retrieves the time slot objects it creates from the database in order of start time.
 
 The HTML then lists the time slots in order,
@@ -1479,8 +2022,206 @@ labelling each according to whether it is a task, event or routine,
 noting the start and end times,
 and linking to the detail view.
 
-\part{Evaluation}
+\section{Time Tracking and User Statistics}
+These are the two final components needed to complete the solution,
+although in reality I find it most sensible to consider them as one module due to their interdependence.
 
+\subsection{Tracking time spent on a task}
+After some consideration,
+I don't think it makes sense to implement the time tracking in the way originally conceived;
+in a manner like Forest,
+where time is tracked as a live counter in the program as you work.
+This is because the problem trying to be solved is not really that of concentration on a task,
+which is what Forest targets,
+but rather of planning and keeping track of time.
+So I think it would be more sensible to have the user enter the time they spend working on a task,
+rather than compel them to use a timer built in to the program.
+This would also avoid unhelpful situations which occur in a program like Forest,
+where time has been spent working unrecorded,
+and there is no way to rectify that.
+
+I discussed this with SH,
+here is the transcript.
+
+\paragraph{Max} Hi SH.
+As you're aware,
+I'm nearing the end of the development of the product.
+I've come to implementing the module for tracking time spent working on a task,
+however I'm not sure if it's best to implement it as originally discussed.
+\paragraph{SH} What do you mean?
+\paragraph{Max} I originally designed the solution using an approach like Forest,
+where time is tracked by a timer in the app as you are working.
+However I think it might be better to instead have the user simply log the time they spend.
+This means the user isn't forced into adopting the program into their workflow,
+which may be an inconvenience,
+and avoids situations where statistics are inaccurate due to the user forgetting to use the timer when doing work on a task,
+since they can simply log the time spent working whenever they are finished.
+\paragraph{SH} That's true,
+but I suppose that means you can't force the user to stay concentrated on the task,
+like Forest does?
+\paragraph{Max} I suppose so,
+however it was already impossible to be as restrictive as Forest due to being a web app,
+rather than a native application.
+Also, if the user wanted to enforce those restrictions on themself,
+they could always use another app like Forest for that purpose,
+essentially regulating their time,
+while still using MyTime for planning and tracking their time.
+\paragraph{SH} That's reasonable.
+I suppose it's also helpful to keep the program's scope reasonable.
+Ok, I'm happy with that change then.
+
+So I went ahead with implementing the time tracking via a form on the task detail page,
+which allows the user to record time that they've spent working on the task.
+This required a new view to be written,
+to be responsible for updating the time spent on a task,
+and changes made to the existing task detail view and template,
+to accommodate the new form.
+
+The task detail now looks like this:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{Screenshots/task_detail_with_time.png}
+  \caption{Task detail with time logging form}
+  \label{fig:task_detail2}
+\end{figure}
+
+Upon submitting the form with the ``log'' button,
+the number in the form is sent to the task view,
+which converts it to a Python timedelta object of the corresponding number of minutes,
+and passed to the \texttt{alter\_time\_spent()} method of the task object.
+
+\subsection{User Statistics}
+In a slight change to the modular design outlined in figure \ref{fig:modular_design},
+I decided to create a separate statistics-generation function,
+\texttt{statistics.py}.
+Although I could have handled generation of the statistics from the view,
+I decided it would be best,
+in terms of code readability and maintenance,
+to make this separation.
+Then, there are three components here:
+the function for generating the statistics,
+the view,
+and the template.
+
+As outlined in the design,
+the usage statistics I want to be able to provide to the user are:
+\begin{enumerate}
+  \item Information on the timeliness of completion,
+    and accuracy of time estimation,
+    for recently completed tasks
+  \item Overall number of tasks completed and time spent for the past day and week
+  \item Overall statistics,
+    for all tasks,
+    of whether tasks are completed on time and within the time estimate
+\end{enumerate}
+
+It made sense to further separate the function into two sub-procedures,
+one for the generation of the specific statistics for the recent tasks,
+and one for the generation of the overall statistics.
+Here is the code for that,
+it is moderately lengthy but quite straightforward:
+
+\begin{lstlisting}[language=Python]
+# Function for generating the overall statistics
+def generate_overall_stats():
+    # When this data is received by the view,
+    # it will need to put it in the context dictionary,
+    # so if we create a dictionary here is will be easy to copy.
+    stats = {}
+
+    # Here we'll do some queries to get various lists of tasks we'll need.
+    # Note that we're listifying all the queries,
+    # as Django provides Q objects,
+    # which are a bit different.
+    #
+    # Tasks completed today:
+    tasks_today = list(
+        Task.objects.filter(
+            done=True,
+            completion_time__range=[timezone.now() - timedelta(days=1), timezone.now()],
+        )
+    )
+    # Tasks completed this week:
+    tasks_week = list(
+        Task.objects.filter(
+            done=True,
+            completion_time__range=[timezone.now() - timedelta(days=7), timezone.now()],
+        )
+    )
+
+    # Tasks completed on time:
+    tasks_on_time = list(Task.objects.filter(done=True, completed_on_time=True))
+    # Tasks completed within their time estimate
+    tasks_in_time = list(Task.objects.filter(done=True, completed_in_time=True))
+
+    # All completed tasks
+    tasks_done = list(Task.objects.filter(done=True))
+
+    # We simply look at the length of the respective lists,
+    # to find out the number of tasks completed in the given timeframe.
+    stats["num day"] = len(tasks_today)
+    stats["num week"] = len(tasks_week)
+
+    # Similarly we can sum the time_spent attributes of the tasks in each list,
+    # to get the total time spent
+    stats["time day"] = sum([task.time_spent for task in tasks_today], timedelta())
+    stats["time week"] = sum([task.time_spent for task in tasks_week], timedelta())
+
+    # Here we calculate the percentage, rounded to one decimal place,
+    # of tasks completed on time and within their time estimate respectively
+    stats["on time"] = round(100 * len(tasks_on_time) / len(tasks_done), 1)
+    stats["in time"] = round(100 * len(tasks_in_time) / len(tasks_done), 1)
+
+    # And return the dictionary
+    return stats
+
+
+# Function for generating the specific stats for given tasks
+def generate_specific_stats(tasks):
+    for task in tasks:
+        # Create an offset-aware datetime object from the due date and due time,
+        # for comparison with the completion datetime
+        due = datetime.combine(task.due_date, task.due_time).replace(tzinfo=pytz.UTC)
+        complete = task.completion_time
+
+        # This is superflouous but makes the code look nicer
+        spent = task.time_spent
+        estimate = task.time_estimate
+
+        # Get the difference between completion and due
+        task.completion_delta = abs(due - complete)
+        # Caculate the estimate accuracy as a percentage, rounded to 1 d.p.
+        task.estimate_accuracy = round(abs(100 * ((spent / estimate) - 1)), 1)
+\end{lstlisting}
+
+These functions are both called by the statistics view,
+which passes the data generated to the template to render.
+
+
+\part{Evaluation}
+\section{Evaluation of solution}
+\subsection{Measurement against success criteria}
+\begin{itemize}
+	\item Store a list of the user's tasks\\
+	      Status: \textbf{met}
+	\item Store the due date, priority, expected time needed, and other information about each task
+	      Status: \textbf{met}
+	\item Allow the user to add, edit and remove tasks\\
+	      Status: \textbf{met}
+	\item Record the successful completion of each task, time taken,
+	      and number of breaks taken,
+	      and display this information to the user in a useful manner\\
+	      Status: \textbf{met}
+\end{itemize}
+
+The solution allows the user to create tasks,
+with a title, description, due date, time estimate, and priority level.
+The user can furthermore mark a task as done and record the time spent on it;
+this information may also be easily changed in case the user makes a mistake.
+The date and time of completion are automatically recorded by the program,
+for use in generating statistics for the user.
+Tasks may also have any information about them edited,
+and may deleted.
 
 \end{document}
 
