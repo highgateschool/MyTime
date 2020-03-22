@@ -46,7 +46,8 @@
     "fig:task_detail1"
     "fig:task_form1"
     "fig:schedule1"
-    "fig:task_detail2")
+    "fig:task_detail2"
+    "fig:task_index_usability")
    (LaTeX-add-index-entries
     "\\item"))
  :latex)

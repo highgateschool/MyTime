@@ -7,7 +7,7 @@
 \usepackage{float}
 \usepackage[utf8]{inputenc}
 
-\title{ComSci Project - MyTime}
+\title{A-Level Computer Science Project\\ Time Scheduler - ``MyTime''}
 \author{Max Stupple}
 \date{}
 
@@ -16,7 +16,7 @@
 	tabsize=4, % tab space width
 	showstringspaces=false, % don't mark spaces in strings
 	numbers=left, % display line numbers on the left
-	basicstyle=\ttfamily,
+	basicstyle=\small,
 	commentstyle=\color{gray}, % comment color
 	keywordstyle=\color{blue}, % keyword color
 	stringstyle=\color{red}, % string color
@@ -33,17 +33,19 @@
 \section{Overview of the problem}
 Many students struggle to manage their time. The workload of A-levels alone is
 enough to make it difficult to balance between small pieces that are due in
-soon, and longer project that need a little bit of work here and there, let
+soon, and longer projects which need to be worked on frequently; let
 alone extra-curricular activities and sports that take up more time after school
 and on weekends. One solution is to manually plan how you will use all your free
 time, but this has two drawbacks:
 
-\begin{itemize}
-	\item Many people struggle to estimate how long a task will take them and hence
-	      struggle to allocate a reasonable amount of time to each task
-	\item This process takes time, a resource which has already been established to
-	      be finite and valuable
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Many people struggle to estimate how long a task will take them and hence
+		      struggle to allocate a reasonable amount of time to each task
+		\item This process takes time, a resource which has already been established to
+		      be finite and valuable
+	\end{itemize}
+\end{samepage}
 
 My stakeholder (henceforth referred to as SH) is a Sixth Form student
 studying Maths, Further Maths, Physics and Chemistry. He struggles to fit in all
@@ -70,19 +72,21 @@ solution will be.
 To satisfy the needs of SH, I anticipate a solution will need to fulfil the
 following functions:
 
-\begin{itemize}
-	\item Keep a list of the users tasks which contain a description of the task, a
-	      due date and time estimate
-	\item Schedule tasks in user's free time according to a calendar and school/work
-	      schedule
-	\item Record and track the actual time taken to complete a task, including
-	      breaks
-	\item Provide feedback on the accuracy of the user's time estimates and
-	      productivity levels
-	\item Adapt to the user's preference in terms of length of work sessions
-	\item Display these tasks to the user is an organised manner using a Graphical
-	      User Interface
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Keep a list of the users tasks which contain a description of the task, a
+		      due date and time estimate
+		\item Schedule tasks in user's free time according to a calendar and school/work
+		      schedule
+		\item Record and track the actual time taken to complete a task, including
+		      breaks
+		\item Provide feedback on the accuracy of the user's time estimates and
+		      productivity levels
+		\item Adapt to the user's preference in terms of length of work sessions
+		\item Display these tasks to the user is an organised manner using a Graphical
+		      User Interface
+	\end{itemize}
+\end{samepage}
 
 The program will be created as a web app using the Django web framework. The
 reason for creating it as a web app is so that it is available as widely as
@@ -90,7 +94,7 @@ possible, as it will be possible to access it on any device with a modern web
 browser. Django will allow me to deploy my solution in a modern and efficient
 way, so that I can focus on the underlying data structures, while Django mostly
 handles the interface. The data structures will also be implemented using Python
-in an object-oriented way, which I think is sensible and are tools I'm familiar
+in an object-oriented way, which I think is sensible as this is a tool which I'm familiar
 with working with.
 
 \section{User group}
@@ -152,15 +156,17 @@ work schedule.
 I identified a number of candidates for solutions to SH's problem. The candidate
 programs are:
 
-\begin{itemize}
-	\item Forest
-	\item Evernote
-	\item Todoist
-	\item Remember the Milk
-	\item Ike
-	\item Google Keep
-	\item Trello
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Forest
+		\item Evernote
+		\item Todoist
+		\item Remember the Milk
+		\item Ike
+		\item Google Keep
+		\item Trello
+	\end{itemize}
+\end{samepage}
 
 \begin{figure}[h!]
 	\includegraphics[width=\linewidth]{Images/forest.jpg}
@@ -289,7 +295,7 @@ comments:
 \begin{description}
 	\item Forest: ``This is my favourite. The UI is excellent and the metaphor of
 	      growing trees is very appealing. Out of all the programs this does the best
-	      job of helping me manage my time, however tt's unfortunate that is doesn't
+	      job of helping me manage my time, however it's unfortunate that is doesn't
 	      include integrated task management. I like that you can see your past progress
 	      as this is very motivational, and it stops the timer if you leave the app,
 	      which helps you avoid idly switching to Facebook or Twitter for a 'quick
@@ -321,49 +327,53 @@ ability to have ``subtasks'' nestled inside other tasks.
 From this I have assembled the following list of features which my program will
 need:
 
-\begin{itemize}
-	\item Main view displays all uncompleted tasks and recently completed but
-	      not-deleted tasks
-	\item Archive containing completed tasks, and allows tasks to be un-marked as
-	      complete
-	\item Tasks grouped in categories
-	\item Tasks can be filtered by category
-	\item Ordered by time needed or due date
-	\item Tasks can be marked as done or deleted
-	\item New tasks can be added, with a brief title, optional additional notes, an
-	      estimate of time needed and a due date
-	\item Graphs showing number of tasks completed, amount of time taken, and
-	      whether tasks were completed on time
-	\item Show upcoming tasks in their automatically allocated time slots
-	\item User can enter the schedule and other commitments that the program will
-	      schedule tasks around
-	\item The program will give a warning if there is not enough free time to
-	      complete a given task before it's due date
-	\item Current task displayed at top of screen
-	\item Time spent working and time to next break
-	\item Buttons to manually pause timer and take a break or mark task as done
-	\item Graphic showing a town/city building up over time as you work
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Main view displays all uncompleted tasks and recently completed but
+		      not-deleted tasks
+		\item Archive containing completed tasks, and allows tasks to be un-marked as
+		      complete
+		\item Tasks grouped in categories
+		\item Tasks can be filtered by category
+		\item Ordered by time needed or due date
+		\item Tasks can be marked as done or deleted
+		\item New tasks can be added, with a brief title, optional additional notes, an
+		      estimate of time needed and a due date
+		\item Graphs showing number of tasks completed, amount of time taken, and
+		      whether tasks were completed on time
+		\item Show upcoming tasks in their automatically allocated time slots
+		\item User can enter the schedule and other commitments that the program will
+		      schedule tasks around
+		\item The program will give a warning if there is not enough free time to
+		      complete a given task before it's due date
+		\item Current task displayed at top of screen
+		\item Time spent working and time to next break
+		\item Buttons to manually pause timer and take a break or mark task as done
+		\item Graphic showing a town/city building up over time as you work
+	\end{itemize}
+\end{samepage}
 
 I showed this list to SH, and he added that tasks should be given a priority
 level, so that high priority tasks can be scheduled before low priority ones. He
 also elaborated on the city-building mechanic, resulting in the following:
 
-\begin{itemize}
-	\item The city builds over time as you work
-	\item Taking a break which has been allocated by the app simply pauses
+\begin{samepage}
+	\begin{itemize}
+		\item The city builds over time as you work
+		\item Taking a break which has been allocated by the app simply pauses
 
-	\item Taking an unallocated break sets the development back - perhaps there is a
-	      level system and you can be set back one or two levels
-	\item If you quit a task before you finished - and taking an excessively long
-	      break automatically quits - the city is destroyed
-	\item If you take too long to complete a task, development is slowed down
-	\item When you finish a task, you can either stop, which doesn't destroy your
-	      city but it degrades over time, or go straight to the next task, in which case
-	      progress continues
-	\item If you finish a task early and go straight on to another task, your city
-	      gets a boost
-\end{itemize}
+		\item Taking an unallocated break sets the development back - perhaps there is a
+		      level system and you can be set back one or two levels
+		\item If you quit a task before you finished - and taking an excessively long
+		      break automatically quits - the city is destroyed
+		\item If you take too long to complete a task, development is slowed down
+		\item When you finish a task, you can either stop, which doesn't destroy your
+		      city but it degrades over time, or go straight to the next task, in which case
+		      progress continues
+		\item If you finish a task early and go straight on to another task, your city
+		      gets a boost
+	\end{itemize}
+\end{samepage}
 
 SH said he ``agrees with all of this'' and called it ``good design''. He also
 emphasised his desire to access his tasks across different devices. I have
@@ -384,7 +394,7 @@ The main way in which my solution will be limited,
 compared to those products researched,
 will be the inability to sync to an external calendar,
 as for example Google Keep can.
-User's might like to sync their events from their existing calendaring solutions,
+Users might like to sync their events from their existing calendaring solutions,
 but I think implementing such a feature is beyond my project's scope.
 
 It will also be limited in the depth of the task management,
@@ -406,40 +416,48 @@ modern internet browser, such as Firefox. The system requirements for Firefox
 \subsubsection*{Operating Systems (32-bit and
 	64-bit)}\label{operating-systems-32-bit-and-64-bit}
 
-\begin{itemize}
-	\item Windows 7
-	\item Windows 8
-	\item Windows 10
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Windows 7
+		\item Windows 8
+		\item Windows 10
+	\end{itemize}
+\end{samepage}
 
 \subsubsection*{Recommended Hardware}\label{recommended-hardware}
 
-\begin{itemize}
-	\item Pentium 4 or newer processor that supports SSE2
-	\item 512MB of RAM / 2GB of RAM for the 64-bit version
-	\item 200MB of hard drive space
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Pentium 4 or newer processor that supports SSE2
+		\item 512MB of RAM / 2GB of RAM for the 64-bit version
+		\item 200MB of hard drive space
+	\end{itemize}
+\end{samepage}
 
 \subsection*{Mac}\label{mac}
 
 \subsubsection*{Operating Systems}\label{operating-systems}
 
-\begin{itemize}
-	\item macOS 10.9
-	\item macOS 10.10
-	\item macOS 10.11
-	\item macOS 10.12
-	\item macOS 10.13
-	\item macOS 10.14
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item macOS 10.9
+		\item macOS 10.10
+		\item macOS 10.11
+		\item macOS 10.12
+		\item macOS 10.13
+		\item macOS 10.14
+	\end{itemize}
+\end{samepage}
 
 \subsubsection*{Recommended Hardware}\label{recommended-hardware_1}
 
-\begin{itemize}
-	\item Macintosh computer with an Intel x86 processor
-	\item 512 MB of RAM
-	\item 200 MB hard drive space
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Macintosh computer with an Intel x86 processor
+		\item 512 MB of RAM
+		\item 200 MB hard drive space
+	\end{itemize}
+\end{samepage}
 
 \subsection*{GNU/Linux}\label{gnulinux}
 
@@ -448,26 +466,32 @@ modern internet browser, such as Firefox. The system requirements for Firefox
 \emph{Please note that GNU/Linux distributors may provide packages for your
 	distribution which have different requirements.}
 
-\begin{itemize}
-	\item Firefox will not run at all without the following libraries or packages:
+\begin{samepage}
+	\begin{itemize}
+		\item Firefox will not run at all without the following libraries or packages:
 
-	      \begin{itemize}
-		      \item GTK+ 3.4 or higher
-		      \item GLib 2.22 or higher
-		      \item Pango 1.22 or higher
-		      \item X.Org 1.0 or higher (1.7 or higher is recommended)
-		      \item libstdc++ 4.6.1 or higher
-	      \end{itemize}
-	\item For optimal functionality, we recommend the following libraries or
-	      packages:
+		      \begin{samepage}
+			      \begin{itemize}
+				      \item GTK+ 3.4 or higher
+				      \item GLib 2.22 or higher
+				      \item Pango 1.22 or higher
+				      \item X.Org 1.0 or higher (1.7 or higher is recommended)
+				      \item libstdc++ 4.6.1 or higher
+			      \end{itemize}
+		      \end{samepage}
+		\item For optimal functionality, we recommend the following libraries or
+		      packages:
 
-	      \begin{itemize}
-		      \item NetworkManager 0.7 or higher \index{\item}\index{\item}\item DBus 1.0 or
-		            higher
-		      \item GNOME 2.16 or higher
-		      \item PulseAudio
-	      \end{itemize}
-\end{itemize}
+		      \begin{samepage}
+			      \begin{itemize}
+				      \item NetworkManager 0.7 or higher \index{\item}\index{\item}\item DBus 1.0 or
+				            higher
+				      \item GNOME 2.16 or higher
+				      \item PulseAudio
+			      \end{itemize}
+		      \end{samepage}
+	\end{itemize}
+\end{samepage}
 
 Any system which meets these requirements will be able to run the program.
 
@@ -485,29 +509,31 @@ and complete tasks within the allotted time.
 \subsection{Specific objectives}
 The program should:
 
-\begin{itemize}
-	\item Store a list of the user's tasks
-	\item Store the due date, priority, expected time needed, and other information
-	      about each task
-	\item Allow the user to add, edit and remove tasks from the list
-	\item Record the successful completion of each task, time taken, and number of
-	      breaks taken and display this information to the user in a useful manner
-	\item Store information about the user's schedule,
-	      including both regular and particular commitments
-	\item Schedule time for the user to complete their tasks, according to the
-	      user's schedule, task due date and task priority
-	\item Display the tasks in their allocated time slots,
-	      relative to the user's schedule
-	\item Have a focus mode, which helps the user concentrate on the task at hand,
-	      and incentivises the user to complete the task in a timely manner without
-	      procrastination using game-like aspects
-	\item Track the time the user spends working on a task
-	\item Provide feedback to the user about their completed tasks,
-	      such as whether a task was completed on time and within the scheduled time slot,
-	      and equivalent overall and average task statistics
-	\item Be available on multiple platforms and devices
-	\item Sync tasks between devices
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Store a list of the user's tasks
+		\item Store the due date, priority, expected time needed, and other information
+		      about each task
+		\item Allow the user to add, edit and remove tasks from the list
+		\item Record the successful completion of each task, time taken, and number of
+		      breaks taken and display this information to the user in a useful manner
+		\item Store information about the user's schedule,
+		      including both regular and particular commitments
+		\item Schedule time for the user to complete their tasks, according to the
+		      user's schedule, task due date and task priority
+		\item Display the tasks in their allocated time slots,
+		      relative to the user's schedule
+		\item Have a focus mode, which helps the user concentrate on the task at hand,
+		      and incentivises the user to complete the task in a timely manner without
+		      procrastination, using game-like aspects
+		\item Track the time the user spends working on a task
+		\item Provide feedback to the user about their completed tasks,
+		      such as whether a task was completed on time and within the scheduled time slot,
+		      and equivalent overall and average task statistics
+		\item Be available on multiple platforms and devices
+		\item Sync tasks between devices
+	\end{itemize}
+\end{samepage}
 
 
 \part{Design}
@@ -517,32 +543,34 @@ which will comprise the overall solution.
 This is a higher-level description than the product specification,
 but low enough that each component is a manageable individual problem.
 I have identified the key functions that my solution will need to perform as:
-\begin{itemize}
-	\item Basic calendaring:\\
-	      My solution needs to keep track of the user's regular commitments,
-	      and particular events,
-	      so that tasks can be scheduled around them.
-	\item Task management:\\
-	      The user should be able to add tasks,
-	      mark them as done,
-	      and delete them.
-	      These tasks should be able to hold a reasonable amount of information,
-	      but in particular a due date and time estimate will be essential to the scheduler.
-	\item Track time spent on tasks:\\
-	      The user should be able to log they are working on a task,
-	      and for how long,
-	      so that they can see overall statistics,
-	      on the accuracy of their time estimates,
-	      and on how good they are at sticking to their schedule.
-	\item Calculate and display statistics:\\
-	      The aforementioned statistics should be presented to the user in a helpful way.
-	\item Scheduling the user's tasks:\\
-	      The program will need to allocate time for each of the user's tasks,
-	      according to their priority,
-	      due date,
-	      and time estimate.
-	      It will also need to take into account the user's other commitments.
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Basic calendaring:\\
+		      My solution needs to keep track of the user's regular commitments,
+		      and particular events,
+		      so that tasks can be scheduled around them.
+		\item Task management:\\
+		      The user should be able to add tasks,
+		      mark them as done,
+		      and delete them.
+		      These tasks should be able to hold a reasonable amount of information,
+		      but in particular a due date and time estimate will be essential to the scheduler.
+		\item Track time spent on tasks:\\
+		      The user should be able to log they are working on a task,
+		      and for how long,
+		      so that they can see overall statistics,
+		      on the accuracy of their time estimates,
+		      and on how good they are at sticking to their schedule.
+		\item Calculate and display statistics:\\
+		      The aforementioned statistics should be presented to the user in a helpful way.
+		\item Scheduling the user's tasks:\\
+		      The program will need to allocate time for each of the user's tasks,
+		      according to their priority,
+		      due date,
+		      and time estimate.
+		      It will also need to take into account the user's other commitments.
+	\end{itemize}
+\end{samepage}
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/TDD.png}
@@ -593,26 +621,28 @@ so it seems more elegant to have a separate class for time slots.
 In Django,
 each page on the site is called a ``view''.
 I will have the following views:
-\begin{itemize}
-	\item Task list:\\
-	      A screen where the user can create, view and manage their tasks
-	\item Calendar:\\
-	      A screen where the user can create, view and manage upcoming events
-	\item Schedule:\\
-	      A screen showing the users tasks scheduled in around their events for today
-	\item Task/event/routine detail:\\
-	      A screen where the user can look at and individual task, event or routine,
-	      and perform relevant actions such as marking as done/todo,
-	      editing or deleting them
-	\item Task/event/routine creator:\\
-	      A form to create new tasks, events or routines
-	\item Task/event/routine editor:\\
-	      A form to edit existing tasks, events or routines
-	\item Work time:\\
-	      A screen where the user can enter a ``work session'' which records the time they spend working
-	\item Work review:\\
-	      A screen displaying statistics about the time the user has spent working
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Task list:\\
+		      A screen where the user can create, view and manage their tasks
+		\item Calendar:\\
+		      A screen where the user can create, view and manage upcoming events
+		\item Schedule:\\
+		      A screen showing the users tasks scheduled in around their events for today
+		\item Task/event/routine detail:\\
+		      A screen where the user can look at and individual task, event or routine,
+		      and perform relevant actions such as marking as done/todo,
+		      editing or deleting them
+		\item Task/event/routine creator:\\
+		      A form to create new tasks, events or routines
+		\item Task/event/routine editor:\\
+		      A form to edit existing tasks, events or routines
+		\item Work time:\\
+		      A screen where the user can enter a ``work session'' which records the time they spend working
+		\item Work review:\\
+		      A screen displaying statistics about the time the user has spent working
+	\end{itemize}
+\end{samepage}
 
 I think it will also be helpful to have a navigation bar,
 at the top of the screen,
@@ -631,13 +661,15 @@ It might also be helpful to have a quick button to add a new task/event/routine.
 \end{minipage} \hfill
 \begin{minipage}{0.45\textwidth}
 	\paragraph{Features:}
-	\begin{itemize}
-		\item View all tasks
-		\item List split by todo/done status
-		\item Click on a task to see a more detailed view
-		\item Quickly toggle whether a task is done
-		\item Add new tasks
-	\end{itemize}
+	\begin{samepage}
+		\begin{itemize}
+			\item View all tasks
+			\item List split by todo/done status
+			\item Click on a task to see a more detailed view
+			\item Quickly toggle whether a task is done
+			\item Add new tasks
+		\end{itemize}
+	\end{samepage}
 \end{minipage}
 
 \begin{minipage}{0.45\textwidth}
@@ -649,13 +681,15 @@ It might also be helpful to have a quick button to add a new task/event/routine.
 \end{minipage} \hfill
 \begin{minipage}{0.5\textwidth}
 	\paragraph{Features:}
-	\begin{itemize}
-		\item View all upcoming events
-		\item List split by one-off events and routine events,
-		      and further by those which are today and which are later
-		\item Click on and event to see a more detailed view
-		\item Add new events
-	\end{itemize}
+	\begin{samepage}
+		\begin{itemize}
+			\item View all upcoming events
+			\item List split by one-off events and routine events,
+			      and further by those which are today and which are later
+			\item Click on and event to see a more detailed view
+			\item Add new events
+		\end{itemize}
+	\end{samepage}
 \end{minipage}
 
 \begin{minipage}{0.5\textwidth}
@@ -667,11 +701,13 @@ It might also be helpful to have a quick button to add a new task/event/routine.
 \end{minipage} \hfill
 \begin{minipage}{0.45\textwidth}
 	\paragraph{Features:}
-	\begin{itemize}
-		\item View routine, events and tasks scheduled for today
-		\item Tasks are scheduled automatically according to due date, priority and time estimate
-		\item Click on an item to see a more detailed view
-	\end{itemize}
+	\begin{samepage}
+		\begin{itemize}
+			\item View routine, events and tasks scheduled for today
+			\item Tasks are scheduled automatically according to due date, priority and time estimate
+			\item Click on an item to see a more detailed view
+		\end{itemize}
+	\end{samepage}
 \end{minipage}
 
 \begin{minipage}{0.5\textwidth}
@@ -683,13 +719,15 @@ It might also be helpful to have a quick button to add a new task/event/routine.
 \end{minipage} \hfill
 \begin{minipage}{0.45\textwidth}
 	\paragraph{Features:}
-	\begin{itemize}
-		\item View all the information about the task
-		\item Mark the task as done/todo
-		\item Edit information about the task
-		\item Delete the task
-		\item Log time working on the task
-	\end{itemize}
+	\begin{samepage}
+		\begin{itemize}
+			\item View all the information about the task
+			\item Mark the task as done/todo
+			\item Edit information about the task
+			\item Delete the task
+			\item Log time working on the task
+		\end{itemize}
+	\end{samepage}
 \end{minipage}
 
 \begin{minipage}{0.5\textwidth}
@@ -701,11 +739,13 @@ It might also be helpful to have a quick button to add a new task/event/routine.
 \end{minipage} \hfill
 \begin{minipage}{0.45\textwidth}
 	\paragraph{Features:}
-	\begin{itemize}
-		\item View all the information about the event
-		\item Edit information about the event
-		\item Delete the event
-	\end{itemize}
+	\begin{samepage}
+		\begin{itemize}
+			\item View all the information about the event
+			\item Edit information about the event
+			\item Delete the event
+		\end{itemize}
+	\end{samepage}
 \end{minipage}
 
 \begin{minipage}{0.5\textwidth}
@@ -717,13 +757,15 @@ It might also be helpful to have a quick button to add a new task/event/routine.
 \end{minipage} \hfill
 \begin{minipage}{0.45\textwidth}
 	\paragraph{Features:}
-	\begin{itemize}
-		\item View information about the current task
-		\item A timer of time spent working
-		\item See time when started working
-		\item Pause and resume the timer
-		\item End the work session
-	\end{itemize}
+	\begin{samepage}
+		\begin{itemize}
+			\item View information about the current task
+			\item A timer of time spent working
+			\item See time when started working
+			\item Pause and resume the timer
+			\item End the work session
+		\end{itemize}
+	\end{samepage}
 \end{minipage}
 
 \begin{minipage}{0.5\textwidth}
@@ -735,21 +777,40 @@ It might also be helpful to have a quick button to add a new task/event/routine.
 \end{minipage} \hfill
 \begin{minipage}{0.45\textwidth}
 	\paragraph{Features:}
-	\begin{itemize}
-		\item View individual statistics for recently completed tasks
-		      \begin{itemize}
-			      \item Comparison of due date with date of completion
-			      \item Comparison of time estimate with actual time spent
-		      \end{itemize}
-		\item View overall statistics
-		      \begin{itemize}
-			      \item Number of tasks completed today and this week
-			      \item Time spent working today and this week
-			      \item Proportion of tasks completed on time
-			      \item Overall accuracy of time estimates
-		      \end{itemize}
-	\end{itemize}
+	\begin{samepage}
+		\begin{itemize}
+			\item View individual statistics for recently completed tasks
+			      \begin{samepage}
+				      \begin{itemize}
+					      \item Comparison of due date with date of completion
+					      \item Comparison of time estimate with actual time spent
+				      \end{itemize}
+			      \end{samepage}
+			\item View overall statistics
+			      \begin{samepage}
+				      \begin{itemize}
+					      \item Number of tasks completed today and this week
+					      \item Time spent working today and this week
+					      \item Proportion of tasks completed on time
+					      \item Overall accuracy of time estimates
+				      \end{itemize}
+			      \end{samepage}
+		\end{itemize}
+	\end{samepage}
 \end{minipage}
+
+\section{Usability features}
+There are several notable usability features to be included.
+Firstly, since there are a number of page which can display tasks, events and routines,
+it will be ensured that wherever one of these is featured it will contain a link through to it's detail view.
+This way the user can always quickly access the relevant information.
+Secondly, todo/done toggles will be included on both the task index and task detail pages,
+so the user can quickly alter any task's status.
+Thirdly, there will be a navigation bar present on all pages,
+so that the user can move between the main views -
+the task and event lists,
+the schedule page,
+and the statistics page.
 
 \section{Algorithms}
 Django takes a primarily object oriented approach to creating webapps.
@@ -835,7 +896,7 @@ as there is no status or time spent attribute.
 
 \subsection{Make schedule}
 \begin{lstlisting}[breaklines]
-// Create time slots for all evnets and routines
+// Create time slots for all events and routines
 for event in events where event.date = date
     ts <- new TimeSlot
     ts.set_date(date)
@@ -856,7 +917,7 @@ end
 
 // Create time slots for tasks according to free time
 ts_list <- timeslots.sort_by(start_time)
-for 0 < i < len(ts_list) - 1
+for 0 <= i < len(ts_list) - 1
     // Room for change in terms of which tasks will be scheduled,
     // for example I might decide to restrict it to tasks with a due date within a certain range
     for task in tasks.sort_by(due_date, priority)
@@ -882,6 +943,7 @@ for task in tasks where task.completed = true and task.completion_date > datetim
     // Calculate the time delta between completion and due
     completion_time_delta <- timedelta(from=task.completion_date, to=task.due_date) + timedelta(from=task.completion_time, to=task.due_time)
     // If it was completed on time, the time delta is positive. Print it
+    // NB that all tasks are flagged as completed on time or not when they are marked as done
     if task.was_completed_on_time
         print("Task was completed on time by", completion_time_delta)
     // If it was completed late, the time delta is negative, so correct that when printing
@@ -956,12 +1018,14 @@ and in the context of the terminology used by Django.
 \end{figure}
 
 The modules have been colour coded into:
-\begin{itemize}
-	\item Red: distinct functions
-	\item Blue: database models
-	\item Green: page views
-	\item Yellow: page templates
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Red: distinct functions
+		\item Blue: database models
+		\item Green: page views
+		\item Yellow: page templates
+	\end{itemize}
+\end{samepage}
 
 This diagram shows the solution broken down into almost as small components as possible.
 Note that creation, editing and deletion views for each model have been grouped together,
@@ -1103,17 +1167,19 @@ I think the best place to start development will be with task management,
 especially given that this is the primary important function of my product.
 
 I need to make:
-\begin{itemize}
-	\item A task model,
-	      to store that data about each task
-	\item A task index,
-	      listing todo and done tasks separately,
-	      and linking through to view each task in more detail
-	\item A task detail view,
-	      showing all the information about a given task and allowing editing/deletion
-	\item A form for adding and editing tasks
-	\item A task deletion view
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item A task model,
+		      to store that data about each task
+		\item A task index,
+		      listing todo and done tasks separately,
+		      and linking through to view each task in more detail
+		\item A task detail view,
+		      showing all the information about a given task and allowing editing/deletion
+		\item A form for adding and editing tasks
+		\item A task deletion view
+	\end{itemize}
+\end{samepage}
 
 \subsection{Task Model}
 Logically, it makes sense to create the model first,
@@ -1135,7 +1201,7 @@ class Task(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=1000)
     due_date = models.DateField("due date")
-    due_time = models.TimeField("due time", default="00:00")
+    due_time = models.TimeField("due time", default="23:59")
     time_estimate = models.DurationField("time estimate")
     priority = models.IntegerField("priority", choices=PRIORITY_LIST, default=2)
     done = models.BooleanField(default=False)
@@ -1264,20 +1330,22 @@ class Task(models.Model):
 \end{lstlisting}
 
 The additional attributes:
-\begin{itemize}
-	\item \texttt{completion\_time},
-	      a datetime for when the task was marked as completed
-	\item \texttt{completed\_on\_time},
-	      a boolean for whether was or wasn't overdue at time of completion
-	\item \texttt{completed\_in\_time},
-	      a boolean for whether the time spent was greater or less than the time estimate at time of completion
-	\item \texttt{time\_spent},
-	      a timedelta for time spent working on the task
-	\item \texttt{completion\_delta},
-	      a time delta from completion time to due time
-	\item \texttt{estimate\_accuracy},
-	      the percentage (to 1 d.p.) error from the estimate to actual time taken
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item \texttt{completion\_time},
+		      a datetime for when the task was marked as completed
+		\item \texttt{completed\_on\_time},
+		      a boolean for whether was or wasn't overdue at time of completion
+		\item \texttt{completed\_in\_time},
+		      a boolean for whether the time spent was greater or less than the time estimate at time of completion
+		\item \texttt{time\_spent},
+		      a timedelta for time spent working on the task
+		\item \texttt{completion\_delta},
+		      a time delta from completion time to due time
+		\item \texttt{estimate\_accuracy},
+		      the percentage (to 1 d.p.) error from the estimate to actual time taken
+	\end{itemize}
+\end{samepage}
 
 These attributes are elaborated on in the Statistics and Time Tracking section of the development.
 
@@ -1317,7 +1385,7 @@ class IndexView(ListView):
 \end{lstlisting}
 
 \texttt{IndexView} is a subclass of \texttt{ListView},
-meaning it expects a list as it's queryset -
+meaning it expects a list as its queryset -
 in other words,
 it retrieves a list of objects from the database,
 not just one.
@@ -1394,7 +1462,7 @@ Figure \ref{fig:task_index1} shows what we've made so far.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{Screenshots/task_index.png}
+	\includegraphics[width=0.5\linewidth]{Screenshots/task_index.png}
 	\caption{The task index}
 	\label{fig:task_index1}
 \end{figure}
@@ -1513,7 +1581,7 @@ See figure \ref{fig:task_form1}.
 	\label{fig:task_form1}
 \end{figure}
 
-The deletion view is nothing special,
+The deletion view is rather simple,
 the only notable feature is how it redirects the user back to the index,
 as going back the previous page wouldn't workm
 since that would be the detail view of a task that was just deleted.
@@ -1583,10 +1651,12 @@ Here I've called the class \texttt{TaskModelTests}.
 The first test is one for checking the functionality of the \texttt{mark\_done} method,
 on a task which is still todo.
 I want to test
-\begin{enumerate}
-	\item that the task is indeed marked as done after the method is run
-	\item that the completion time is assigned correctly
-\end{enumerate}
+\begin{samepage}
+	\begin{enumerate}
+		\item that the task is indeed marked as done after the method is run
+		\item that the completion time is assigned correctly
+	\end{enumerate}
+\end{samepage}
 so I take time snapshots before and after marking the task as done.
 Then I check that the task's \texttt{done} attribute is true,
 using the assertion method provided by the \texttt{TestCase} class.
@@ -1684,10 +1754,12 @@ I think,
 an unreasonable amount of time to learn.
 So I went ahead with testing manually.
 In particular, I looked at:
-\begin{itemize}
-	\item the mark todo/done buttons on the task index and task detail pages
-	\item whether the views for creating, updating and deleting tasks worked correctly
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item the mark todo/done buttons on the task index and task detail pages
+		\item whether the views for creating, updating and deleting tasks worked correctly
+	\end{itemize}
+\end{samepage}
 
 I verified that use of the mark todo/done buttons produced corresponding change in the database,
 and that the values input to the forms on the task creation and updating pages created the correct attributes in the corresponding task.
@@ -1709,14 +1781,16 @@ However, thankfully, this turned out not to be a very big issue,
 and was easily corrected.
 
 So at the end of stage 1 it is now possible to:
-\begin{itemize}
-	\item Create tasks
-	\item View the list of tasks which are still todo and which are done
-	\item View a page with detailed information about each task
-	\item Edit a task or delete it
-	\item Toggle whether a task is todo or done,
-	      from either the index or the detail pages
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Create tasks
+		\item View the list of tasks which are still todo and which are done
+		\item View a page with detailed information about each task
+		\item Edit a task or delete it
+		\item Toggle whether a task is todo or done,
+		      from either the index or the detail pages
+	\end{itemize}
+\end{samepage}
 
 In other words,
 the task management component is fully functional.
@@ -1731,6 +1805,10 @@ I might have gone this route,
 however the problem is that models aren't merely classes in Python but also represent tables in the database.
 Whereas it wouldn't be such a problem for classes to have unused attributes,
 I'm not happy with the idea of each entry in the database having many empty fields.
+Technically there is nothing specifying that this is bad practice in database design -
+I don't believe any of the normal forms require that fields not be ``excessively null'',
+as it were,
+however I simply find the notion quite unappealing.
 So I think it's the nicer solution to separate each out into it's own model.
 
 On a similar point,
@@ -1936,14 +2014,16 @@ The only hitch was that error in the \texttt{does\_clash} method for events,
 which was fixed easily.
 
 So at the end of stage 2 it is now possible to:
-\begin{itemize}
-	\item Create events
-	\item View them in a list,
-	      separated by whether they are on today or some other day in the future
-	\item View a detailed information page about them
-	\item Edit or delete existing events
-	\item And do all the same things for routine events
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Create events
+		\item View them in a list,
+		      separated by whether they are on today or some other day in the future
+		\item View a detailed information page about them
+		\item Edit or delete existing events
+		\item And do all the same things for routine events
+	\end{itemize}
+\end{samepage}
 
 In other words,
 full calendaring functionality.
@@ -2055,16 +2135,18 @@ class TimeSlot(models.Model):
 \end{lstlisting}
 
 As for the scheduler itself, it:
-\begin{itemize}
-	\item Gets all the events, routines and tasks from the database
-	\item Creates time slots for all the events and routines
-	\item Puts them into a list in order
-	\item Iterates over all the tasks according to their due date, time estimate and priority level,
-	      for each one finding an available space between sequential timeslots
-	      where the gap it at least as large as the time estimate for the task
-	\item When a space is found, creates a time slot for the task at that time
-	\item Returns a list of time slots and enters them into the database
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item Gets all the events, routines and tasks from the database
+		\item Creates time slots for all the events and routines
+		\item Puts them into a list in order
+		\item Iterates over all the tasks according to their due date, time estimate and priority level,
+		      for each one finding an available space between sequential timeslots
+		      where the gap it at least as large as the time estimate for the task
+		\item When a space is found, creates a time slot for the task at that time
+		\item Returns a list of time slots and enters them into the database
+	\end{itemize}
+\end{samepage}
 
 Here is the code for the scheduler and it's supplementary functions.
 I took particular care to thoroughly comment this code,
@@ -2100,6 +2182,13 @@ def update_schedule(day):
     all_events = sorted(
         chain(routines, events), key=lambda instance: instance.start_time
     )
+
+    # NB I decided not to check for clashes between events/routines,
+    # since there isn't really anything to do in such a case -
+    # I could force them to separate,
+    # but this might be undesired or unexpected for the user,
+    # so I decided just to trust the user and let them handle such clashed,
+    # as it won't affect task scheduling because there is no gap between them.
 
     # Get all the tasks, ordered by due date, time estimate and descending priority level
     tasks = Task.objects.filter(done=False).order_by(
@@ -2142,6 +2231,8 @@ def update_schedule(day):
     # We can't use a for loop to iterate through the time slots,
     # because we're going to be changing the length of the list.
     # So we have to use a while loop and a counter to keep track of our position.
+    # I start a position 1, rather than 0,
+    # because I always look at the gap before the timeslot at the current position.
     pos = 1
 
     # Iterate through the time slots
@@ -2241,17 +2332,19 @@ and linking to the detail view.
 So a schedule might look like this:
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{Screenshots/example_schedule.png}
+	\includegraphics[width=0.8\linewidth]{Screenshots/example_schedule.png}
 	\caption{What a day's schedule might look like}
 	\label{fig:schedule1}
 \end{figure}
 
 \subsection{Stage 3 Testing}
 There are two main things to test here:
-\begin{itemize}
-	\item that the scheduler produces timeslots in an expected way
-	\item that the schedule view correctly displays the allocated timeslots
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item that the scheduler produces timeslots in an expected way
+		\item that the schedule view correctly displays the allocated timeslots
+	\end{itemize}
+\end{samepage}
 
 Here are the tests I wrote for the scheduler:
 \begin{lstlisting}[language=Python]
@@ -2467,13 +2560,15 @@ to having carefully worked through the logic of the scheduling algorithm beforeh
 This meant that my implementation worked almost flawlessly.
 
 Now that stage 3 is complete it is possible to:
-\begin{itemize}
-	\item have the program automatically create your schedule for the day
-	\item view the schedule,
-	      containing all events and routines that day,
-	      and tasks where the scheduler could find space
-	\item link through to the detail view for any item in the schedule
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item have the program automatically create your schedule for the day
+		\item view the schedule,
+		      containing all events and routines that day,
+		      and tasks where the scheduler could find space
+		\item link through to the detail view for any item in the schedule
+	\end{itemize}
+\end{samepage}
 
 In other words,
 it is now possible to create events, routines and tasks,
@@ -2563,15 +2658,17 @@ and the template.
 
 As outlined in the design,
 the usage statistics I want to be able to provide to the user are:
-\begin{enumerate}
-	\item Information on the timeliness of completion,
-	      and accuracy of time estimation,
-	      for recently completed tasks
-	\item Overall number of tasks completed and time spent for the past day and week
-	\item Overall statistics,
-	      for all tasks,
-	      of whether tasks are completed on time and within the time estimate
-\end{enumerate}
+\begin{samepage}
+	\begin{enumerate}
+		\item Information on the timeliness of completion,
+		      and accuracy of time estimation,
+		      for recently completed tasks
+		\item Overall number of tasks completed and time spent for the past day and week
+		\item Overall statistics,
+		      for all tasks,
+		      of whether tasks are completed on time and within the time estimate
+	\end{enumerate}
+\end{samepage}
 
 It made sense to further separate the function into two sub-procedures,
 one for the generation of the specific statistics for the recent tasks,
@@ -3060,47 +3157,91 @@ Likewise,
 the tests were very thorough.
 
 With stage 4 complete, it is now possible to:
-\begin{itemize}
-	\item generate various statistics about completed tasks,
-	      both with respect to specific tasks and in general
-	\item view these statistics
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item generate various statistics about completed tasks,
+		      both with respect to specific tasks and in general
+		\item view these statistics
+	\end{itemize}
+\end{samepage}
 
 And that's it -
 The project is now fully functional.
 
 \part{Evaluation}
+\section{Functionality testing}
+I sent my completed product to SH for testing.
+After a week of use,
+SH provided the following feedback on functionality:
+\begin{samepage}
+	\begin{itemize}
+		\item The scheduler doesn't break up long tasks,
+		      so when I create a task with a very long time estimate,
+		      it often ends up not getting scheduled,
+		      even if it is due soon and has high priority.
+      \item It's annoying that you can't have events which at custom intervals,
+        like daily or fortnightly,
+        or copy routine events across multiple days -
+        I have the same school day from Monday through Friday but I need to input it 5 times.
+        Ditto for sleep schedule, it's the same most days and I have to input it many times.
+      \item The task management works well,
+        although I'd like more organisation options.
+      \item I wish I could sync my calendar on my phone...
+        I know that it was never planned but it's really annoying.
+	\end{itemize}
+\end{samepage}
+
+See the section on limitations of the solution for analysis.
+
+\section{Usability testing}
+SH's feedback on usability:
+\begin{samepage}
+  \begin{itemize}
+    \item I know about function over form but it's kind of basic looking.
+    \item The buttons could be coloured and the navigation at the top is quite unattractive.
+      It is good that they are there though,
+      it helps to have a quicker workflow.
+    \item Having a pile of buttons at the bottom of the screen doesn't look great,
+      especially because they are sized differently.
+      It would look more normal if they were next to each other rather than on top of each other.
+  \end{itemize}
+\end{samepage}
+
+See the section on limitations of usability features for analysis.
+
 \section{Evaluation of the solution against success criteria}
 These were my success criteria at the start of the project:
-\begin{enumerate}
-	\item Store a list of the user's tasks
-	\item Store the due date, priority, expected time needed, and other information
-	      about each task
-	\item Allow the user to add, edit and remove tasks from the list
-	\item Record the successful completion of each task, time taken, and number of
-	      breaks taken and display this information to the user in a useful manner
-	\item Store information about the user's schedule,
-	      including both regular and particular commitments
-	\item Schedule time for the user to complete their tasks, according to the
-	      user's schedule, task due date and task priority
-	\item Display the tasks in their allocated time slots,
-	      relative to the user's schedule
-	\item Have a focus mode, which helps the user concentrate on the task at hand,
-	      and incentivises the user to complete the task in a timely manner without
-	      procrastination using game-like aspects
-	\item Track the time the user spends working on a task
-	\item Provide feedback to the user about their completed tasks,
-	      such as whether a task was completed on time and within the scheduled time slot,
-	      and equivalent overall and average task statistics
-	\item Be available on multiple platforms and devices
-	\item Sync tasks between devices
-\end{enumerate}
+\begin{samepage}
+	\begin{enumerate}
+		\item Store a list of the user's tasks
+		\item Store the due date, priority, expected time needed, and other information
+		      about each task
+		\item Allow the user to add, edit and remove tasks from the list
+		\item Record the successful completion of each task, time taken, and number of
+		      breaks taken and display this information to the user in a useful manner
+		\item Store information about the user's schedule,
+		      including both regular and particular commitments
+		\item Schedule time for the user to complete their tasks, according to the
+		      user's schedule, task due date and task priority
+		\item Display the tasks in their allocated time slots,
+		      relative to the user's schedule
+		\item Have a focus mode, which helps the user concentrate on the task at hand,
+		      and incentivises the user to complete the task in a timely manner without
+		      procrastination, using game-like aspects
+		\item Track the time the user spends working on a task
+		\item Provide feedback to the user about their completed tasks,
+		      such as whether a task was completed on time and within the scheduled time slot,
+		      and equivalent overall and average task statistics
+		\item Be available on multiple platforms and devices
+		\item Sync tasks between devices
+	\end{enumerate}
+\end{samepage}
 
 I will go through these one by one,
 explaining whether they have been met,
 and showing how they have or have not been met.
 
-\subsection{Criteria 1}
+\subsection*{Criterion 1}
 Store a list of the user's tasks.
 
 \paragraph{Status:}
@@ -3110,38 +3251,44 @@ Met.
 The program utilises a database;
 within the database is held a table of tasks.
 
-\subsection{Criteria 2}
+\subsection*{Criterion 2}
 Store the due date, priority, expected time needed, and other information about each task
 
 \paragraph{Status:}
 Met.
 \paragraph{Evidence:}
 The table in the programs database has fields for
-\begin{itemize}
-	\item a due date
-	\item a priority level
-	\item the expected time needed
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item a due date
+		\item a priority level
+		\item the expected time needed
+	\end{itemize}
+\end{samepage}
 
 It also has fields for
-\begin{itemize}
-	\item a title
-	\item a more detailed description
-	\item a due time
-	\item a flag for whether or not the task is done
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item a title
+		\item a more detailed description
+		\item a due time
+		\item a flag for whether or not the task is done
+	\end{itemize}
+\end{samepage}
 
 And if the task is complete
-\begin{itemize}
-	\item the time at which the task was completed
-	\item how long was spent working on the task
-	\item whether it was completed on time
-	\item whether it was completed within the estimated time
-	\item the time delta between when it was completed and when it was due
-	\item the percentage error from time spent to time estimated
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item the time at which the task was completed
+		\item how long was spent working on the task
+		\item whether it was completed on time
+		\item whether it was completed within the estimated time
+		\item the time delta between when it was completed and when it was due
+		\item the percentage error from time spent to time estimated
+	\end{itemize}
+\end{samepage}
 
-\subsection{Criteria 3}
+\subsection*{Criterion 3}
 Allow the user to add, edit and remove tasks from the list.
 
 \paragraph{Status:}
@@ -3170,7 +3317,7 @@ which itself can be accessed from the aforementioned task list page.
 The program provides a button to delete a task,
 located on the aforementioned task detail page.
 
-\subsection{Criteria 4}
+\subsection*{Criterion 4}
 Record the successful completion of each task, time taken,
 and number of breaks taken and display this information to the user in a useful manner.
 
@@ -3186,12 +3333,12 @@ and it stated on the task's detail page.
 The time spent on a task is shown on the task's detail page,
 and further information comparing time taken to time estimated is shown on the statistics page.
 
-This criteria could be met fully by either implementing the abandoned focus mode feature,
+This criterion could be met fully by either implementing the abandoned focus mode feature,
 and allowing the user to pause the timer and tracking the number of times done so,
 or by providing a form similar to the time spent form on the task detail page,
 where the user can manually record breaks.
 
-\subsection{Criteria 5}
+\subsection*{Criterion 5}
 Store information about the user's schedule,
 including both regular and particular commitments
 
@@ -3202,18 +3349,20 @@ Met.
 The database has tables for storing data about events,
 and routine (i.e. weekly recurring) events.
 Specifically:
-\begin{itemize}
-	\item a title
-	\item the date (event) or day (routine event) which they are on
-	\item the start time
-	\item the end time
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item a title
+		\item the date (event) or day (routine event) which they are on
+		\item the start time
+		\item the end time
+	\end{itemize}
+\end{samepage}
 
 All the abilities for creation, updating, deletion, and viewing,
 which are provided for tasks,
 are also provided for events and routines.
 
-\subsection{Criteria 6}
+\subsection*{Criterion 6}
 Schedule time for the user to complete their tasks, according to the
 user's schedule, task due date and task priority.
 
@@ -3226,7 +3375,7 @@ between the user's various events and routine events.
 It does so prioritising those tasks which are due sooner,
 and which have higher priority.
 
-\subsection{Criteria 7}
+\subsection*{Criterion 7}
 Display the tasks in their allocated time slots,
 relative to the user's schedule.
 
@@ -3238,10 +3387,10 @@ The program has a page showing the user's schedule for the day,
 meaning the various events and routine events are shown in order with their timings,
 and tasks are shown in their allocated slots between them.
 
-\subsection{Criteria 8}
+\subsection*{Criterion 8}
 Have a focus mode, which helps the user concentrate on the task at hand,
 and incentivises the user to complete the task in a timely manner without
-procrastination using game-like aspects.
+procrastination, using game-like aspects.
 
 \paragraph{Status:}
 Not met.
@@ -3251,7 +3400,7 @@ As explained the third stage of development,
 I abandoned this feature,
 replacing it with manual time tracking through the task detail page.
 
-This criteria could be met by implementing the feature as originally described in the design.
+This criterion could be met by implementing the feature as originally described in the design.
 This would involve a focus mode page where a particular task could be selected to work on,
 which included a timer which tracks time spent working,
 and can be paused to record breaks.
@@ -3261,7 +3410,7 @@ as previously described,
 and a ``high score'' showing the best city the user ever created
 (being their longest continuous work session).
 
-\subsection{Criteria 9}
+\subsection*{Criterion 9}
 Track the time the user spends working on a task
 
 \paragraph{Status:}
@@ -3271,7 +3420,7 @@ Met.
 This can be performed via a form on each task's detail page,
 where time spent can be input and added to the current time spent for the task.
 
-\subsection{Criteria 10}
+\subsection*{Criterion 10}
 Provide feedback to the user about their completed tasks,
 such as whether a task was completed on time and within the scheduled time slot,
 and equivalent overall and average task statistics.
@@ -3282,24 +3431,26 @@ Met.
 \paragraph{Evidence:}
 The program contains a function for calculating statistics about the user's completed tasks.
 The statistics which may be calculated are:
-\begin{itemize}
-	\item the time delta between when a task was completed and when it was due,
-	      for a specific task
-	\item the percentage error of the estimated time from actual time taken,
-	      for a specific task
-	\item the number of tasks completed on a particular day
-	\item the number of tasks completed in a particular week
-	\item the total amount of time spent working on tasks on a particular day
-	\item the total amount of time spent working on tasks in a particular week
-	\item the percentage of all tasks completed on time
-	\item the percentage of all tasks completed within their time estimate
-\end{itemize}
+\begin{samepage}
+	\begin{itemize}
+		\item the time delta between when a task was completed and when it was due,
+		      for a specific task
+		\item the percentage error of the estimated time from actual time taken,
+		      for a specific task
+		\item the number of tasks completed on a particular day
+		\item the number of tasks completed in a particular week
+		\item the total amount of time spent working on tasks on a particular day
+		\item the total amount of time spent working on tasks in a particular week
+		\item the percentage of all tasks completed on time
+		\item the percentage of all tasks completed within their time estimate
+	\end{itemize}
+\end{samepage}
 
 The program also displays the overall statistics,
 alongside the specific statistics for the five most recently completed tasks,
 on a statistics page.
 
-\subsection{Criteria 11}
+\subsection*{Criterion 11}
 Be available on multiple platforms and devices.
 
 \paragraph{Status:}
@@ -3311,17 +3462,61 @@ if hosted on the internet it can be accessed from any device or platform,
 with access to the internet and compliant with internet standards.
 However, I do not have access to a server which could host the program.
 
-This criteria could be met by deploying running the program on a server with a domain,
+This criterion could be met by deploying running the program on a server with a domain,
 so that it can be accessed on the world wide web.
 
-\subsection{Criteria 12}
+\subsection*{Criterion 12}
 Sync tasks between devices.
 
 \paragraph{Status:}
 Partially met.
 
 \paragraph{Evidence:}
-Refer to criteria 11.
+Refer to criterion 11.
+
+\section{Evaluation of usability features}
+I implemented all the usability features set out.
+\begin{samepage}
+	\begin{itemize}
+		\item Any reference to a task, event or routine contains a link to that items detail view.
+		\item Buttons to toggle the todo/done status are present for all tasks,
+		      both on the index and in their detail view.
+		\item All pages have a navigation bar including links to the task list,
+		      event list,
+		      scheduler,
+		      and statistics pages.
+	\end{itemize}
+\end{samepage}
+
+Note also that the todo/done buttons change their text depending on the current status of the task,
+so when the task is todo the button will read ``Mark as done'',
+and when it is done the button will read ``Mark as todo''.
+
+Here is a screenshot of these features in action:
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{Screenshots/task_index_usability.png}
+	\caption{Screenshot of task index showing most usability features}
+	\label{fig:task_index_usability}
+\end{figure}
+
+\subsection{Limitations of usability features}
+The main limitation with my usability features is that they are quite unattractive.
+It could be helpful, for example,
+for the status toggle buttons to change colour,
+according to whether they will change to todo or done,
+and the navigation bar looks very basic as well.
+The links through to the task detail could also look nicer,
+or possibly be replaced with buttons.
+In general it would be nicer for buttons to be colour coded and arranged more carefully,
+in particular,
+the stack of three buttons at the bottom of the task detail page looks quite bad.
+
+The issue here is that I simply didn't dedicate enough time to the user interface.
+In terms of functionality it's all there,
+and everything is clearly labelled,
+but nothing about it is attractive or good looking.
+With some more time,
+I could have improved the situation through the use of CSS.
 
 \section{Limitations of the solution}
 The biggest limitation of my solution is the inflexibility of the scheduler.
