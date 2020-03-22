@@ -45,6 +45,7 @@
     "fig:task_index1"
     "fig:task_detail1"
     "fig:task_form1"
+    "fig:schedule1"
     "fig:task_detail2")
    (LaTeX-add-index-entries
     "\\item"))

@@ -191,15 +191,19 @@ class Routine(models.Model):
 
 
 class TimeSlot(models.Model):
+    # Define the options to be used in the associated type field
     TYPE_CHOICES = [
         ("T", "task"),
         ("E", "event"),
         ("R", "routine"),
     ]
 
+    # Define the attributes
     date = models.DateField("date")
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")
+
+    # Faciltate tracking of the associated object
     associated_type = models.CharField("type", max_length=200, choices=TYPE_CHOICES)
     associated_task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
     associated_event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)

@@ -1,7 +1,21 @@
 <h1>Events</h1>
 {% if event_list %}
 <h2>Today:</h2>
+{% if routine_today %}
+<h3>Routine events:</h3>
+<ul>
+    {% for routine in routine_today %}
+    <li><a href="/routine/{{ routine.id }}/">{{ routine.title }}</a>
+        from {{ routine.start_time }} to {{ routine.end_time }}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No routine events today. Please at least add routine events for waking up and going to bed.</p>
+{% endif %}
+
 {% if events_today %}
+<h3>Other events:</h3>
 <ul>
     {% for event in events_today %}
     <li><a href="/event/{{ event.id }}/">{{ event.title }}</a>
@@ -23,3 +37,7 @@
     <input type="submit", value="Add a new event">
 </form>
 
+<form action="{% url 'tasks:create_routine' %}" method="get">
+    {% csrf_token %}
+    <input type="submit", value="Add a new routine event">
+</form>

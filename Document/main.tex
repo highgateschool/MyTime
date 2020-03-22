@@ -20,7 +20,7 @@
 	commentstyle=\color{gray}, % comment color
 	keywordstyle=\color{blue}, % keyword color
 	stringstyle=\color{red}, % string color
-  breaklines=true, % allow line wrapping
+	breaklines=true, % allow line wrapping
 }
 
 \begin{document}
@@ -478,10 +478,12 @@ The program should:
 	      including both regular and particular commitments
 	\item Schedule time for the user to complete their tasks, according to the
 	      user's schedule, task due date and task priority
-	\item Display the tasks in their allocated time slots in a calendar view
+	\item Display the tasks in their allocated time slots,
+    relative to the user's schedule
 	\item Have a focus mode, which helps the user concentrate on the task at hand,
 	      and incentivises the user to complete the task in a timely manner without
 	      procrastination using game-like aspects
+	\item Track the time the user spends working on a task
 	\item Provide feedback to the user about their completed tasks,
 	      such as whether a task was completed on time and within the scheduled time slot,
 	      and equivalent overall and average task statistics
@@ -937,10 +939,10 @@ and in the context of the terminology used by Django.
 
 The modules have been colour coded into:
 \begin{itemize}
-  \item Red: distinct functions
-  \item Blue: database models
-  \item Green: page views
-  \item Yellow: page templates
+	\item Red: distinct functions
+	\item Blue: database models
+	\item Green: page views
+	\item Yellow: page templates
 \end{itemize}
 
 This diagram shows the solution broken down into almost as small components as possible.
@@ -1249,18 +1251,18 @@ class Task(models.Model):
 
 The additional attributes:
 \begin{itemize}
-  \item \texttt{completion\_time},
-    a datetime for when the task was marked as completed
-  \item \texttt{completed\_on\_time},
-    a boolean for whether was or wasn't overdue at time of completion
-  \item \texttt{completed\_in\_time},
-    a boolean for whether the time spent was greater or less than the time estimate at time of completion
-  \item \texttt{time\_spent},
-    a timedelta for time spent working on the task
-  \item \texttt{completion\_delta},
-    a time delta from completion time to due time
-  \item \texttt{estimate\_accuracy},
-    the percentage (to 1 d.p.) error from the estimate to actual time taken
+	\item \texttt{completion\_time},
+	      a datetime for when the task was marked as completed
+	\item \texttt{completed\_on\_time},
+	      a boolean for whether was or wasn't overdue at time of completion
+	\item \texttt{completed\_in\_time},
+	      a boolean for whether the time spent was greater or less than the time estimate at time of completion
+	\item \texttt{time\_spent},
+	      a timedelta for time spent working on the task
+	\item \texttt{completion\_delta},
+	      a time delta from completion time to due time
+	\item \texttt{estimate\_accuracy},
+	      the percentage (to 1 d.p.) error from the estimate to actual time taken
 \end{itemize}
 
 These attributes are elaborated on in the Statistics and Time Tracking section of the development.
@@ -1568,8 +1570,8 @@ The first test is one for checking the functionality of the \texttt{mark\_done} 
 on a task which is still todo.
 I want to test
 \begin{enumerate}
-  \item that the task is indeed marked as done after the method is run
-  \item that the completion time is assigned correctly
+	\item that the task is indeed marked as done after the method is run
+	\item that the completion time is assigned correctly
 \end{enumerate}
 so I take time snapshots before and after marking the task as done.
 Then I check that the task's \texttt{done} attribute is true,
@@ -1669,8 +1671,8 @@ an unreasonable amount of time to learn.
 So I went ahead with testing manually.
 In particular, I looked at:
 \begin{itemize}
-  \item the mark todo/done buttons on the task index and task detail pages
-  \item whether the views for creating, updating and deleting tasks worked correctly
+	\item the mark todo/done buttons on the task index and task detail pages
+	\item whether the views for creating, updating and deleting tasks worked correctly
 \end{itemize}
 
 I verified that use of the mark todo/done buttons produced corresponding change in the database,
@@ -1694,12 +1696,12 @@ and was easily corrected.
 
 So at the end of stage 1 it is now possible to:
 \begin{itemize}
-  \item Create tasks
-  \item View the list of tasks which are still todo and which are done
-  \item View a page with detailed information about each task
-  \item Edit a task or delete it
-  \item Toggle whether a task is todo or done,
-    from either the index or the detail pages
+	\item Create tasks
+	\item View the list of tasks which are still todo and which are done
+	\item View a page with detailed information about each task
+	\item Edit a task or delete it
+	\item Toggle whether a task is todo or done,
+	      from either the index or the detail pages
 \end{itemize}
 
 In other words,
@@ -1805,17 +1807,17 @@ class EventModelTests(TestCase):
     # Test non-overlapping events
     #
     # Test events that are on the same day and nearly overlap, but don't
-    def same_day_no_time_overlap(self):
+    def test_same_day_no_time_overlap(self):
         # Define two events which are consecutive but don't overlap
         event_1 = Event(
             date=timezone.now().date(),
-            start_time=timezone.now().time() - dt.timedelta(minutes=10),
-            end_time=timezeon.now().time(),
+            start_time=(timezone.now() - dt.timedelta(minutes=10)).time(),
+            end_time=timezone.now().time(),
         )
         event_2 = Event(
             date=timezone.now().date(),
             start_time=timezone.now().time(),
-            end_time=timezeon.now().time() + dt.timedelta(minutes=10),
+            end_time=(timezone.now() + dt.timedelta(minutes=10)).time(),
         )
 
         # Neither should clash with the other
@@ -1823,18 +1825,18 @@ class EventModelTests(TestCase):
         self.assertIs(event_2.does_clash(event_1), False)
 
     # Test events where the time overlaps but are on different days
-    def different_day_overlapping_time(self):
+    def test_different_day_overlapping_time(self):
         # Define two events which would clash if they were on the same day,
         # but are on different days
         event_1 = Event(
             date=timezone.now().date(),
             start_time=timezone.now().time(),
-            end_time=timezeon.now().time() + dt.timedelta(minutes=10),
+            end_time=(timezone.now() + dt.timedelta(minutes=10)).time(),
         )
         event_2 = Event(
-            date=timezone.now().date() + 1,
-            start_time=timezone.now().time() - dt.timedelta(minutes=5),
-            end_time=timezeon.now().time() + dt.timedelta(minutes=5),
+            date=(timezone.now() + dt.timedelta(days=1)).date(),
+            start_time=(timezone.now() - dt.timedelta(minutes=5)).time(),
+            end_time=(timezone.now() + dt.timedelta(minutes=5)).time(),
         )
 
         # Neither should clash with the other
@@ -1844,40 +1846,40 @@ class EventModelTests(TestCase):
     # Test overlapping events
     #
     # Test events overlapping only at one end
-    def overlap_one_end(self):
+    def test_overlap_one_end(self):
         # Define two events which overlap only on one end
         event_1 = Event(
             date=timezone.now().date(),
             start_time=timezone.now().time(),
-            end_time=timezeon.now().time() + dt.timedelta(minutes=10),
+            end_time=(timezone.now() + dt.timedelta(minutes=10)).time(),
         )
         event_2 = Event(
             date=timezone.now().date(),
-            start_time=timezone.now().time() - dt.timedelta(minutes=5),
-            end_time=timezeon.now().time() + dt.timedelta(minutes=5),
+            start_time=(timezone.now() - dt.timedelta(minutes=5)).time(),
+            end_time=(timezone.now() + dt.timedelta(minutes=5)).time(),
         )
 
         # Both should clash with the other
-        self.assertIs(event_1.does_clash(event_2), False)
-        self.assertIs(event_2.does_clash(event_1), False)
+        self.assertIs(event_1.does_clash(event_2), True)
+        self.assertIs(event_2.does_clash(event_1), True)
 
     # Test events overlapping at both ends
-    def overlap_both_ends(self):
+    def test_overlap_both_ends(self):
         # Define two events which overlap at both ends
         event_1 = Event(
             date=timezone.now().date(),
             start_time=timezone.now().time(),
-            end_time=timezeon.now().time() + dt.timedelta(minutes=10),
+            end_time=(timezone.now() + dt.timedelta(minutes=10)).time(),
         )
         event_2 = Event(
             date=timezone.now().date(),
-            start_time=timezone.now().time() - dt.timedelta(minutes=5),
-            end_time=timezeon.now().time() + dt.timedelta(minutes=15),
+            start_time=(timezone.now() - dt.timedelta(minutes=5)).time(),
+            end_time=(timezone.now() + dt.timedelta(minutes=15)).time(),
         )
 
         # Both should clash with the other
-        self.assertIs(event_1.does_clash(event_2), False)
-        self.assertIs(event_2.does_clash(event_1), False)
+        self.assertIs(event_1.does_clash(event_2), True)
+        self.assertIs(event_2.does_clash(event_1), True)
 \end{lstlisting}
 
 As I was writing these tests I actually realised that one of them would definitely fail:
@@ -1921,12 +1923,12 @@ which was fixed easily.
 
 So at the end of stage 2 it is now possible to:
 \begin{itemize}
-  \item Create events
-  \item View them in a list,
-    separated by whether they are on today or some other day in the future
-  \item View a detailed information page about them
-  \item Edit or delete existing events
-  \item And do all the same things for routine events
+	\item Create events
+	\item View them in a list,
+	      separated by whether they are on today or some other day in the future
+	\item View a detailed information page about them
+	\item Edit or delete existing events
+	\item And do all the same things for routine events
 \end{itemize}
 
 In other words,
@@ -1962,9 +1964,9 @@ I decided to create a new model for the specific purpose of representing chunks 
 and an associated object being a task, event or routine.
 It doesn't need a name/title as this can simply be retrieved from the associated object.
 
+Prototype time slot model:
 \begin{lstlisting}[language=Python]
 class TimeSlot(models.Model):
-
     date = models.DateField("date")
     start_time = models.TimeField("start time")
     end_time = models.TimeField("end time")
@@ -1984,7 +1986,61 @@ Note that for the foreign key it has the argument \texttt{on\_delete=models.CASC
 This ensures referential integrity as if the associated object is deleted,
 the time slot will be deleted as well.
 
-The scheduler itself, then:
+After creating the scheduler,
+I then found out that it didn't work,
+because I had misunderstood the way the \texttt{ForeignKey} field worked.
+In fact it's not so simple as to have a foreign key which can go to a task, event or routine,
+Django requires that the type of model which a foreign key field will refer to be defined.
+The result of this is,
+unfortunately,
+possible the ugliest thing in this entire project:
+the model needs to have attributes for the type of the associated object,
+and attributes for an associated task, event and routine,
+with two of those being null.
+The alternative would have been to create three different time slot models,
+each corresponding to task, event or routine,
+however that would defeat the entire point of having a single data type,
+to unify everything for scheduling purposes.
+So I decided that I didn't really have an option but to go ahead with this workaround.
+
+So the time slot model ended up like this:
+\begin{lstlisting}[language=Python]
+class TimeSlot(models.Model):
+    # Define the options to be used in the associated type field
+    TYPE_CHOICES = [
+        ("T", "task"),
+        ("E", "event"),
+        ("R", "routine"),
+    ]
+
+    # Define the attributes
+    date = models.DateField("date")
+    start_time = models.TimeField("start time")
+    end_time = models.TimeField("end time")
+
+    # Faciltate tracking of the associated object
+    associated_type = models.CharField("type", max_length=200, choices=TYPE_CHOICES)
+    associated_task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
+    associated_event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
+    associated_routine = models.ForeignKey(Routine, on_delete=models.CASCADE, null=True)
+
+    def get_date(self):
+        return self.date
+
+    def get_start(self):
+        return self.start_time
+
+    def get_end(self):
+        return self.end_time
+
+    def __str__(self):
+        return f"TimeSlot type {self.associated_type}"
+
+    def __repr__(self):
+        return f"TimeSlot type {self.associated_type}"
+\end{lstlisting}
+
+As for the scheduler itself, it:
 \begin{itemize}
 	\item Gets all the events, routines and tasks from the database
 	\item Creates time slots for all the events and routines
@@ -1996,6 +2052,144 @@ The scheduler itself, then:
 	\item Returns a list of time slots and enters them into the database
 \end{itemize}
 
+Here is the code for the scheduler and it's supplementary functions.
+I took particular care to thoroughly comment this code,
+so reading it should make clear how it works:
+\begin{lstlisting}[language=Python]
+# We'll need to be able to figure out a concrete date to place routine events on
+# by deriving it from the current date and their assigned weekday
+def get_date_from_weekday(day):
+    today = datetime.today()
+    delta = (day - today.weekday()) % 7
+    date = datetime.today() + timedelta(days=delta)
+    return date
+
+
+# When we run the scheduling algorithm, we'll want to clean out any time slots
+# from last time
+def clean_time_slots(date):
+    TimeSlot.objects.filter(date=date).delete()
+
+
+# Here's the scheduler, it runs based on a given weekday rather than a date.
+# This makes things easier
+def update_schedule(day):
+    # Get the date and clean out time slots
+    date = get_date_from_weekday(day)
+    clean_time_slots(date)
+
+    # Get all events and routine events for today, ordered by start time
+    routines = Routine.objects.filter(day=day).order_by("start_time")
+    events = Event.objects.filter(date=date).order_by("start_time")
+
+    # Sort them together
+    all_events = sorted(
+        chain(routines, events), key=lambda instance: instance.start_time
+    )
+
+    # Get all the tasks, ordered by due date, time estimate and descending priority level
+    tasks = Task.objects.filter(done=False).order_by(
+        "due_date", "time_estimate", "-priority"
+    )
+
+    # Convert the iterable into a list, this is easier to handle and we can remove tasks
+    # from the list once they have been allocated a time slot
+    task_list = list(tasks)
+
+    # Initialise an empty list for holding the time slots, we'll write them all to the
+    # database at the end
+    time_slots = []
+
+    # Iterate over all the events and routines,
+    # creating corresponding time slots
+    for item in all_events:
+        if isinstance(item, Event):
+            time_slots.append(
+                TimeSlot(
+                    date=date,
+                    start_time=item.get_start(),
+                    end_time=item.get_end(),
+                    associated_type="E",
+                    associated_event=item,
+                )
+            )
+
+        elif isinstance(item, Routine):
+            time_slots.append(
+                TimeSlot(
+                    date=date,
+                    start_time=item.get_start(),
+                    end_time=item.get_end(),
+                    associated_type="R",
+                    associated_routine=item,
+                )
+            )
+
+    # We can't use a for loop to iterate through the time slots,
+    # because we're going to be changing the length of the list.
+    # So we have to use a while loop and a counter to keep track of our position.
+    pos = 1
+
+    # Iterate through the time slots
+    while pos < len(time_slots):
+        # Start by assuming that there is at least one task which will fit in this time gap
+        is_room = True
+
+        # As long as tasks keep getting getting inserted,
+        # we need to stay here.
+        while is_room:
+            # Take a note of where we are
+            pos_start_loop = pos
+            # Iterate over the tasks which are not yet assigned
+            for task in task_list:
+                # Get the time gap between this timeslot and the last
+                prev = time_slots[pos - 1]
+                curr = time_slots[pos]
+                tdelta = datetime.combine(date, curr.get_start()) - datetime.combine(
+                    date, prev.get_end()
+                )
+
+                # If the gap is large enought,
+                # create a time slot corresponding to the task and put it here
+                if tdelta > task.time_estimate:
+                    start = prev.get_end()
+                    end = (
+                        datetime.combine(date, prev.get_end()) + task.time_estimate
+                    ).time()
+                    time_slots.insert(
+                        pos,
+                        TimeSlot(
+                            date=date,
+                            start_time=start,
+                            end_time=end,
+                            associated_type="T",
+                            associated_task=task,
+                        ),
+                    )
+
+                    task_list.remove(task)
+
+                    # Increment the position,
+                    # unless we've reached the end of the list,
+                    # in which case there are no more spaces so stop.
+                    if pos <= len(time_slots):
+                        pos += 1
+                    else:
+                        break
+
+            # If we reach the end of the loop and the position is the same,
+            # that means there's no more room for tasks here,
+            # so flag that there is no room and increment position.
+            # Otherwise, we go for another loop.
+            if pos == pos_start_loop:
+                is_room = False
+                pos += 1
+
+    # Finally, we save all the time slots to the database
+    for item in time_slots:
+        item.save()
+\end{lstlisting}
+
 \subsection{The Schedule View}
 The schedule view allows the user to view their schedule for today;
 that is,
@@ -2003,16 +2197,24 @@ the events that are occurring that day and tasks scheduled to be completed.
 When the page is accessed,
 the schedule will be updated in the background.
 
-The code for the view is quite simple:
+Prototype schedule view:
 \begin{lstlisting}[language=Python]
 class ScheduleView(ListView):
     template_name = "tasks/schedule.html"
     context_object_name = "time_slots"
 
     def get_queryset(self):
+        # Run the scheduler and get the TimeSlots it creates
         update_schedule(datetime.today().weekday())
         return TimeSlot.objects.order_by("start_time")
 \end{lstlisting}
+
+It took me a couple of days to realise this,
+but this prototype will take old timeslots,
+because they are never removed -
+cleaning up old timeslots is a function of the scheduler,
+but it only cleans timeslots for the date it is updating.
+So
 
 The view simply calls the scheduler to run passing today as the argument for the day,
 and retrieves the time slot objects it creates from the database in order of start time.
@@ -2022,7 +2224,249 @@ labelling each according to whether it is a task, event or routine,
 noting the start and end times,
 and linking to the detail view.
 
-\section{Time Tracking and User Statistics}
+So a schedule might look like this:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Screenshots/example_schedule.png}
+	\caption{What a day's schedule might look like}
+	\label{fig:schedule1}
+\end{figure}
+
+\subsection{Stage 3 Testing}
+There are two main things to test here:
+\begin{itemize}
+	\item that the scheduler produces timeslots in an expected way
+	\item that the schedule view correctly displays the allocated timeslots
+\end{itemize}
+
+Here are the tests I wrote for the scheduler:
+\begin{lstlisting}[language=Python]
+class SchedulerTests(TestCase):
+    # Test that the scheduler assigns timeslots for all events and routines on a day
+    def test_num_timeslots(self):
+        # Specify number of events and routines.
+        # These numbers should not be too large so that they can all fit in the one day.
+        num_events = 10
+        num_routines = 2
+
+        # Create a bunch of events
+        for i in range(num_events):
+            event = Event(
+                date=timezone.now().date(),
+                start_time=dt.time(hour=i),
+                end_time=dt.time(hour=i, minute=30),
+            )
+            # They need to be saved to the database so the scheduler can see them
+            event.save()
+
+        # Ditto for routines
+        for i in range(num_routines):
+            routine = Routine(
+                day=timezone.now().date().weekday(),
+                start_time=dt.time(hour=i + num_events),
+                end_time=dt.time(hour=i + num_events, minute=30),
+            )
+            routine.save()
+
+        # Run the scheduler
+        update_schedule(timezone.now().date().weekday())
+
+        # Check that the number of timeslots created is the total no. events and routines
+        self.assertEquals(len(TimeSlot.objects.all()), num_events + num_routines)
+
+    # A similar test, this time involving tasks
+    def test_num_timeslots_with_tasks(self):
+        # Specify number of events, routines and tasks.
+        # These numbers should not be too large so that they can all fit in the one day.
+        num_events = 10
+        num_routines = 2
+        num_tasks = 10
+
+        # Create a bunch of events
+        for i in range(num_events):
+            event = Event(
+                date=timezone.now().date(),
+                start_time=dt.time(hour=i),
+                end_time=dt.time(hour=i, minute=30),
+            )
+            # They need to be saved to the database so the scheduler can see them
+            event.save()
+
+        # Ditto for routines
+        for i in range(num_routines):
+            routine = Routine(
+                day=timezone.now().date().weekday(),
+                start_time=dt.time(hour=i + num_events),
+                end_time=dt.time(hour=i + num_events, minute=30),
+            )
+            routine.save()
+
+        # Ditto for tasks
+        # I'll create all the tasks with time estimates of 0 so they should definitely be scheduled.
+        for i in range(num_tasks):
+            task = Task(time_estimate=dt.timedelta(minutes=0))
+            task.save()
+
+        # Run the scheduler
+        update_schedule(timezone.now().date().weekday())
+
+        # Check that the number of timeslots
+        self.assertEquals(
+            len(TimeSlot.objects.all()), num_events + num_routines + num_tasks
+        )
+
+    # Test that a task which is too long to be scheduled is not scheduled
+    def test_unschedulable_task(self):
+        # Have the first event of the day from 09:30 to 10:00
+        first_event = Event(
+            date=timezone.now().date(),
+            start_time=dt.time(hour=9, minute=30),
+            end_time=dt.time(hour=10),
+        )
+        first_event.save()
+
+        # Have the last event of the day from 10:30 to 11:00
+        last_event = Event(
+            date=timezone.now().date(),
+            start_time=dt.time(hour=10, minute=30),
+            end_time=dt.time(hour=11),
+        )
+        last_event.save()
+
+        # If the task is longer than 30 minutes, there won't be room to schedule it
+        task = Task(time_estimate=dt.timedelta(hours=1))
+        task.save()
+
+        # Run the scheduler
+        update_schedule(timezone.now().date().weekday())
+
+        # There should only be two timeslots, as the task has not been scheduled
+        self.assertEquals(len(TimeSlot.objects.all()), 2)
+
+    # Given the test for no. timeslots with tasks, this is probably redundant,
+    # but I'll do it anyway
+    def test_schedulable_task(self):
+        # Have the first event of the day from 09:30 to 10:00
+        first_event = Event(
+            date=timezone.now().date(),
+            start_time=dt.time(hour=9, minute=30),
+            end_time=dt.time(hour=10),
+        )
+        first_event.save()
+
+        # Have the last event of the day from 10:30 to 11:00
+        last_event = Event(
+            date=timezone.now().date(),
+            start_time=dt.time(hour=10, minute=30),
+            end_time=dt.time(hour=11),
+        )
+        last_event.save()
+
+        # If the task is shorter than 30 minutes, there is room to schedule it
+        task = Task(time_estimate=dt.timedelta(minutes=10))
+        task.save()
+
+        # Run the scheduler
+        update_schedule(timezone.now().date().weekday())
+
+        # There should be three timeslots,
+        # for the two events and the task
+        self.assertEquals(len(TimeSlot.objects.all()), 3)
+
+    # Test what happens when events have weird timings
+    def test_end_before_start_event(self):
+        # This event starts at 10:00 and finishes as 09:00
+        invalid_event = Event(
+            date=timezone.now().date(),
+            start_time=dt.time(hour=10),
+            end_time=dt.time(hour=9),
+        )
+        invalid_event.save()
+
+        # Also make a valid event
+        valid_event = Event(
+            date=timezone.now().date(),
+            start_time=dt.time(hour=11),
+            end_time=dt.time(hour=12),
+        )
+        valid_event.save()
+
+        # Run the scheduler
+        update_schedule(timezone.now().date().weekday())
+
+        # The scheduler shouldn't create a timeslot for the nonsensical event,
+        # so there should only be one timeslot
+        self.assertEquals(len(TimeSlot.objects.all()), 1)
+\end{lstlisting}
+
+I realised that I hadn't considered what would happen,
+if the scheduler encountered an event which ended before it started.
+In theory this should never happen because events are validated on creation,
+requiring them to end after they start,
+however the scheduler should be durable enough to deal with this just in case.
+As I suspected,
+the scheduler blindly creates a nonsensical timeslot for the event.
+I considered how to do this,
+and decided that best thing to do was to have the scheduler ignore such events.
+This way is the least likely to produce unexpected behaviour.
+
+The scheduler now checks that any timeslot it creates does not end before it starts.
+Here is the affected piece of code:
+\begin{lstlisting}[language=Python]
+# Iterate over all the events and routines,
+# creating corresponding time slots
+for item in all_events:
+    if isinstance(item, Event):
+        ts = TimeSlot(
+            date=date,
+            start_time=item.get_start(),
+            end_time=item.get_end(),
+            associated_type="E",
+            associated_event=item,
+        )
+
+    elif isinstance(item, Routine):
+        ts = TimeSlot(
+            date=date,
+            start_time=item.get_start(),
+            end_time=item.get_end(),
+            associated_type="R",
+            associated_routine=item,
+        )
+
+    # Before adding the timslot to the list,
+    # check that it has sensible timings.
+    # If it doesn't, we can just discard it.
+    if ts.start_time <= ts.end_time:
+        time_slots.append(ts)
+\end{lstlisting}
+
+With that added validation,
+all tests now pass.
+There were also no issues with the view:
+it calls the scheduler correctly and displays all the timeslots correctly and in order.
+
+\subsection{Stage 3 Review}
+This section went a lot smoother than I had anticipated.
+I think I can attribute that, primarily,
+to having carefully worked through the logic of the scheduling algorithm beforehand.
+This meant that my implementation worked almost flawlessly.
+
+Now that stage 3 is complete it is possible to:
+\begin{itemize}
+	\item have the program automatically create your schedule for the day
+	\item view the schedule,
+	      containing all events and routines that day,
+	      and tasks where the scheduler could find space
+	\item link through to the detail view for any item in the schedule
+\end{itemize}
+
+In other words,
+it is now possible to create events, routines and tasks,
+and have the program schedule tasks around events and routines -
+the primary goal of the project!
+
+\section{Stage 4: Time Tracking and User Statistics}
 These are the two final components needed to complete the solution,
 although in reality I find it most sensible to consider them as one module due to their interdependence.
 
@@ -2079,10 +2523,10 @@ to accommodate the new form.
 
 The task detail now looks like this:
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=\linewidth]{Screenshots/task_detail_with_time.png}
-  \caption{Task detail with time logging form}
-  \label{fig:task_detail2}
+	\centering
+	\includegraphics[width=\linewidth]{Screenshots/task_detail_with_time.png}
+	\caption{Task detail with time logging form}
+	\label{fig:task_detail2}
 \end{figure}
 
 Upon submitting the form with the ``log'' button,
@@ -2106,13 +2550,13 @@ and the template.
 As outlined in the design,
 the usage statistics I want to be able to provide to the user are:
 \begin{enumerate}
-  \item Information on the timeliness of completion,
-    and accuracy of time estimation,
-    for recently completed tasks
-  \item Overall number of tasks completed and time spent for the past day and week
-  \item Overall statistics,
-    for all tasks,
-    of whether tasks are completed on time and within the time estimate
+	\item Information on the timeliness of completion,
+	      and accuracy of time estimation,
+	      for recently completed tasks
+	\item Overall number of tasks completed and time spent for the past day and week
+	\item Overall statistics,
+	      for all tasks,
+	      of whether tasks are completed on time and within the time estimate
 \end{enumerate}
 
 It made sense to further separate the function into two sub-procedures,
@@ -2126,8 +2570,7 @@ it is moderately lengthy but quite straightforward:
 def generate_overall_stats():
     # When this data is received by the view,
     # it will need to put it in the context dictionary,
-    # so if we create a dictionary here is will be easy to copy.
-    stats = {}
+    # so if we create a dictionary here is will be easy to copy. stats = {}
 
     # Here we'll do some queries to get various lists of tasks we'll need.
     # Note that we're listifying all the queries,
@@ -2197,31 +2640,677 @@ def generate_specific_stats(tasks):
 These functions are both called by the statistics view,
 which passes the data generated to the template to render.
 
+\subsection{Stage 4 Testing}
+I wrote a number of tests to ascertain whether the statistics generator was working correctly.
 
-\part{Evaluation}
-\section{Evaluation of solution}
-\subsection{Measurement against success criteria}
+Firstly, testing the function for generating stats on a per-task basis:
+\begin{lstlisting}[language=Python]
+class StatisticsTests(TestCase):
+    # Test specific statistics generation
+    def test_specific_stats(self):
+        # This is just to make sure there are no unexpected small discretions in timings
+        time = timezone.now()
+
+        # Test large and small differences between due and completion
+        late_one_day = Task(
+            done=True,
+            due_date=(time - dt.timedelta(days=1)).date(),
+            due_time=time.time(),
+            completion_time=time,
+        )
+
+        early_one_day = Task(
+            done=True,
+            due_date=time.date(),
+            due_time=time.time(),
+            completion_time=time + dt.timedelta(days=1),
+        )
+
+        late_one_minute = Task(
+            done=True,
+            due_date=time.date(),
+            due_time=(time - dt.timedelta(minutes=1)).time(),
+            completion_time=time,
+        )
+
+        early_one_minute = Task(
+            done=True,
+            due_date=time.date(),
+            due_time=time.time(),
+            completion_time=time + dt.timedelta(minutes=1),
+        )
+
+        exactly_due = Task(
+            done=True, due_date=time.date(), due_time=time.time(), completion_time=time,
+        )
+
+        # Test large and small differences between time spent and estimated
+        second_too_long = Task(
+            done=True,
+            time_estimate=dt.timedelta(seconds=10),
+            time_spent=dt.timedelta(seconds=11),
+        )
+
+        second_too_short = Task(
+            done=True,
+            time_estimate=dt.timedelta(seconds=10),
+            time_spent=dt.timedelta(seconds=9),
+        )
+
+        hour_too_long = Task(
+            done=True,
+            time_estimate=dt.timedelta(hours=10),
+            time_spent=dt.timedelta(hours=11),
+        )
+
+        hour_too_short = Task(
+            done=True,
+            time_estimate=dt.timedelta(hours=10),
+            time_spent=dt.timedelta(hours=9),
+        )
+
+        exactly_estimate = Task(
+            done=True,
+            time_estimate=dt.timedelta(minutes=10),
+            time_spent=dt.timedelta(minutes=10),
+        )
+
+        tasks = [
+            late_one_day,
+            early_one_day,
+            late_one_minute,
+            early_one_minute,
+            exactly_due,
+            second_too_long,
+            second_too_short,
+            hour_too_long,
+            hour_too_short,
+            exactly_estimate,
+        ]
+
+        # Run the statistics generator on them
+        generate_specific_stats(tasks)
+
+        # All of them should be 10% off except for the exact ones
+        self.assertEquals(late_one_day.completion_delta, 10)
+        self.assertEquals(early_one_day.completion_delta, 10)
+        self.assertEquals(late_one_minute.completion_delta, 10)
+        self.assertEquals(early_one_minute.completion_delta, 10)
+
+        self.assertEquals(second_too_long.estimate_accuracy, 10)
+        self.assertEquals(second_too_short.estimate_accuracy, 10)
+        self.assertEquals(hour_too_long.estimate_accuracy, 10)
+        self.assertEquals(hour_too_short.estimate_accuracy, 10)
+
+        self.assertEquals(exactly_due.completion_delta, 0)
+        self.assertEquals(exactly_estimate.estimate_accuracy, 0)
+\end{lstlisting}
+
+Running these tests encountered the issue that,
+in the statistics generator,
+to find the accuracy of the time estimate I time spent by time estimate,
+however time estimate defaults to 0,
+so for the tasks without an estimate specified and error occurs.
+
+Firstly,
+I realised that the division should be the other way round,
+as we are finding the error of the estimate from actual time spent,
+not the other way around.
+However,
+time spent may also be 0,
+so I also added in a check for this:
+\begin{lstlisting}[language=Python]
+# Caculate the estimate accuracy as a percentage, rounded to 1 d.p.
+#
+# Check that time spent is non-zero
+if spent:
+    task.estimate_accuracy = round(abs(100 * ((estimate / spent) - 1)), 1)
+# If it's 0, then either the error is 0%, if the estimate was 0,
+# or 100% if the estimate was anything else
+elif estimate == timedelta(minutes=0):
+    task.estimate_accuracy = 0
+else:
+    task.estimate_accuracy = 100
+\end{lstlisting}
+
+At this point I realised that I ought to have named \texttt{estimate\_accuracy},
+\texttt{estimate\_error},
+however I don't think this is a big enough issue to warrant refacoring.
+
+Having corrected this I ran into a similar issue for tasks with a null completion time,
+and made a similar correction:
+\begin{lstlisting}[language=Python]
+# Get the difference between completion and due,
+# checking that the task does have a completion time
+if complete:
+    task.completion_delta = abs(due - complete)
+else:
+    task.completion_delta = timedelta(minutes=0)
+\end{lstlisting}
+
+Such an issue wouldn't arise in the typical operation of the program,
+since it's impossible to mark a task as done without the completion time being assigned.
+However this will catch any task that somehow is marked as done without a completion time,
+because completion time is a field which is technically allowed to be null.
+
+This resulted in a couple of tweaks to the existing tests and a couple new tests:
+\begin{lstlisting}[language=Python]
+class StatisticsTests(TestCase):
+    # Test specific statistics generation
+    def test_completion_delta_stats(self):
+        # This is just to make sure there are no unexpected small discretions in timings
+        time = timezone.now()
+
+        # Test large and small differences between due and completion
+        late_one_day = Task(
+            done=True,
+            due_date=(time - dt.timedelta(days=1)).date(),
+            due_time=time.time(),
+            completion_time=time,
+        )
+
+        early_one_day = Task(
+            done=True,
+            due_date=time.date(),
+            due_time=time.time(),
+            completion_time=time + dt.timedelta(days=1),
+        )
+
+        late_one_minute = Task(
+            done=True,
+            due_date=time.date(),
+            due_time=(time - dt.timedelta(minutes=1)).time(),
+            completion_time=time,
+        )
+
+        early_one_minute = Task(
+            done=True,
+            due_date=time.date(),
+            due_time=time.time(),
+            completion_time=time + dt.timedelta(minutes=1),
+        )
+
+        exactly_due = Task(
+            done=True, due_date=time.date(), due_time=time.time(), completion_time=time,
+        )
+
+        tasks = [
+            late_one_day,
+            early_one_day,
+            late_one_minute,
+            early_one_minute,
+            exactly_due,
+        ]
+
+        # Run the statistics generator on them
+        generate_specific_stats(tasks)
+
+        # Check that the values are what we would expect
+        self.assertEquals(late_one_day.completion_delta, dt.timedelta(days=1))
+        self.assertEquals(early_one_day.completion_delta, dt.timedelta(days=1))
+        self.assertEquals(late_one_minute.completion_delta, dt.timedelta(minutes=1))
+        self.assertEquals(early_one_minute.completion_delta, dt.timedelta(minutes=1))
+
+        self.assertEquals(exactly_due.completion_delta, dt.timedelta(minutes=0))
+
+    def test_estimate_accuracy_stats(self):
+        # Test large and small differences between time spent and estimated
+        second_too_long = Task(
+            done=True,
+            time_estimate=dt.timedelta(seconds=11),
+            time_spent=dt.timedelta(seconds=10),
+        )
+
+        second_too_short = Task(
+            done=True,
+            time_estimate=dt.timedelta(seconds=9),
+            time_spent=dt.timedelta(seconds=10),
+        )
+
+        hour_too_long = Task(
+            done=True,
+            time_estimate=dt.timedelta(hours=11),
+            time_spent=dt.timedelta(hours=10),
+        )
+
+        hour_too_short = Task(
+            done=True,
+            time_estimate=dt.timedelta(hours=9),
+            time_spent=dt.timedelta(hours=10),
+        )
+
+        exactly_estimate = Task(
+            done=True,
+            time_estimate=dt.timedelta(minutes=10),
+            time_spent=dt.timedelta(minutes=10),
+        )
+
+        tasks = [
+            second_too_long,
+            second_too_short,
+            hour_too_long,
+            hour_too_short,
+            exactly_estimate,
+        ]
+
+        # Run the stats generator
+        generate_specific_stats(tasks)
+
+        # Check the values
+        self.assertEquals(second_too_long.estimate_accuracy, 10)
+        self.assertEquals(second_too_short.estimate_accuracy, 10)
+        self.assertEquals(hour_too_long.estimate_accuracy, 10)
+        self.assertEquals(hour_too_short.estimate_accuracy, 10)
+        self.assertEquals(exactly_estimate.estimate_accuracy, 0)
+
+    # Test null values
+    def test_specific_stats_null(self):
+        time = timezone.now()
+
+        # Create tasks with unusual attributes
+        null_complete = Task(done=True, due_date=time.date(), due_time=time.time(),)
+
+        zero_spent_zero_estimate = Task(done=True)
+
+        zero_spent_nonzero_estimate = Task(
+            done=True, time_estimate=dt.timedelta(minutes=10)
+        )
+
+        # Run the generator
+        generate_specific_stats(
+            [null_complete, zero_spent_zero_estimate, zero_spent_nonzero_estimate]
+        )
+
+        # Check the stats
+        self.assertEquals(null_complete.completion_delta, dt.timedelta(minutes=0))
+        self.assertEquals(zero_spent_zero_estimate.estimate_accuracy, 0)
+        self.assertEquals(zero_spent_nonzero_estimate.estimate_accuracy, 100)
+\end{lstlisting}
+
+These tests all passed.
+
+Then there were tests for the overall statistics generation:
+\begin{lstlisting}[language=Python]
+class GeneralStatisticsTests(TestCase):
+    # Create n tasks today and n tasks yesterday
+    def setup(self, n):
+        # What's the time?
+        time = timezone.now()
+        yesterday = time - dt.timedelta(days=1)
+        # Take precautionary measures
+        Task.objects.all().delete()
+
+        # Create a bunch of tasks, done today,
+        # in less than estimated time and before their due date
+        for i in range(n):
+            Task(
+                done=True,
+                completed_on_time=True,
+                completed_in_time=True,
+                completion_time=time,
+                time_spent=dt.timedelta(minutes=1),
+            ).save()
+
+        # Create a bunch of tasks, done yesterday,
+        # in over the estimated time and overdue
+        for i in range(n):
+            Task(
+                done=True,
+                completed_on_time=False,
+                completed_in_time=False,
+                completion_time=yesterday,
+                time_spent=dt.timedelta(minutes=1),
+            ).save()
+
+    def test_num_day(self):
+        # Number of tasks
+        n = 10
+        # Run setup
+        self.setup(n)
+
+        # Generate stats
+        stats = generate_overall_stats()
+
+        # Check the number today
+        self.assertEquals(stats["num day"], n)
+
+    def test_num_week(self):
+        # Number of tasks
+        n = 10
+        # Run setup
+        self.setup(n)
+
+        # Generate stats
+        stats = generate_overall_stats()
+
+        # Check the number this week
+        self.assertEquals(stats["num week"], 2 * n)
+
+    def test_time_day(self):
+        # Number of tasks
+        n = 10
+        # Run setup
+        self.setup(n)
+
+        # Generate stats
+        stats = generate_overall_stats()
+
+        # Check the time spent today
+        self.assertEquals(stats["time day"], timedelta(minutes=n))
+
+    def test_time_week(self):
+        # Number of tasks
+        n = 10
+        # Run setup
+        self.setup(n)
+
+        # Generate stats
+        stats = generate_overall_stats()
+
+        # Check the time spent this week
+        self.assertEquals(stats["time week"], timedelta(minutes=2 * n))
+
+    def test_on_time(self):
+        # Number of tasks
+        n = 10
+        # Run setup
+        self.setup(n)
+
+        # Generate stats
+        stats = generate_overall_stats()
+
+        # Check the time spent today
+        self.assertEquals(stats["on time"], 50)
+
+    def test_in_time(self):
+        # Number of tasks
+        n = 10
+        # Run setup
+        self.setup(n)
+
+        # Generate stats
+        stats = generate_overall_stats()
+
+        # Check the time spent today
+        self.assertEquals(stats["in time"], 50)
+\end{lstlisting}
+
+These tests all passed:
+this is unsurprising given the relatively simpler nature of the general stats generator.
+
+\subsection{Stage 4 Review}
+At this point at the end of development,
+I was very familiar with the tools I was using,
+so it was completed quite efficiently.
+Likewise,
+the tests were very thorough.
+
+With stage 4 complete, it is now possible to:
 \begin{itemize}
-	\item Store a list of the user's tasks\\
-	      Status: \textbf{met}
-	\item Store the due date, priority, expected time needed, and other information about each task
-	      Status: \textbf{met}
-	\item Allow the user to add, edit and remove tasks\\
-	      Status: \textbf{met}
-	\item Record the successful completion of each task, time taken,
-	      and number of breaks taken,
-	      and display this information to the user in a useful manner\\
-	      Status: \textbf{met}
+	\item generate various statistics about completed tasks,
+	      both with respect to specific tasks and in general
+	\item view these statistics
 \end{itemize}
 
-The solution allows the user to create tasks,
-with a title, description, due date, time estimate, and priority level.
-The user can furthermore mark a task as done and record the time spent on it;
-this information may also be easily changed in case the user makes a mistake.
-The date and time of completion are automatically recorded by the program,
-for use in generating statistics for the user.
-Tasks may also have any information about them edited,
-and may deleted.
+And that's it -
+The project is now fully functional.
+
+\part{Evaluation}
+\section{Evaluation of the solution against success criteria}
+These were my success criteria at the start of the project:
+\begin{enumerate}
+	\item Store a list of the user's tasks
+	\item Store the due date, priority, expected time needed, and other information
+	      about each task
+	\item Allow the user to add, edit and remove tasks from the list
+	\item Record the successful completion of each task, time taken, and number of
+	      breaks taken and display this information to the user in a useful manner
+	\item Store information about the user's schedule,
+	      including both regular and particular commitments
+	\item Schedule time for the user to complete their tasks, according to the
+	      user's schedule, task due date and task priority
+	\item Display the tasks in their allocated time slots,
+    relative to the user's schedule
+	\item Have a focus mode, which helps the user concentrate on the task at hand,
+	      and incentivises the user to complete the task in a timely manner without
+	      procrastination using game-like aspects
+	\item Track the time the user spends working on a task
+	\item Provide feedback to the user about their completed tasks,
+	      such as whether a task was completed on time and within the scheduled time slot,
+	      and equivalent overall and average task statistics
+	\item Be available on multiple platforms and devices
+	\item Sync tasks between devices
+\end{enumerate}
+
+I will go through these one by one,
+explaining whether they have been met,
+and showing how they have or have not been met.
+
+\subsection{Criteria 1}
+Store a list of the user's tasks.
+
+\paragraph{Status:}
+Met.
+
+\paragraph{Evidence:}
+The program utilises a database;
+within the database is held a table of tasks.
+
+\subsection{Criteria 2}
+Store the due date, priority, expected time needed, and other information about each task
+
+\paragraph{Status:}
+Met.
+\paragraph{Evidence:}
+The table in the programs database has fields for
+\begin{itemize}
+	\item a due date
+	\item a priority level
+	\item the expected time needed
+\end{itemize}
+
+It also has fields for
+\begin{itemize}
+	\item a title
+	\item a more detailed description
+	\item a due time
+	\item a flag for whether or not the task is done
+\end{itemize}
+
+And if the task is complete
+\begin{itemize}
+	\item the time at which the task was completed
+	\item how long was spent working on the task
+	\item whether it was completed on time
+	\item whether it was completed within the estimated time
+	\item the time delta between when it was completed and when it was due
+  \item the percentage error from time spent to time estimated
+\end{itemize}
+
+\subsection{Criteria 3}
+Allow the user to add, edit and remove tasks from the list.
+
+\paragraph{Status:}
+Met.
+
+\paragraph{Evidence:}
+The program provides a form through which a task can be created,
+by entering a title,
+description,
+due date,
+due time,
+time estimate,
+and priority level.
+This can be can be accessed from a page showing the list of the user's tasks.
+
+The program provides a form through which a task can be edited,
+by entering a new title,
+description,
+due date,
+due time,
+time estimate,
+and/or priority level.
+This can be accessed from the page showing the details of a task,
+which itself can be accessed from the aforementioned task list page.
+
+The program provides a button to delete a task,
+located on the aforementioned task detail page.
+
+\subsection{Criteria 4}
+Record the successful completion of each task, time taken,
+and number of breaks taken and display this information to the user in a useful manner.
+
+\paragraph{Status:}
+Partially met.
+
+\paragraph{Evidence:}
+Tasks may be marked as complete using buttons on the task list page or the task detail pages.
+Time taken may be recorded using a form on the task detail page for each task.
+It is not possible to record breaks taken.
+Whether a task is complete or not is shown by it's categorisation on the task list page,
+and it stated on the task's detail page.
+The time spent on a task is shown on the task's detail page,
+and further information comparing time taken to time estimated is shown on the statistics page.
+
+This criteria could be met fully by either implementing the abandoned focus mode feature,
+and allowing the user to pause the timer and tracking the number of times done so,
+or by providing a form similar to the time spent form on the task detail page,
+where the user can manually record breaks.
+
+\subsection{Criteria 5}
+Store information about the user's schedule,
+including both regular and particular commitments
+
+\paragraph{Status:}
+Met.
+
+\paragraph{Evidence:}
+The database has tables for storing data about events,
+and routine (i.e. weekly recurring) events.
+Specifically:
+\begin{itemize}
+  \item a title
+  \item the date (event) or day (routine event) which they are on
+  \item the start time
+  \item the end time
+\end{itemize}
+
+All the abilities for creation, updating, deletion, and viewing,
+which are provided for tasks,
+are also provided for events and routines.
+
+\subsection{Criteria 6}
+Schedule time for the user to complete their tasks, according to the
+user's schedule, task due date and task priority.
+
+\paragraph{Status:}
+Met.
+
+\paragraph{Evidence:}
+The program provides a function to schedule tasks,
+between the user's various events and routine events.
+It does so prioritising those tasks which are due sooner,
+and which have higher priority.
+
+\subsection{Criteria 7}
+Display the tasks in their allocated time slots,
+relative to the user's schedule.
+
+\paragraph{Status:}
+Met.
+
+\paragraph{Evidence:}
+The program has a page showing the user's schedule for the day,
+meaning the various events and routine events are shown in order with their timings,
+and tasks are shown in their allocated slots between them.
+
+\subsection{Criteria 8}
+Have a focus mode, which helps the user concentrate on the task at hand,
+and incentivises the user to complete the task in a timely manner without
+procrastination using game-like aspects.
+
+\paragraph{Status:}
+Not met.
+
+\paragraph{Evidence:}
+As explained the third stage of development,
+I abandoned this feature,
+replacing it with manual time tracking through the task detail page.
+
+This criteria could be met by implementing the feature as originally described in the design.
+This would involve a focus mode page where a particular task could be selected to work on,
+which included a timer which tracks time spent working,
+and can be paused to record breaks.
+On this page something could be shown which acts as a reward for continuously working,
+such as city which grows over time,
+as previously described,
+and a ``high score'' showing the best city the user ever created
+(being their longest continuous work session).
+
+\subsection{Criteria 9}
+Track the time the user spends working on a task
+
+\paragraph{Status:}
+Met.
+
+\paragraph{Evidence:}
+This can be performed via a form on each task's detail page,
+where time spent can be input and added to the current time spent for the task.
+
+\subsection{Criteria 10}
+Provide feedback to the user about their completed tasks,
+such as whether a task was completed on time and within the scheduled time slot,
+and equivalent overall and average task statistics.
+
+\paragraph{Status:}
+Met.
+
+\paragraph{Evidence:}
+The program contains a function for calculating statistics about the user's completed tasks.
+The statistics which may be calculated are:
+\begin{itemize}
+  \item the time delta between when a task was completed and when it was due,
+    for a specific task
+  \item the percentage error of the estimated time from actual time taken,
+    for a specific task
+  \item the number of tasks completed on a particular day
+  \item the number of tasks completed in a particular week
+  \item the total amount of time spent working on tasks on a particular day
+  \item the total amount of time spent working on tasks in a particular week
+  \item the percentage of all tasks completed on time
+  \item the percentage of all tasks completed within their time estimate
+\end{itemize}
+
+The program also displays the overall statistics,
+alongside the specific statistics for the five most recently completed tasks,
+on a statistics page.
+
+\subsection{Criteria 11}
+Be available on multiple platforms and devices.
+
+\paragraph{Status:}
+Partially met.
+
+\paragraph{Evidence:}
+As the program is built as a webapp,
+if hosted on the internet it can be accessed from any device or platform,
+with access to the internet and compliant with internet standards.
+However, I do not have access to a server which could host the program.
+
+This criteria could be met by deploying running the program on a server with a domain,
+so that it can be accessed on the world wide web.
+
+\subsection{Criteria 12}
+Sync tasks between devices.
+
+\paragraph{Status:}
+Partially met.
+
+\paragraph{Evidence:}
+Refer to criteria 11.
+
+\section{Limitations of the solution}
+
 
 \end{document}
 

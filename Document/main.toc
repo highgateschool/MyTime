@@ -1,23 +1,23 @@
 \contentsline {part}{I\hspace {1em}Analysis}{3}% 
-\contentsline {section}{\numberline {1}Overview of the problem}{3}% 
+\contentsline {section}{\numberline {1}Overview of the problem}{4}% 
 \contentsline {section}{\numberline {2}Limitations of current system}{4}% 
 \contentsline {section}{\numberline {3}Initial ideas}{4}% 
 \contentsline {section}{\numberline {4}User group}{5}% 
 \contentsline {section}{\numberline {5}Computational methods}{5}% 
 \contentsline {subsection}{\numberline {5.1}Abstraction}{5}% 
-\contentsline {subsection}{\numberline {5.2}Reusability}{5}% 
-\contentsline {subsection}{\numberline {5.3}Visualisation}{5}% 
+\contentsline {subsection}{\numberline {5.2}Reusability}{6}% 
+\contentsline {subsection}{\numberline {5.3}Visualisation}{6}% 
 \contentsline {subsection}{\numberline {5.4}Concurrency}{6}% 
 \contentsline {subsection}{\numberline {5.5}Data Mining}{6}% 
 \contentsline {subsection}{\numberline {5.6}Logic}{6}% 
 \contentsline {section}{\numberline {6}Research}{6}% 
-\contentsline {section}{\numberline {7}System requirements}{13}% 
+\contentsline {section}{\numberline {7}System requirements}{14}% 
 \contentsline {section}{\numberline {8}Success Criteria}{15}% 
 \contentsline {subsection}{\numberline {8.1}General objectives}{15}% 
 \contentsline {subsection}{\numberline {8.2}Specific objectives}{15}% 
 \contentsline {part}{II\hspace {1em}Design}{16}% 
 \contentsline {section}{\numberline {9}Breaking down the problem}{16}% 
-\contentsline {subsection}{\numberline {9.1}Explanation of design}{16}% 
+\contentsline {subsection}{\numberline {9.1}Explanation of design}{17}% 
 \contentsline {section}{\numberline {10}UI Design}{18}% 
 \contentsline {subsection}{\numberline {10.1}View Mockups}{19}% 
 \contentsline {paragraph}{Features:}{19}% 
@@ -47,19 +47,61 @@
 \contentsline {subsection}{\numberline {15.6}Stage 1 Review}{42}% 
 \contentsline {section}{\numberline {16}Stage 2: Events and Routines}{43}% 
 \contentsline {subsection}{\numberline {16.1}Models}{43}% 
-\contentsline {subsection}{\numberline {16.2}Views}{43}% 
-\contentsline {section}{\numberline {17}Stage 3: The Scheduler}{44}% 
-\contentsline {subsection}{\numberline {17.1}The Scheduling Function}{44}% 
-\contentsline {subsection}{\numberline {17.2}The Schedule View}{45}% 
-\contentsline {section}{\numberline {18}Time Tracking and User Statistics}{46}% 
-\contentsline {subsection}{\numberline {18.1}Tracking time spent on a task}{46}% 
-\contentsline {paragraph}{Max}{46}% 
-\contentsline {paragraph}{SH}{46}% 
-\contentsline {paragraph}{Max}{46}% 
-\contentsline {paragraph}{SH}{47}% 
-\contentsline {paragraph}{Max}{47}% 
-\contentsline {paragraph}{SH}{47}% 
-\contentsline {subsection}{\numberline {18.2}User Statistics}{48}% 
-\contentsline {part}{IV\hspace {1em}Evaluation}{50}% 
-\contentsline {section}{\numberline {19}Evaluation of solution}{50}% 
-\contentsline {subsection}{\numberline {19.1}Measurement against success criteria}{50}% 
+\contentsline {subsection}{\numberline {16.2}Views}{44}% 
+\contentsline {subsection}{\numberline {16.3}Stage 2 Testing}{45}% 
+\contentsline {subsection}{\numberline {16.4}Stage 2 Review}{47}% 
+\contentsline {section}{\numberline {17}Stage 3: The Scheduler}{48}% 
+\contentsline {subsection}{\numberline {17.1}The Scheduling Function}{48}% 
+\contentsline {subsection}{\numberline {17.2}The Schedule View}{53}% 
+\contentsline {subsection}{\numberline {17.3}Stage 3 Testing}{54}% 
+\contentsline {subsection}{\numberline {17.4}Stage 3 Review}{59}% 
+\contentsline {section}{\numberline {18}Stage 4: Time Tracking and User Statistics}{59}% 
+\contentsline {subsection}{\numberline {18.1}Tracking time spent on a task}{59}% 
+\contentsline {paragraph}{Max}{59}% 
+\contentsline {paragraph}{SH}{60}% 
+\contentsline {paragraph}{Max}{60}% 
+\contentsline {paragraph}{SH}{60}% 
+\contentsline {paragraph}{Max}{60}% 
+\contentsline {paragraph}{SH}{60}% 
+\contentsline {subsection}{\numberline {18.2}User Statistics}{61}% 
+\contentsline {subsection}{\numberline {18.3}Stage 4 Testing}{64}% 
+\contentsline {subsection}{\numberline {18.4}Stage 4 Review}{72}% 
+\contentsline {part}{IV\hspace {1em}Evaluation}{72}% 
+\contentsline {section}{\numberline {19}Evaluation of the solution against success criteria}{73}% 
+\contentsline {subsection}{\numberline {19.1}Criteria 1}{73}% 
+\contentsline {paragraph}{Status:}{73}% 
+\contentsline {paragraph}{Evidence:}{74}% 
+\contentsline {subsection}{\numberline {19.2}Criteria 2}{74}% 
+\contentsline {paragraph}{Status:}{74}% 
+\contentsline {paragraph}{Evidence:}{74}% 
+\contentsline {subsection}{\numberline {19.3}Criteria 3}{74}% 
+\contentsline {paragraph}{Status:}{74}% 
+\contentsline {paragraph}{Evidence:}{75}% 
+\contentsline {subsection}{\numberline {19.4}Criteria 4}{75}% 
+\contentsline {paragraph}{Status:}{75}% 
+\contentsline {paragraph}{Evidence:}{75}% 
+\contentsline {subsection}{\numberline {19.5}Criteria 5}{75}% 
+\contentsline {paragraph}{Status:}{75}% 
+\contentsline {paragraph}{Evidence:}{75}% 
+\contentsline {subsection}{\numberline {19.6}Criteria 6}{76}% 
+\contentsline {paragraph}{Status:}{76}% 
+\contentsline {paragraph}{Evidence:}{76}% 
+\contentsline {subsection}{\numberline {19.7}Criteria 7}{76}% 
+\contentsline {paragraph}{Status:}{76}% 
+\contentsline {paragraph}{Evidence:}{76}% 
+\contentsline {subsection}{\numberline {19.8}Criteria 8}{76}% 
+\contentsline {paragraph}{Status:}{76}% 
+\contentsline {paragraph}{Evidence:}{76}% 
+\contentsline {subsection}{\numberline {19.9}Criteria 9}{77}% 
+\contentsline {paragraph}{Status:}{77}% 
+\contentsline {paragraph}{Evidence:}{77}% 
+\contentsline {subsection}{\numberline {19.10}Criteria 10}{77}% 
+\contentsline {paragraph}{Status:}{77}% 
+\contentsline {paragraph}{Evidence:}{77}% 
+\contentsline {subsection}{\numberline {19.11}Criteria 11}{78}% 
+\contentsline {paragraph}{Status:}{78}% 
+\contentsline {paragraph}{Evidence:}{78}% 
+\contentsline {subsection}{\numberline {19.12}Criteria 12}{78}% 
+\contentsline {paragraph}{Status:}{78}% 
+\contentsline {paragraph}{Evidence:}{78}% 
+\contentsline {section}{\numberline {20}Limitations of the solution}{78}% 

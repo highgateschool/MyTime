@@ -73,7 +73,21 @@ def generate_specific_stats(tasks):
         spent = task.time_spent
         estimate = task.time_estimate
 
-        # Get the difference between completion and due
-        task.completion_delta = abs(due - complete)
+        # Get the difference between completion and due,
+        # checking that the task does have a completion time
+        if complete:
+            task.completion_delta = abs(due - complete)
+        else:
+            task.completion_delta = timedelta(minutes=0)
+
         # Caculate the estimate accuracy as a percentage, rounded to 1 d.p.
-        task.estimate_accuracy = round(abs(100 * ((spent / estimate) - 1)), 1)
+        #
+        # Check that time spent is non-zero
+        if spent:
+            task.estimate_accuracy = round(abs(100 * ((estimate / spent) - 1)), 1)
+        # If it's 0, then either the error is 0%, if the estimate was 0,
+        # or 100% if the estimate was anything else
+        elif estimate == timedelta(minutes=0):
+            task.estimate_accuracy = 0
+        else:
+            task.estimate_accuracy = 100

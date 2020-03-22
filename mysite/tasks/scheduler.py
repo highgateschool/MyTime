@@ -48,71 +48,93 @@ def update_schedule(day):
     # database at the end
     time_slots = []
 
-    print("Begin tracing contents of time_slots")
-
+    # Iterate over all the events and routines,
+    # creating corresponding time slots
     for item in all_events:
         if isinstance(item, Event):
-            print("Appending event...")
-            time_slots.append(
-                TimeSlot(
-                    date=date,
-                    start_time=item.get_start(),
-                    end_time=item.get_end(),
-                    associated_type="E",
-                    associated_event=item,
-                )
+            ts = TimeSlot(
+                date=date,
+                start_time=item.get_start(),
+                end_time=item.get_end(),
+                associated_type="E",
+                associated_event=item,
             )
-            print(f"Contents: {time_slots}")
 
         elif isinstance(item, Routine):
-            print("Appending routine...")
-            time_slots.append(
-                TimeSlot(
-                    date=date,
-                    start_time=item.get_start(),
-                    end_time=item.get_end(),
-                    associated_type="R",
-                    associated_routine=item,
-                )
+            ts = TimeSlot(
+                date=date,
+                start_time=item.get_start(),
+                end_time=item.get_end(),
+                associated_type="R",
+                associated_routine=item,
             )
-            print(f"Contents: {time_slots}")
 
-        else:
-            raise Exception("Looks like we have a problem with creating the TimeSlots.")
+        # Before adding the timslot to the list,
+        # check that it has sensible timings.
+        # If it doesn't, we can just discard it.
+        if ts.start_time <= ts.end_time:
+            time_slots.append(ts)
 
-        print("Done with adding events/routines.")
-        print(f"Contents: {time_slots}")
-
+    # We can't use a for loop to iterate through the time slots,
+    # because we're going to be changing the length of the list.
+    # So we have to use a while loop and a counter to keep track of our position.
     pos = 1
 
+    # Iterate through the time slots
     while pos < len(time_slots):
-        for task in task_list:
-            prev = time_slots[pos - 1]
-            curr = time_slots[pos]
-            tdelta = datetime.combine(date, curr.get_start()) - datetime.combine(
-                date, prev.get_end()
-            )
-            if tdelta > task.time_estimate:
-                start = prev.get_end()
-                end = (
-                    datetime.combine(date, prev.get_end()) + task.time_estimate
-                ).time()
-                print("Adding task...")
-                time_slots.insert(
-                    pos,
-                    TimeSlot(
-                        date=date,
-                        start_time=start,
-                        end_time=end,
-                        associated_type="T",
-                        associated_task=task,
-                    ),
-                )
-                print(f"Contents: {time_slots}")
-                task_list.remove(task)
-                if pos < len(time_slots):
-                    pos += 1
-                    pos += 1
+        # Start by assuming that there is at least one task which will fit in this time gap
+        is_room = True
 
+        # As long as tasks keep getting getting inserted,
+        # we need to stay here.
+        while is_room:
+            # Take a note of where we are
+            pos_start_loop = pos
+            # Iterate over the tasks which are not yet assigned
+            for task in task_list:
+                # Get the time gap between this timeslot and the last
+                prev = time_slots[pos - 1]
+                curr = time_slots[pos]
+                tdelta = datetime.combine(date, curr.get_start()) - datetime.combine(
+                    date, prev.get_end()
+                )
+
+                # If the gap is large enought,
+                # create a time slot corresponding to the task and put it here
+                if tdelta > task.time_estimate:
+                    start = prev.get_end()
+                    end = (
+                        datetime.combine(date, prev.get_end()) + task.time_estimate
+                    ).time()
+                    time_slots.insert(
+                        pos,
+                        TimeSlot(
+                            date=date,
+                            start_time=start,
+                            end_time=end,
+                            associated_type="T",
+                            associated_task=task,
+                        ),
+                    )
+
+                    task_list.remove(task)
+
+                    # Increment the position,
+                    # unless we've reached the end of the list,
+                    # in which case there are no more spaces so stop.
+                    if pos <= len(time_slots):
+                        pos += 1
+                    else:
+                        break
+
+            # If we reach the end of the loop and the position is the same,
+            # that means there's no more room for tasks here,
+            # so flag that there is no room and increment position.
+            # Otherwise, we go for another loop.
+            if pos == pos_start_loop:
+                is_room = False
+                pos += 1
+
+    # Finally, we save all the time slots to the database
     for item in time_slots:
         item.save()

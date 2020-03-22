@@ -3,21 +3,18 @@
 <ul>
     {% for slot in time_slots %}
     {% if slot.associated_type == "T" %}
-    <li>Task:
+    <li>Work on
         <a href="/task/{{ slot.associated_task.id }}/">{{ slot.associated_task.title }}</a>
-        from {{ slot.start_time }} to {{ slot.end_time }}
     </li>
 
     {% elif slot.associated_type == "E" %}
-    <li>Event:
+    <li>From {{ slot.start_time }} to {{ slot.end_time }}
         <a href="/event/{{ slot.associated_event.id }}/">{{ slot.associated_event.title }}</a>
-        from {{ slot.start_time }} to {{ slot.end_time }}
     </li>
 
     {% elif slot.associated_type == "R" %}
-    <li>Routine:
+    <li>From {{ slot.start_time }} to {{ slot.end_time }}
         <a href="/routine/{{ slot.associated_routine.id }}/">{{ slot.associated_routine.title }}</a>
-        from {{ slot.start_time }} to {{ slot.end_time }}
     </li>
     {% endif %}
     {% endfor %}

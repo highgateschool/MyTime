@@ -11,7 +11,7 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import Task, Event, Routine, TimeSlot
-from .scheduler import update_schedule
+from .scheduler import *
 from .statistics import generate_overall_stats, generate_specific_stats
 
 
@@ -86,7 +86,9 @@ class ScheduleView(ListView):
     def get_queryset(self):
         # Run the scheduler and get the TimeSlots it creates
         update_schedule(datetime.today().weekday())
-        return TimeSlot.objects.order_by("start_time")
+        return TimeSlot.objects.filter(date=timezone.now().date()).order_by(
+            "start_time"
+        )
 
 
 class TaskDetail(DetailView):
