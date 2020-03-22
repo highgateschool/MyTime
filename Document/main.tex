@@ -317,6 +317,7 @@ He also commented in general that he liked the ability to sync tasks between
 devices, and a feature which he wanted but none of the programs offered was the
 ability to have ``subtasks'' nestled inside other tasks.
 
+\subsection{Features of the proposed solution}
 From this I have assembled the following list of features which my program will
 need:
 
@@ -325,7 +326,7 @@ need:
 	      not-deleted tasks
 	\item Archive containing completed tasks, and allows tasks to be un-marked as
 	      complete
-	\item Tasks grouped in categories, can be colour coded
+	\item Tasks grouped in categories
 	\item Tasks can be filtered by category
 	\item Ordered by time needed or due date
 	\item Tasks can be marked as done or deleted
@@ -351,7 +352,7 @@ also elaborated on the city-building mechanic, resulting in the following:
 \begin{itemize}
 	\item The city builds over time as you work
 	\item Taking a break which has been allocated by the app simply pauses
-	      development
+
 	\item Taking an unallocated break sets the development back - perhaps there is a
 	      level system and you can be set back one or two levels
 	\item If you quit a task before you finished - and taking an excessively long
@@ -377,6 +378,23 @@ rather than only one. Therefore I will endeavour to implement a system which,
 rather than forcing, or heavily encouraging, the user to complete one particular
 task in a certain time slot, will instead give them the option to choose between
 tasks with similar levels of priority.
+
+\subsection{Limitations of the proposed solution}
+The main way in which my solution will be limited,
+compared to those products researched,
+will be the inability to sync to an external calendar,
+as for example Google Keep can.
+User's might like to sync their events from their existing calendaring solutions,
+but I think implementing such a feature is beyond my project's scope.
+
+It will also be limited in the depth of the task management,
+when compared to a product such as Todoist.
+I won't include features such as organising tasks into ``projects'',
+or collaborating on tasks,
+as this would greatly increase complexity,
+and again,
+it really beyond the scope of the problem I am aiming to solve.
+
 
 \section{System requirements}
 As the program will be web-based, it will require a system capable of running a
@@ -479,7 +497,7 @@ The program should:
 	\item Schedule time for the user to complete their tasks, according to the
 	      user's schedule, task due date and task priority
 	\item Display the tasks in their allocated time slots,
-    relative to the user's schedule
+	      relative to the user's schedule
 	\item Have a focus mode, which helps the user concentrate on the task at hand,
 	      and incentivises the user to complete the task in a timely manner without
 	      procrastination using game-like aspects
@@ -1138,7 +1156,6 @@ class Task(models.Model):
         return f"/task/{self.id}/"
 \end{lstlisting}
 
-Most of this is self-explanatory, and in line with my design specification.
 Some notable features are the \texttt{PRIORITY\_LIST},
 which is an attribute of Task but not model field -
 as such it is not present in the database.
@@ -1150,9 +1167,6 @@ and a human readable name for that value - what it represents.
 In this instance the values are \texttt{LOW}, \texttt{MED} and \texttt{HIGH},
 each being a variable corresponding to the values of 1, 2 and 3 respectively,
 and each with a corresponding readable name.
-This method seems somewhat convoluted,
-but is Django's recommended way of handling choice fields and has a pleasant, clean feel,
-so I decided not to take a shortcut route.
 
 There is also the \texttt{get\_absolute\_url} method,
 this is so it is always easy to access the corresponding detail view of any given task,
@@ -3070,7 +3084,7 @@ These were my success criteria at the start of the project:
 	\item Schedule time for the user to complete their tasks, according to the
 	      user's schedule, task due date and task priority
 	\item Display the tasks in their allocated time slots,
-    relative to the user's schedule
+	      relative to the user's schedule
 	\item Have a focus mode, which helps the user concentrate on the task at hand,
 	      and incentivises the user to complete the task in a timely manner without
 	      procrastination using game-like aspects
@@ -3124,7 +3138,7 @@ And if the task is complete
 	\item whether it was completed on time
 	\item whether it was completed within the estimated time
 	\item the time delta between when it was completed and when it was due
-  \item the percentage error from time spent to time estimated
+	\item the percentage error from time spent to time estimated
 \end{itemize}
 
 \subsection{Criteria 3}
@@ -3189,10 +3203,10 @@ The database has tables for storing data about events,
 and routine (i.e. weekly recurring) events.
 Specifically:
 \begin{itemize}
-  \item a title
-  \item the date (event) or day (routine event) which they are on
-  \item the start time
-  \item the end time
+	\item a title
+	\item the date (event) or day (routine event) which they are on
+	\item the start time
+	\item the end time
 \end{itemize}
 
 All the abilities for creation, updating, deletion, and viewing,
@@ -3269,16 +3283,16 @@ Met.
 The program contains a function for calculating statistics about the user's completed tasks.
 The statistics which may be calculated are:
 \begin{itemize}
-  \item the time delta between when a task was completed and when it was due,
-    for a specific task
-  \item the percentage error of the estimated time from actual time taken,
-    for a specific task
-  \item the number of tasks completed on a particular day
-  \item the number of tasks completed in a particular week
-  \item the total amount of time spent working on tasks on a particular day
-  \item the total amount of time spent working on tasks in a particular week
-  \item the percentage of all tasks completed on time
-  \item the percentage of all tasks completed within their time estimate
+	\item the time delta between when a task was completed and when it was due,
+	      for a specific task
+	\item the percentage error of the estimated time from actual time taken,
+	      for a specific task
+	\item the number of tasks completed on a particular day
+	\item the number of tasks completed in a particular week
+	\item the total amount of time spent working on tasks on a particular day
+	\item the total amount of time spent working on tasks in a particular week
+	\item the percentage of all tasks completed on time
+	\item the percentage of all tasks completed within their time estimate
 \end{itemize}
 
 The program also displays the overall statistics,
@@ -3310,7 +3324,80 @@ Partially met.
 Refer to criteria 11.
 
 \section{Limitations of the solution}
+The biggest limitation of my solution is the inflexibility of the scheduler.
+Particularly,
+it would be very useful if it were able to break tasks down into smaller chunks,
+in case a whole task cannot be fit in a particular time slot,
+or to provide the user with breaks,
+or to alternate between different tasks,
+according to user preference.
+Without such an ability,
+the program is only suited to scheduling the sort of tasks that can be completed in one go.
+Furthermore,
+the program always attempts to schedule tasks in free time,
+even if, for example,
+the task with which the space is filled is not due for a very long time.
+In short,
+the scheduling algorithm I use is not very intelligent,
+and doesn't make best use of the information available to it.
 
+Additionally,
+it is currently only possible for the user to view their schedule for the day.
+User's might like to, at least, view their schedule for the next week.
+The scheduler is also not aware of whether or not the user completes their tasks as allocated,
+so cannot,
+for example,
+reschedule a task the user failed to complete for later in the day -
+it can only reschedule it tomorrow.
+This inflexibility limits the usefulness of the solution as it currently is.
+
+Furthermore,
+despite acting as a task manager and calendar,
+the solution does not contain features typical of such programs.
+Task categorisation is absent,
+as is the ability to have events which occur anything other than weekly.
+This limits the efficacy of the solution in performing those roles.
+
+The solution is also limited in the way it shows statistics about completed tasks.
+The user can't access specific statistics beyond a set number of recently completed tasks,
+and can't access statistics for particular days or weeks except the current day and current week.
+Access to such information may be desired by the user.
+
+Overall,
+the solution suffers from a problem of scope -
+because the scope was too broad,
+every component is in some sense limited,
+and not developed to as full an extent as it could have been.
+This is the case despite a fairly significant feature,
+the focus mode,
+having been cut.
+If I had not needed to develop task management and calendaring functionality,
+a lot more time could have been devoted to developing the scheduler,
+and providing flexibility and customisation that would have made it much more useful.
+The same can be said for the statistics tracking component.
+
+\subsection{Potential solutions to these limitations}
+With regard to the scheduler,
+more time would allow the development of a better algorithm.
+It would be easy to drop in a new algorithm once developed,
+due to the modular nature of the solution.
+
+In terms of task management and calendaring,
+I think the task management could be fleshed out with more development time -
+providing categorisation of tasks would bring this mostly up to standard,
+and the ability to add attachments to tasks is also a common feature.
+However,
+I think the best way forward to calendaring would be to scrap the current implementation,
+replacing it with the ability to sync with external calendars,
+such as Google Calendar,
+Apple Calendar,
+or CalDAV.
+Good calendar solutions already exist which most user's will use,
+so it is better not to force the user to switch from their existing calendar,
+which probably integrates better with their devices and other services such as email.
+
+The statistics could also be improved by providing the user with task-specific stats on the task detail pages,
+and by giving options on the statistics page to view statistics for other days and weeks in the past.
 
 \end{document}
 
