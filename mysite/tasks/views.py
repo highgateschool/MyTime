@@ -39,11 +39,12 @@ class StatisticsView(ListView):
 
     def get_queryset(self):
         # Get 5 most recent completed tasks
-        tasks = Task.objects.filter(done=True).order_by("completion_time")[:5]
+        tasks = Task.objects.filter(done=True).order_by("-completion_time")[:5]
         # Run the stats generator for them
         generate_specific_stats(tasks)
         # Return them
-        return tasks
+        # return tasks
+        return Task.objects.filter(done=True).order_by("-completion_time")[:5]
 
     def get_context_data(self, **kwargs):
         context = super(StatisticsView, self).get_context_data(**kwargs)

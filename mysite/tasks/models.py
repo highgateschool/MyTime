@@ -84,11 +84,12 @@ class Task(models.Model):
 
         # At this point we can mark whether the task was completed before it's due date,
         # and within the user's time estimate
+        self.completion_time = timezone.now()
+
         if self.is_overdue():
             self.completed_on_time = False
         else:
             self.completed_on_time = True
-        self.completion_time = timezone.now()
 
         if self.time_spent <= self.time_estimate:
             self.completed_in_time = True

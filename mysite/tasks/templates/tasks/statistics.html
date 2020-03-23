@@ -10,8 +10,9 @@
 
 <h1>Usage Statistics</h1>
 {% if recent_tasks %}
+<h2>Recently completed tasks</h2>
 <ol>
-  {% for task in recent_task %}
+  {% for task in recent_tasks %}
   <li><a href="/task/{{ task.id }}/">{{ task.title }}</a>
     <ul>
       <li>Was due on {{ task.due_date }} at {{ task.due_time }},
@@ -25,8 +26,8 @@
         took {{ task.time_spent }},
         {% if task.estimate_accuracy == 0 %}
         - perfect estimate!
-        {% elif task.was_completed_in_time %}
-        so time was overestimated by {{ task.estimate_accuracy }}%
+        {% elif task.completed_in_time %}
+        so time was underestimated by {{ task.estimate_accuracy }}%
         {% else %}
         so time was overestimated by {{ task.estimate_accuracy }}%
         {% endif %}
@@ -38,3 +39,12 @@
 <p>No data to show for recent tasks.</p>
 {% endif %}
 
+<h2>General statistics</h2>
+<p>Number of tasks completed today: {{ num_day }}</p>
+<p>Time spent working today: {{ time_day }}</p>
+
+<p>Number of tasks completed this week: {{ num_week }}</p>
+<p>Time spent working this week: {{ time_week }}</p>
+
+<p>Percentage of tasks completed on time: {{ on_time }}</p>
+<p>Average accuracy of time estimates: {{ in_time }}</p>

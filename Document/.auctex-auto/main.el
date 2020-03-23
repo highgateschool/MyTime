@@ -15,6 +15,7 @@
     "listings"
     "xcolor"
     "float"
+    "fancyhdr"
     "inputenc")
    (LaTeX-add-labels
     "fig:forest1"
@@ -47,7 +48,9 @@
     "fig:task_form1"
     "fig:schedule1"
     "fig:task_detail2"
-    "fig:task_index_usability")
+    "fig:statistics1"
+    "fig:task_index_usability"
+    "page:the_end")
    (LaTeX-add-index-entries
     "\\item"))
  :latex)

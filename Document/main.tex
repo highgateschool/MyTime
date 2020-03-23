@@ -5,9 +5,17 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{float}
+\usepackage{fancyhdr}
 \usepackage[utf8]{inputenc}
 
-\title{A-Level Computer Science Project\\ Time Scheduler - ``MyTime''}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\lhead{Max Stupple - A-Level Computer Science Project}
+\rhead{\thepage / \pageref{page:the_end}}
+
+\title{A-Level Computer Science Project\\ Task Scheduler}
 \author{Max Stupple}
 \date{}
 
@@ -25,9 +33,13 @@
 
 \begin{document}
 
+\pagenumbering{gobble}
 \maketitle
+\pagebreak
 
+\pagenumbering{arabic}
 \tableofcontents
+\pagebreak
 
 \part{Analysis}
 \section{Overview of the problem}
@@ -168,7 +180,7 @@ programs are:
 	\end{itemize}
 \end{samepage}
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/forest.jpg}
 	\caption{Forest}
 	\label{fig:forest1}
@@ -186,7 +198,7 @@ as the app which is going to help you focus the most is one which never needs
 you to leave while working. Integrated task management is an
 absolute must for my solution.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/evernote.jpg}
 	\caption{Evernote}
 	\label{fig:evernote1}
@@ -197,7 +209,7 @@ The power of it's note-taking is remarkable, and can include voice memos,
 handwritten notes and embedded web pages. However, most of these features are
 superfluous for my product, and would needlessly add complexity.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/todoist.png}
 	\caption{Todoist}
 	\label{fig:todoist1}
@@ -212,7 +224,7 @@ done per day/week, the distribution between different types of tasks e.g.
 whether you did more tasks tagged with ``Study'' or ``Chores''. I definitely
 want to have similar visualisations of how productive the user is being.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/remember-the-milk.png}
 	\caption{Remember The Milk}
 	\label{fig:rtm1}
@@ -225,7 +237,7 @@ personally have used to-do apps with such a feature and have found it rather
 useful, so I'll be interested to get my stakeholder's opinion on this
 feature specifically when I talk to them.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/ike.png}
 	\caption{Ike}
 	\label{fig:ike1}
@@ -241,7 +253,7 @@ allow the user to organise their tasks into whatever folders and sub-folders
 they please. I think any limitation on how the tasks are organised will always
 be counterproductive in some degree to some users.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/keep.png}
 	\caption{Google Keep}
 	\label{fig:keep1}
@@ -255,7 +267,7 @@ metaphor in Google's design language. I think this creates confusion as there is
 not simply a vertical list. I also dislike that you need to create different
 types of tasks for simple text, lists, voice memos etc.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/trello.jpg}
 	\caption{Trello}
 	\label{fig:trello1}
@@ -572,7 +584,7 @@ I have identified the key functions that my solution will need to perform as:
 	\end{itemize}
 \end{samepage}
 
-\begin{figure}[h]
+\begin{figure}[p]
 	\includegraphics[width=\linewidth]{Images/TDD.png}
 	\caption{Combination of top-down design analysis and class diagrams}
 	\label{fig:TDD1}
@@ -1095,7 +1107,7 @@ holding text and datetimes respectively.
 
 Here's a screenshot of the that table:
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{Images/question_table.png}
 	\caption{Database table ``Question''}
 	\label{fig:database1}
@@ -2750,6 +2762,12 @@ def generate_specific_stats(tasks):
 
 These functions are both called by the statistics view,
 which passes the data generated to the template to render.
+Here is the result:
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{Screenshots/statistics.png}
+	\caption{Screenshot of statistics page}
+	\label{fig:statistics1}
+\end{figure}
 
 \subsection{Stage 4 Testing}
 I wrote a number of tests to ascertain whether the statistics generator was working correctly.
@@ -3594,6 +3612,7 @@ which probably integrates better with their devices and other services such as e
 The statistics could also be improved by providing the user with task-specific stats on the task detail pages,
 and by giving options on the statistics page to view statistics for other days and weeks in the past.
 
+\label{page:the_end}
 \end{document}
 
 % LocalWords:  MyTime Evernote Trello Todoist subtasks TimeSlot tuples

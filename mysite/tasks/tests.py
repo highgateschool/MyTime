@@ -498,7 +498,7 @@ class GeneralStatisticsTests(TestCase):
         stats = generate_overall_stats()
 
         # Check the number today
-        self.assertEquals(stats["num day"], n)
+        self.assertEquals(stats["num_day"], n)
 
     def test_num_week(self):
         # Number of tasks
@@ -510,7 +510,7 @@ class GeneralStatisticsTests(TestCase):
         stats = generate_overall_stats()
 
         # Check the number this week
-        self.assertEquals(stats["num week"], 2 * n)
+        self.assertEquals(stats["num_week"], 2 * n)
 
     def test_time_day(self):
         # Number of tasks
@@ -522,7 +522,7 @@ class GeneralStatisticsTests(TestCase):
         stats = generate_overall_stats()
 
         # Check the time spent today
-        self.assertEquals(stats["time day"], timedelta(minutes=n))
+        self.assertEquals(stats["time_day"], timedelta(minutes=n))
 
     def test_time_week(self):
         # Number of tasks
@@ -534,7 +534,7 @@ class GeneralStatisticsTests(TestCase):
         stats = generate_overall_stats()
 
         # Check the time spent this week
-        self.assertEquals(stats["time week"], timedelta(minutes=2 * n))
+        self.assertEquals(stats["time_week"], timedelta(minutes=2 * n))
 
     def test_on_time(self):
         # Number of tasks
@@ -546,7 +546,7 @@ class GeneralStatisticsTests(TestCase):
         stats = generate_overall_stats()
 
         # Check the time spent today
-        self.assertEquals(stats["on time"], 50)
+        self.assertEquals(stats["on_time"], 50)
 
     def test_in_time(self):
         # Number of tasks
@@ -558,4 +558,4 @@ class GeneralStatisticsTests(TestCase):
         stats = generate_overall_stats()
 
         # Check the time spent today
-        self.assertEquals(stats["in time"], 50)
+        self.assertEquals(stats["in_time"], 50)

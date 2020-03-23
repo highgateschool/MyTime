@@ -6,6 +6,10 @@ from itertools import chain
 from django.utils import timezone
 from .models import Task
 
+# Function to round of time deltas
+def chop_microseconds(delta):
+    return delta - timedelta(microseconds=delta.microseconds)
+
 
 # Function for generating the overall statistics
 def generate_overall_stats():
@@ -44,18 +48,18 @@ def generate_overall_stats():
 
     # We simply look at the length of the respective lists,
     # to find out the number of tasks completed in the given timeframe.
-    stats["num day"] = len(tasks_today)
-    stats["num week"] = len(tasks_week)
+    stats["num_day"] = len(tasks_today)
+    stats["num_week"] = len(tasks_week)
 
     # Similarly we can sum the time_spent attributes of the tasks in each list,
     # to get the total time spent
-    stats["time day"] = sum([task.time_spent for task in tasks_today], timedelta())
-    stats["time week"] = sum([task.time_spent for task in tasks_week], timedelta())
+    stats["time_day"] = sum([task.time_spent for task in tasks_today], timedelta())
+    stats["time_week"] = sum([task.time_spent for task in tasks_week], timedelta())
 
     # Here we calculate the percentage, rounded to one decimal place,
     # of tasks completed on time and within their time estimate respectively
-    stats["on time"] = round(100 * len(tasks_on_time) / len(tasks_done), 1)
-    stats["in time"] = round(100 * len(tasks_in_time) / len(tasks_done), 1)
+    stats["on_time"] = round(100 * len(tasks_on_time) / len(tasks_done), 1)
+    stats["in_time"] = round(100 * len(tasks_in_time) / len(tasks_done), 1)
 
     # And return the dictionary
     return stats
@@ -76,7 +80,7 @@ def generate_specific_stats(tasks):
         # Get the difference between completion and due,
         # checking that the task does have a completion time
         if complete:
-            task.completion_delta = abs(due - complete)
+            task.completion_delta = chop_microseconds(abs(due - complete))
         else:
             task.completion_delta = timedelta(minutes=0)
 
@@ -91,3 +95,5 @@ def generate_specific_stats(tasks):
             task.estimate_accuracy = 0
         else:
             task.estimate_accuracy = 100
+
+        task.save()
